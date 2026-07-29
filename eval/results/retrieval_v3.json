@@ -1,0 +1,2985 @@
+{
+  "n_questions": 120,
+  "n_chunks": 1511,
+  "embed_model": "nvidia/nemotron-3-embed-1b",
+  "eval_sets": [
+    "data/eval/eval_set_v2.jsonl"
+  ],
+  "limit": null,
+  "tickers": {
+    "AAPL": 40,
+    "MSFT": 40,
+    "NVDA": 40
+  },
+  "splits": {
+    "numeric": 120
+  },
+  "results": [
+    {
+      "split": "all",
+      "config": "BM25 only",
+      "n": 120,
+      "R@1": 0.0433531746031746,
+      "S@1": 0.10833333333333334,
+      "R@5": 0.22676587301587298,
+      "R@10": 0.35083333333333333,
+      "nDCG@10": 0.22575263538957255,
+      "MRR@10": 0.2245072751322751,
+      "seconds": 0.0
+    },
+    {
+      "split": "all",
+      "config": "Dense only",
+      "n": 120,
+      "R@1": 0.1948015873015873,
+      "S@1": 0.5416666666666666,
+      "R@5": 0.5584325396825398,
+      "R@10": 0.7651785714285713,
+      "nDCG@10": 0.6073276919057561,
+      "MRR@10": 0.6757242063492064,
+      "seconds": 43.4
+    },
+    {
+      "split": "all",
+      "config": "Hybrid (RRF)",
+      "n": 120,
+      "R@1": 0.17521825396825397,
+      "S@1": 0.425,
+      "R@5": 0.47757936507936516,
+      "R@10": 0.7091071428571427,
+      "nDCG@10": 0.527762834590921,
+      "MRR@10": 0.5550892857142858,
+      "seconds": 39.7
+    },
+    {
+      "split": "all",
+      "config": "BM25 + rerank",
+      "n": 120,
+      "R@1": 0.21160714285714285,
+      "S@1": 0.5,
+      "R@5": 0.6222420634920635,
+      "R@10": 0.7551984126984126,
+      "nDCG@10": 0.619967585542134,
+      "MRR@10": 0.6615608465608467,
+      "seconds": 76.7
+    },
+    {
+      "split": "all",
+      "config": "Dense + rerank",
+      "n": 120,
+      "R@1": 0.19660714285714284,
+      "S@1": 0.5083333333333333,
+      "R@5": 0.6756547619047618,
+      "R@10": 0.8780753968253967,
+      "nDCG@10": 0.6809321751468971,
+      "MRR@10": 0.6815972222222224,
+      "seconds": 131.0
+    },
+    {
+      "split": "all",
+      "config": "Hybrid + rerank",
+      "n": 120,
+      "R@1": 0.19452380952380952,
+      "S@1": 0.48333333333333334,
+      "R@5": 0.6920436507936506,
+      "R@10": 0.8776587301587301,
+      "nDCG@10": 0.6807646668575278,
+      "MRR@10": 0.6710846560846561,
+      "seconds": 123.8
+    }
+  ],
+  "per_question_ndcg": {
+    "BM25 only": [
+      {
+        "qid": "AAPL-Assets-2024",
+        "nDCG@10": 0.1772
+      },
+      {
+        "qid": "MSFT-RevenueFromContractWithCustomerExcludingAssessedTax-2025",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-NetIncomeLoss-2026",
+        "nDCG@10": 0.1009
+      },
+      {
+        "qid": "AAPL-ResearchAndDevelopmentExpense-2025",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "MSFT-OperatingIncomeLoss-2022",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2026",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-GrossProfit-2024",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "MSFT-GrossProfit-2024",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-Revenues-2026",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-Assets-2023",
+        "nDCG@10": 0.3562
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2025",
+        "nDCG@10": 0.2961
+      },
+      {
+        "qid": "NVDA-Liabilities-2024",
+        "nDCG@10": 0.5
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2024",
+        "nDCG@10": 0.2811
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2023",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2024",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2024",
+        "nDCG@10": 0.7107
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2023",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-Assets-2024",
+        "nDCG@10": 0.3869
+      },
+      {
+        "qid": "AAPL-GrossProfit-2023",
+        "nDCG@10": 0.2304
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2022",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-SellingGeneralAndAdministrativeExpense-2023",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2023",
+        "nDCG@10": 0.6367
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2022",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2023",
+        "nDCG@10": 0.3333
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2024",
+        "nDCG@10": 0.9439
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2025",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-Liabilities-2025",
+        "nDCG@10": 0.5706
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2022",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-OperatingIncomeLoss-2023",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-StockholdersEquity-2024",
+        "nDCG@10": 0.4693
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2024",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2022",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2023",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2023",
+        "nDCG@10": 0.6534
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2025",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-GrossProfit-2025",
+        "nDCG@10": 0.1846
+      },
+      {
+        "qid": "AAPL-Liabilities-2023",
+        "nDCG@10": 0.3869
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2023",
+        "nDCG@10": 0.4554
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2025",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2022",
+        "nDCG@10": 0.7904
+      },
+      {
+        "qid": "MSFT-Assets-2024",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2023",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-CashAndCashEquivalentsAtCarryingValue-2025",
+        "nDCG@10": 0.2961
+      },
+      {
+        "qid": "MSFT-GrossProfit-2022",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-Assets-2025",
+        "nDCG@10": 0.4306
+      },
+      {
+        "qid": "AAPL-OperatingIncomeLoss-2022",
+        "nDCG@10": 0.4911
+      },
+      {
+        "qid": "MSFT-NetIncomeLoss-2025",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-StockholdersEquity-2023",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-Liabilities-2024",
+        "nDCG@10": 0.3618
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2024",
+        "nDCG@10": 0.6266
+      },
+      {
+        "qid": "NVDA-GrossProfit-2023",
+        "nDCG@10": 0.2891
+      },
+      {
+        "qid": "AAPL-GrossProfit-2022",
+        "nDCG@10": 0.3066
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2022",
+        "nDCG@10": 0.6309
+      },
+      {
+        "qid": "NVDA-EarningsPerShareDiluted-2026",
+        "nDCG@10": 0.2021
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2023",
+        "nDCG@10": 0.906
+      },
+      {
+        "qid": "MSFT-RevenueFromContractWithCustomerExcludingAssessedTax-2022",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2026",
+        "nDCG@10": 0.148
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2023",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "MSFT-Liabilities-2024",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2024",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2025",
+        "nDCG@10": 0.6131
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2025",
+        "nDCG@10": 0.3228
+      },
+      {
+        "qid": "NVDA-EarningsPerShareDiluted-2025",
+        "nDCG@10": 0.0875
+      },
+      {
+        "qid": "AAPL-RevenueFromContractWithCustomerExcludingAssessedTax-2025",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "MSFT-OperatingExpenses-2025",
+        "nDCG@10": 0.6934
+      },
+      {
+        "qid": "NVDA-StockholdersEquity-2026",
+        "nDCG@10": 0.9197
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2022",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "MSFT-Assets-2025",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-Liabilities-2026",
+        "nDCG@10": 0.3869
+      },
+      {
+        "qid": "AAPL-RevenueFromContractWithCustomerExcludingAssessedTax-2022",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "MSFT-GrossProfit-2025",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2026",
+        "nDCG@10": 0.4776
+      },
+      {
+        "qid": "AAPL-NetIncomeLoss-2022",
+        "nDCG@10": 0.1131
+      },
+      {
+        "qid": "MSFT-Liabilities-2025",
+        "nDCG@10": 0.301
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2023",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-ResearchAndDevelopmentExpense-2024",
+        "nDCG@10": 0.1078
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2024",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2026",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2023",
+        "nDCG@10": 0.2692
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2024",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2023",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2022",
+        "nDCG@10": 0.2372
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2024",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2026",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-CashAndCashEquivalentsAtCarryingValue-2023",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2022",
+        "nDCG@10": 0.3869
+      },
+      {
+        "qid": "NVDA-SellingGeneralAndAdministrativeExpense-2025",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2025",
+        "nDCG@10": 0.8503
+      },
+      {
+        "qid": "MSFT-NetIncomeLoss-2022",
+        "nDCG@10": 0.1312
+      },
+      {
+        "qid": "NVDA-NetIncomeLoss-2023",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-CashAndCashEquivalentsAtCarryingValue-2024",
+        "nDCG@10": 0.3933
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2025",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2025",
+        "nDCG@10": 0.1303
+      },
+      {
+        "qid": "AAPL-NetIncomeLoss-2025",
+        "nDCG@10": 0.1131
+      },
+      {
+        "qid": "MSFT-GrossProfit-2023",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2024",
+        "nDCG@10": 0.1952
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2024",
+        "nDCG@10": 0.6367
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2023",
+        "nDCG@10": 0.3633
+      },
+      {
+        "qid": "NVDA-Revenues-2023",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2025",
+        "nDCG@10": 0.2372
+      },
+      {
+        "qid": "MSFT-OperatingExpenses-2023",
+        "nDCG@10": 0.6309
+      },
+      {
+        "qid": "NVDA-SellingGeneralAndAdministrativeExpense-2026",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-GrossProfit-2025",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "MSFT-Liabilities-2023",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2025",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2025",
+        "nDCG@10": 0.8175
+      },
+      {
+        "qid": "MSFT-OperatingExpenses-2024",
+        "nDCG@10": 0.6934
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2024",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2025",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2023",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2025",
+        "nDCG@10": 0.4941
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2022",
+        "nDCG@10": 0.6934
+      },
+      {
+        "qid": "MSFT-Assets-2023",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2024",
+        "nDCG@10": 0.4996
+      },
+      {
+        "qid": "AAPL-OperatingIncomeLoss-2024",
+        "nDCG@10": 0.1391
+      },
+      {
+        "qid": "MSFT-OperatingIncomeLoss-2025",
+        "nDCG@10": 0.1128
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2025",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-ResearchAndDevelopmentExpense-2022",
+        "nDCG@10": 0.3703
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2024",
+        "nDCG@10": 0.3422
+      },
+      {
+        "qid": "NVDA-GrossProfit-2024",
+        "nDCG@10": 0.1772
+      }
+    ],
+    "Dense only": [
+      {
+        "qid": "AAPL-Assets-2024",
+        "nDCG@10": 0.2372
+      },
+      {
+        "qid": "MSFT-RevenueFromContractWithCustomerExcludingAssessedTax-2025",
+        "nDCG@10": 0.7891
+      },
+      {
+        "qid": "NVDA-NetIncomeLoss-2026",
+        "nDCG@10": 0.7193
+      },
+      {
+        "qid": "AAPL-ResearchAndDevelopmentExpense-2025",
+        "nDCG@10": 0.6257
+      },
+      {
+        "qid": "MSFT-OperatingIncomeLoss-2022",
+        "nDCG@10": 0.6131
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2026",
+        "nDCG@10": 0.3869
+      },
+      {
+        "qid": "AAPL-GrossProfit-2024",
+        "nDCG@10": 0.5135
+      },
+      {
+        "qid": "MSFT-GrossProfit-2024",
+        "nDCG@10": 0.5531
+      },
+      {
+        "qid": "NVDA-Revenues-2026",
+        "nDCG@10": 0.6924
+      },
+      {
+        "qid": "AAPL-Assets-2023",
+        "nDCG@10": 0.5
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2025",
+        "nDCG@10": 0.3693
+      },
+      {
+        "qid": "NVDA-Liabilities-2024",
+        "nDCG@10": 0.6309
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2024",
+        "nDCG@10": 0.4144
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2023",
+        "nDCG@10": 0.3487
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2024",
+        "nDCG@10": 0.2346
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2024",
+        "nDCG@10": 0.5414
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2023",
+        "nDCG@10": 0.9047
+      },
+      {
+        "qid": "NVDA-Assets-2024",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "AAPL-GrossProfit-2023",
+        "nDCG@10": 0.8773
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2022",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-SellingGeneralAndAdministrativeExpense-2023",
+        "nDCG@10": 0.3155
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2023",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2022",
+        "nDCG@10": 0.5
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2023",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2024",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2025",
+        "nDCG@10": 0.6131
+      },
+      {
+        "qid": "NVDA-Liabilities-2025",
+        "nDCG@10": 0.8316
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2022",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-OperatingIncomeLoss-2023",
+        "nDCG@10": 0.8105
+      },
+      {
+        "qid": "NVDA-StockholdersEquity-2024",
+        "nDCG@10": 0.906
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2024",
+        "nDCG@10": 0.1772
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2022",
+        "nDCG@10": 0.5
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2023",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2023",
+        "nDCG@10": 0.8797
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2025",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "NVDA-GrossProfit-2025",
+        "nDCG@10": 0.2044
+      },
+      {
+        "qid": "AAPL-Liabilities-2023",
+        "nDCG@10": 0.6309
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2023",
+        "nDCG@10": 0.6426
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2025",
+        "nDCG@10": 0.4591
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2022",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-Assets-2024",
+        "nDCG@10": 0.3072
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2023",
+        "nDCG@10": 0.3333
+      },
+      {
+        "qid": "AAPL-CashAndCashEquivalentsAtCarryingValue-2025",
+        "nDCG@10": 0.6462
+      },
+      {
+        "qid": "MSFT-GrossProfit-2022",
+        "nDCG@10": 0.3562
+      },
+      {
+        "qid": "NVDA-Assets-2025",
+        "nDCG@10": 0.7904
+      },
+      {
+        "qid": "AAPL-OperatingIncomeLoss-2022",
+        "nDCG@10": 0.9197
+      },
+      {
+        "qid": "MSFT-NetIncomeLoss-2025",
+        "nDCG@10": 0.6013
+      },
+      {
+        "qid": "NVDA-StockholdersEquity-2023",
+        "nDCG@10": 0.4307
+      },
+      {
+        "qid": "AAPL-Liabilities-2024",
+        "nDCG@10": 0.2641
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2024",
+        "nDCG@10": 0.4538
+      },
+      {
+        "qid": "NVDA-GrossProfit-2023",
+        "nDCG@10": 0.6309
+      },
+      {
+        "qid": "AAPL-GrossProfit-2022",
+        "nDCG@10": 0.8175
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2022",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "NVDA-EarningsPerShareDiluted-2026",
+        "nDCG@10": 0.9675
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2023",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-RevenueFromContractWithCustomerExcludingAssessedTax-2022",
+        "nDCG@10": 0.9447
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2026",
+        "nDCG@10": 0.6364
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2023",
+        "nDCG@10": 0.4556
+      },
+      {
+        "qid": "MSFT-Liabilities-2024",
+        "nDCG@10": 0.4218
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2024",
+        "nDCG@10": 0.4291
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2025",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2025",
+        "nDCG@10": 0.8855
+      },
+      {
+        "qid": "NVDA-EarningsPerShareDiluted-2025",
+        "nDCG@10": 0.7526
+      },
+      {
+        "qid": "AAPL-RevenueFromContractWithCustomerExcludingAssessedTax-2025",
+        "nDCG@10": 0.7323
+      },
+      {
+        "qid": "MSFT-OperatingExpenses-2025",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "NVDA-StockholdersEquity-2026",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2022",
+        "nDCG@10": 0.6309
+      },
+      {
+        "qid": "MSFT-Assets-2025",
+        "nDCG@10": 0.511
+      },
+      {
+        "qid": "NVDA-Liabilities-2026",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "AAPL-RevenueFromContractWithCustomerExcludingAssessedTax-2022",
+        "nDCG@10": 0.7227
+      },
+      {
+        "qid": "MSFT-GrossProfit-2025",
+        "nDCG@10": 0.6131
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2026",
+        "nDCG@10": 0.6508
+      },
+      {
+        "qid": "AAPL-NetIncomeLoss-2022",
+        "nDCG@10": 0.8062
+      },
+      {
+        "qid": "MSFT-Liabilities-2025",
+        "nDCG@10": 0.5
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2023",
+        "nDCG@10": 0.3562
+      },
+      {
+        "qid": "AAPL-ResearchAndDevelopmentExpense-2024",
+        "nDCG@10": 0.4725
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2024",
+        "nDCG@10": 0.4415
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2026",
+        "nDCG@10": 0.6053
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2023",
+        "nDCG@10": 0.7087
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2024",
+        "nDCG@10": 0.8688
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2023",
+        "nDCG@10": 0.5803
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2022",
+        "nDCG@10": 0.8175
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2024",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2026",
+        "nDCG@10": 0.5714
+      },
+      {
+        "qid": "AAPL-CashAndCashEquivalentsAtCarryingValue-2023",
+        "nDCG@10": 0.8066
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2022",
+        "nDCG@10": 0.6241
+      },
+      {
+        "qid": "NVDA-SellingGeneralAndAdministrativeExpense-2025",
+        "nDCG@10": 0.5148
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2025",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-NetIncomeLoss-2022",
+        "nDCG@10": 0.4462
+      },
+      {
+        "qid": "NVDA-NetIncomeLoss-2023",
+        "nDCG@10": 0.6844
+      },
+      {
+        "qid": "AAPL-CashAndCashEquivalentsAtCarryingValue-2024",
+        "nDCG@10": 0.2438
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2025",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2025",
+        "nDCG@10": 0.571
+      },
+      {
+        "qid": "AAPL-NetIncomeLoss-2025",
+        "nDCG@10": 0.8297
+      },
+      {
+        "qid": "MSFT-GrossProfit-2023",
+        "nDCG@10": 0.7054
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2024",
+        "nDCG@10": 0.5414
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2024",
+        "nDCG@10": 0.8665
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2023",
+        "nDCG@10": 0.7757
+      },
+      {
+        "qid": "NVDA-Revenues-2023",
+        "nDCG@10": 0.8843
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2025",
+        "nDCG@10": 0.7977
+      },
+      {
+        "qid": "MSFT-OperatingExpenses-2023",
+        "nDCG@10": 0.6309
+      },
+      {
+        "qid": "NVDA-SellingGeneralAndAdministrativeExpense-2026",
+        "nDCG@10": 0.5912
+      },
+      {
+        "qid": "AAPL-GrossProfit-2025",
+        "nDCG@10": 0.6131
+      },
+      {
+        "qid": "MSFT-Liabilities-2023",
+        "nDCG@10": 0.4307
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2025",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2025",
+        "nDCG@10": 0.8066
+      },
+      {
+        "qid": "MSFT-OperatingExpenses-2024",
+        "nDCG@10": 0.1772
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2024",
+        "nDCG@10": 0.3816
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2025",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2023",
+        "nDCG@10": 0.2961
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2025",
+        "nDCG@10": 0.6106
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2022",
+        "nDCG@10": 0.8175
+      },
+      {
+        "qid": "MSFT-Assets-2023",
+        "nDCG@10": 0.511
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2024",
+        "nDCG@10": 0.5585
+      },
+      {
+        "qid": "AAPL-OperatingIncomeLoss-2024",
+        "nDCG@10": 0.7095
+      },
+      {
+        "qid": "MSFT-OperatingIncomeLoss-2025",
+        "nDCG@10": 0.955
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2025",
+        "nDCG@10": 0.6753
+      },
+      {
+        "qid": "AAPL-ResearchAndDevelopmentExpense-2022",
+        "nDCG@10": 0.9218
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2024",
+        "nDCG@10": 0.4329
+      },
+      {
+        "qid": "NVDA-GrossProfit-2024",
+        "nDCG@10": 0.4118
+      }
+    ],
+    "Hybrid (RRF)": [
+      {
+        "qid": "AAPL-Assets-2024",
+        "nDCG@10": 0.4118
+      },
+      {
+        "qid": "MSFT-RevenueFromContractWithCustomerExcludingAssessedTax-2025",
+        "nDCG@10": 0.2961
+      },
+      {
+        "qid": "NVDA-NetIncomeLoss-2026",
+        "nDCG@10": 0.6116
+      },
+      {
+        "qid": "AAPL-ResearchAndDevelopmentExpense-2025",
+        "nDCG@10": 0.3434
+      },
+      {
+        "qid": "MSFT-OperatingIncomeLoss-2022",
+        "nDCG@10": 0.8175
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2026",
+        "nDCG@10": 0.3155
+      },
+      {
+        "qid": "AAPL-GrossProfit-2024",
+        "nDCG@10": 0.4144
+      },
+      {
+        "qid": "MSFT-GrossProfit-2024",
+        "nDCG@10": 0.252
+      },
+      {
+        "qid": "NVDA-Revenues-2026",
+        "nDCG@10": 0.2684
+      },
+      {
+        "qid": "AAPL-Assets-2023",
+        "nDCG@10": 0.5
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2025",
+        "nDCG@10": 0.6257
+      },
+      {
+        "qid": "NVDA-Liabilities-2024",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2024",
+        "nDCG@10": 0.5535
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2023",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2024",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2024",
+        "nDCG@10": 0.7537
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2023",
+        "nDCG@10": 0.4471
+      },
+      {
+        "qid": "NVDA-Assets-2024",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "AAPL-GrossProfit-2023",
+        "nDCG@10": 0.6367
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2022",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-SellingGeneralAndAdministrativeExpense-2023",
+        "nDCG@10": 0.3333
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2023",
+        "nDCG@10": 0.9268
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2022",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2023",
+        "nDCG@10": 0.3562
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2024",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2025",
+        "nDCG@10": 0.2184
+      },
+      {
+        "qid": "NVDA-Liabilities-2025",
+        "nDCG@10": 0.8772
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2022",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-OperatingIncomeLoss-2023",
+        "nDCG@10": 0.5356
+      },
+      {
+        "qid": "NVDA-StockholdersEquity-2024",
+        "nDCG@10": 0.4693
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2024",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2022",
+        "nDCG@10": 0.301
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2023",
+        "nDCG@10": 0.3155
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2023",
+        "nDCG@10": 0.8928
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2025",
+        "nDCG@10": 0.7904
+      },
+      {
+        "qid": "NVDA-GrossProfit-2025",
+        "nDCG@10": 0.4306
+      },
+      {
+        "qid": "AAPL-Liabilities-2023",
+        "nDCG@10": 0.5
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2023",
+        "nDCG@10": 0.693
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2025",
+        "nDCG@10": 0.1232
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2022",
+        "nDCG@10": 0.8772
+      },
+      {
+        "qid": "MSFT-Assets-2024",
+        "nDCG@10": 0.2913
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2023",
+        "nDCG@10": 0.301
+      },
+      {
+        "qid": "AAPL-CashAndCashEquivalentsAtCarryingValue-2025",
+        "nDCG@10": 0.6257
+      },
+      {
+        "qid": "MSFT-GrossProfit-2022",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-Assets-2025",
+        "nDCG@10": 0.8772
+      },
+      {
+        "qid": "AAPL-OperatingIncomeLoss-2022",
+        "nDCG@10": 0.8772
+      },
+      {
+        "qid": "MSFT-NetIncomeLoss-2025",
+        "nDCG@10": 0.3212
+      },
+      {
+        "qid": "NVDA-StockholdersEquity-2023",
+        "nDCG@10": 0.3155
+      },
+      {
+        "qid": "AAPL-Liabilities-2024",
+        "nDCG@10": 0.389
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2024",
+        "nDCG@10": 0.7499
+      },
+      {
+        "qid": "NVDA-GrossProfit-2023",
+        "nDCG@10": 0.4307
+      },
+      {
+        "qid": "AAPL-GrossProfit-2022",
+        "nDCG@10": 0.6131
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2022",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "NVDA-EarningsPerShareDiluted-2026",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2023",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-RevenueFromContractWithCustomerExcludingAssessedTax-2022",
+        "nDCG@10": 0.4763
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2026",
+        "nDCG@10": 0.5116
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2023",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "MSFT-Liabilities-2024",
+        "nDCG@10": 0.4218
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2024",
+        "nDCG@10": 0.4995
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2025",
+        "nDCG@10": 0.9197
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2025",
+        "nDCG@10": 0.6979
+      },
+      {
+        "qid": "NVDA-EarningsPerShareDiluted-2025",
+        "nDCG@10": 0.9877
+      },
+      {
+        "qid": "AAPL-RevenueFromContractWithCustomerExcludingAssessedTax-2025",
+        "nDCG@10": 0.3937
+      },
+      {
+        "qid": "MSFT-OperatingExpenses-2025",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "NVDA-StockholdersEquity-2026",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2022",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "MSFT-Assets-2025",
+        "nDCG@10": 0.2641
+      },
+      {
+        "qid": "NVDA-Liabilities-2026",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "AAPL-RevenueFromContractWithCustomerExcludingAssessedTax-2022",
+        "nDCG@10": 0.3423
+      },
+      {
+        "qid": "MSFT-GrossProfit-2025",
+        "nDCG@10": 0.2641
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2026",
+        "nDCG@10": 0.7865
+      },
+      {
+        "qid": "AAPL-NetIncomeLoss-2022",
+        "nDCG@10": 0.7145
+      },
+      {
+        "qid": "MSFT-Liabilities-2025",
+        "nDCG@10": 0.4307
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2023",
+        "nDCG@10": 0.3155
+      },
+      {
+        "qid": "AAPL-ResearchAndDevelopmentExpense-2024",
+        "nDCG@10": 0.3762
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2024",
+        "nDCG@10": 0.2692
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2026",
+        "nDCG@10": 0.525
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2023",
+        "nDCG@10": 0.6199
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2024",
+        "nDCG@10": 0.5296
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2023",
+        "nDCG@10": 0.9197
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2022",
+        "nDCG@10": 0.6241
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2024",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2026",
+        "nDCG@10": 0.2372
+      },
+      {
+        "qid": "AAPL-CashAndCashEquivalentsAtCarryingValue-2023",
+        "nDCG@10": 0.1846
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2022",
+        "nDCG@10": 0.8503
+      },
+      {
+        "qid": "NVDA-SellingGeneralAndAdministrativeExpense-2025",
+        "nDCG@10": 0.4043
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2025",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-NetIncomeLoss-2022",
+        "nDCG@10": 0.6524
+      },
+      {
+        "qid": "NVDA-NetIncomeLoss-2023",
+        "nDCG@10": 0.7227
+      },
+      {
+        "qid": "AAPL-CashAndCashEquivalentsAtCarryingValue-2024",
+        "nDCG@10": 0.5511
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2025",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2025",
+        "nDCG@10": 0.4197
+      },
+      {
+        "qid": "AAPL-NetIncomeLoss-2025",
+        "nDCG@10": 0.6662
+      },
+      {
+        "qid": "MSFT-GrossProfit-2023",
+        "nDCG@10": 0.3072
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2024",
+        "nDCG@10": 0.3904
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2024",
+        "nDCG@10": 0.9829
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2023",
+        "nDCG@10": 0.7598
+      },
+      {
+        "qid": "NVDA-Revenues-2023",
+        "nDCG@10": 0.5856
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2025",
+        "nDCG@10": 0.6053
+      },
+      {
+        "qid": "MSFT-OperatingExpenses-2023",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "NVDA-SellingGeneralAndAdministrativeExpense-2026",
+        "nDCG@10": 0.5013
+      },
+      {
+        "qid": "AAPL-GrossProfit-2025",
+        "nDCG@10": 0.6131
+      },
+      {
+        "qid": "MSFT-Liabilities-2023",
+        "nDCG@10": 0.5
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2025",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2025",
+        "nDCG@10": 0.9197
+      },
+      {
+        "qid": "MSFT-OperatingExpenses-2024",
+        "nDCG@10": 0.5706
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2024",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2025",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2023",
+        "nDCG@10": 0.1672
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2025",
+        "nDCG@10": 0.571
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2022",
+        "nDCG@10": 0.8772
+      },
+      {
+        "qid": "MSFT-Assets-2023",
+        "nDCG@10": 0.3066
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2024",
+        "nDCG@10": 0.6805
+      },
+      {
+        "qid": "AAPL-OperatingIncomeLoss-2024",
+        "nDCG@10": 0.5654
+      },
+      {
+        "qid": "MSFT-OperatingIncomeLoss-2025",
+        "nDCG@10": 0.7537
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2025",
+        "nDCG@10": 0.4996
+      },
+      {
+        "qid": "AAPL-ResearchAndDevelopmentExpense-2022",
+        "nDCG@10": 0.8452
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2024",
+        "nDCG@10": 0.6492
+      },
+      {
+        "qid": "NVDA-GrossProfit-2024",
+        "nDCG@10": 0.4228
+      }
+    ],
+    "BM25 + rerank": [
+      {
+        "qid": "AAPL-Assets-2024",
+        "nDCG@10": 0.8066
+      },
+      {
+        "qid": "MSFT-RevenueFromContractWithCustomerExcludingAssessedTax-2025",
+        "nDCG@10": 0.3692
+      },
+      {
+        "qid": "NVDA-NetIncomeLoss-2026",
+        "nDCG@10": 0.6974
+      },
+      {
+        "qid": "AAPL-ResearchAndDevelopmentExpense-2025",
+        "nDCG@10": 0.6448
+      },
+      {
+        "qid": "MSFT-OperatingIncomeLoss-2022",
+        "nDCG@10": 0.9197
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2026",
+        "nDCG@10": 0.5
+      },
+      {
+        "qid": "AAPL-GrossProfit-2024",
+        "nDCG@10": 0.5414
+      },
+      {
+        "qid": "MSFT-GrossProfit-2024",
+        "nDCG@10": 0.2669
+      },
+      {
+        "qid": "NVDA-Revenues-2026",
+        "nDCG@10": 0.4725
+      },
+      {
+        "qid": "AAPL-Assets-2023",
+        "nDCG@10": 0.6309
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2025",
+        "nDCG@10": 0.6714
+      },
+      {
+        "qid": "NVDA-Liabilities-2024",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2024",
+        "nDCG@10": 0.6551
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2023",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2024",
+        "nDCG@10": 0.7921
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2024",
+        "nDCG@10": 0.9268
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2023",
+        "nDCG@10": 0.4415
+      },
+      {
+        "qid": "NVDA-Assets-2024",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "AAPL-GrossProfit-2023",
+        "nDCG@10": 0.5856
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2022",
+        "nDCG@10": 0.3562
+      },
+      {
+        "qid": "NVDA-SellingGeneralAndAdministrativeExpense-2023",
+        "nDCG@10": 0.3869
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2023",
+        "nDCG@10": 0.8486
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2022",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2023",
+        "nDCG@10": 0.5
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2024",
+        "nDCG@10": 0.955
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2025",
+        "nDCG@10": 0.5438
+      },
+      {
+        "qid": "NVDA-Liabilities-2025",
+        "nDCG@10": 0.5714
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2022",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-OperatingIncomeLoss-2023",
+        "nDCG@10": 0.5356
+      },
+      {
+        "qid": "NVDA-StockholdersEquity-2024",
+        "nDCG@10": 0.4693
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2024",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2022",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2023",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2023",
+        "nDCG@10": 0.9558
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2025",
+        "nDCG@10": 0.6131
+      },
+      {
+        "qid": "NVDA-GrossProfit-2025",
+        "nDCG@10": 0.403
+      },
+      {
+        "qid": "AAPL-Liabilities-2023",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2023",
+        "nDCG@10": 0.6825
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2025",
+        "nDCG@10": 0.5102
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2022",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-Assets-2024",
+        "nDCG@10": 0.3904
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2023",
+        "nDCG@10": 0.3869
+      },
+      {
+        "qid": "AAPL-CashAndCashEquivalentsAtCarryingValue-2025",
+        "nDCG@10": 0.7039
+      },
+      {
+        "qid": "MSFT-GrossProfit-2022",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-Assets-2025",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "AAPL-OperatingIncomeLoss-2022",
+        "nDCG@10": 0.9197
+      },
+      {
+        "qid": "MSFT-NetIncomeLoss-2025",
+        "nDCG@10": 0.6448
+      },
+      {
+        "qid": "NVDA-StockholdersEquity-2023",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "AAPL-Liabilities-2024",
+        "nDCG@10": 0.5641
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2024",
+        "nDCG@10": 0.6295
+      },
+      {
+        "qid": "NVDA-GrossProfit-2023",
+        "nDCG@10": 0.6309
+      },
+      {
+        "qid": "AAPL-GrossProfit-2022",
+        "nDCG@10": 0.3869
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2022",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "NVDA-EarningsPerShareDiluted-2026",
+        "nDCG@10": 0.9675
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2023",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-RevenueFromContractWithCustomerExcludingAssessedTax-2022",
+        "nDCG@10": 0.7537
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2026",
+        "nDCG@10": 0.6039
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2023",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "MSFT-Liabilities-2024",
+        "nDCG@10": 0.8175
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2024",
+        "nDCG@10": 0.6366
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2025",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2025",
+        "nDCG@10": 0.906
+      },
+      {
+        "qid": "NVDA-EarningsPerShareDiluted-2025",
+        "nDCG@10": 0.876
+      },
+      {
+        "qid": "AAPL-RevenueFromContractWithCustomerExcludingAssessedTax-2025",
+        "nDCG@10": 0.3026
+      },
+      {
+        "qid": "MSFT-OperatingExpenses-2025",
+        "nDCG@10": 0.5706
+      },
+      {
+        "qid": "NVDA-StockholdersEquity-2026",
+        "nDCG@10": 0.8772
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2022",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "MSFT-Assets-2025",
+        "nDCG@10": 0.6131
+      },
+      {
+        "qid": "NVDA-Liabilities-2026",
+        "nDCG@10": 0.5
+      },
+      {
+        "qid": "AAPL-RevenueFromContractWithCustomerExcludingAssessedTax-2022",
+        "nDCG@10": 0.8358
+      },
+      {
+        "qid": "MSFT-GrossProfit-2025",
+        "nDCG@10": 0.3066
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2026",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "AAPL-NetIncomeLoss-2022",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-Liabilities-2025",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2023",
+        "nDCG@10": 0.3869
+      },
+      {
+        "qid": "AAPL-ResearchAndDevelopmentExpense-2024",
+        "nDCG@10": 0.7431
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2024",
+        "nDCG@10": 0.3854
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2026",
+        "nDCG@10": 0.8503
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2023",
+        "nDCG@10": 0.671
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2024",
+        "nDCG@10": 0.6218
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2023",
+        "nDCG@10": 0.9197
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2022",
+        "nDCG@10": 0.6934
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2024",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2026",
+        "nDCG@10": 0.5
+      },
+      {
+        "qid": "AAPL-CashAndCashEquivalentsAtCarryingValue-2023",
+        "nDCG@10": 0.3066
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2022",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "NVDA-SellingGeneralAndAdministrativeExpense-2025",
+        "nDCG@10": 0.5155
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2025",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-NetIncomeLoss-2022",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "NVDA-NetIncomeLoss-2023",
+        "nDCG@10": 0.5296
+      },
+      {
+        "qid": "AAPL-CashAndCashEquivalentsAtCarryingValue-2024",
+        "nDCG@10": 0.476
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2025",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2025",
+        "nDCG@10": 0.6454
+      },
+      {
+        "qid": "AAPL-NetIncomeLoss-2025",
+        "nDCG@10": 0.5531
+      },
+      {
+        "qid": "MSFT-GrossProfit-2023",
+        "nDCG@10": 0.6367
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2024",
+        "nDCG@10": 0.8486
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2024",
+        "nDCG@10": 0.955
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2023",
+        "nDCG@10": 0.6096
+      },
+      {
+        "qid": "NVDA-Revenues-2023",
+        "nDCG@10": 0.4415
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2025",
+        "nDCG@10": 0.6934
+      },
+      {
+        "qid": "MSFT-OperatingExpenses-2023",
+        "nDCG@10": 0.3869
+      },
+      {
+        "qid": "NVDA-SellingGeneralAndAdministrativeExpense-2026",
+        "nDCG@10": 0.6053
+      },
+      {
+        "qid": "AAPL-GrossProfit-2025",
+        "nDCG@10": 0.6131
+      },
+      {
+        "qid": "MSFT-Liabilities-2023",
+        "nDCG@10": 0.6309
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2025",
+        "nDCG@10": 0.2641
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2025",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-OperatingExpenses-2024",
+        "nDCG@10": 0.2044
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2024",
+        "nDCG@10": 0.1846
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2025",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2023",
+        "nDCG@10": 0.5989
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2025",
+        "nDCG@10": 0.6238
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2022",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-Assets-2023",
+        "nDCG@10": 0.6131
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2024",
+        "nDCG@10": 0.6976
+      },
+      {
+        "qid": "AAPL-OperatingIncomeLoss-2024",
+        "nDCG@10": 0.7246
+      },
+      {
+        "qid": "MSFT-OperatingIncomeLoss-2025",
+        "nDCG@10": 0.5143
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2025",
+        "nDCG@10": 0.6591
+      },
+      {
+        "qid": "AAPL-ResearchAndDevelopmentExpense-2022",
+        "nDCG@10": 0.9469
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2024",
+        "nDCG@10": 0.6454
+      },
+      {
+        "qid": "NVDA-GrossProfit-2024",
+        "nDCG@10": 0.4228
+      }
+    ],
+    "Dense + rerank": [
+      {
+        "qid": "AAPL-Assets-2024",
+        "nDCG@10": 0.6131
+      },
+      {
+        "qid": "MSFT-RevenueFromContractWithCustomerExcludingAssessedTax-2025",
+        "nDCG@10": 0.5857
+      },
+      {
+        "qid": "NVDA-NetIncomeLoss-2026",
+        "nDCG@10": 0.9496
+      },
+      {
+        "qid": "AAPL-ResearchAndDevelopmentExpense-2025",
+        "nDCG@10": 0.6448
+      },
+      {
+        "qid": "MSFT-OperatingIncomeLoss-2022",
+        "nDCG@10": 0.9197
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2026",
+        "nDCG@10": 0.5
+      },
+      {
+        "qid": "AAPL-GrossProfit-2024",
+        "nDCG@10": 0.6367
+      },
+      {
+        "qid": "MSFT-GrossProfit-2024",
+        "nDCG@10": 0.3896
+      },
+      {
+        "qid": "NVDA-Revenues-2026",
+        "nDCG@10": 0.4725
+      },
+      {
+        "qid": "AAPL-Assets-2023",
+        "nDCG@10": 0.6309
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2025",
+        "nDCG@10": 0.7039
+      },
+      {
+        "qid": "NVDA-Liabilities-2024",
+        "nDCG@10": 0.4307
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2024",
+        "nDCG@10": 0.4144
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2023",
+        "nDCG@10": 0.5431
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2024",
+        "nDCG@10": 0.6364
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2024",
+        "nDCG@10": 0.7757
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2023",
+        "nDCG@10": 0.9047
+      },
+      {
+        "qid": "NVDA-Assets-2024",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "AAPL-GrossProfit-2023",
+        "nDCG@10": 0.6836
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2022",
+        "nDCG@10": 0.3562
+      },
+      {
+        "qid": "NVDA-SellingGeneralAndAdministrativeExpense-2023",
+        "nDCG@10": 0.3562
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2023",
+        "nDCG@10": 0.8277
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2022",
+        "nDCG@10": 0.6309
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2023",
+        "nDCG@10": 0.3869
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2024",
+        "nDCG@10": 0.8319
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2025",
+        "nDCG@10": 0.5438
+      },
+      {
+        "qid": "NVDA-Liabilities-2025",
+        "nDCG@10": 0.3066
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2022",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-OperatingIncomeLoss-2023",
+        "nDCG@10": 0.7934
+      },
+      {
+        "qid": "NVDA-StockholdersEquity-2024",
+        "nDCG@10": 0.9469
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2024",
+        "nDCG@10": 0.2372
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2022",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2023",
+        "nDCG@10": 0.6309
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2023",
+        "nDCG@10": 0.9558
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2025",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "NVDA-GrossProfit-2025",
+        "nDCG@10": 0.3956
+      },
+      {
+        "qid": "AAPL-Liabilities-2023",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2023",
+        "nDCG@10": 0.6727
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2025",
+        "nDCG@10": 0.3764
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2022",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-Assets-2024",
+        "nDCG@10": 0.5032
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2023",
+        "nDCG@10": 0.3155
+      },
+      {
+        "qid": "AAPL-CashAndCashEquivalentsAtCarryingValue-2025",
+        "nDCG@10": 0.7328
+      },
+      {
+        "qid": "MSFT-GrossProfit-2022",
+        "nDCG@10": 0.4307
+      },
+      {
+        "qid": "NVDA-Assets-2025",
+        "nDCG@10": 0.8316
+      },
+      {
+        "qid": "AAPL-OperatingIncomeLoss-2022",
+        "nDCG@10": 0.9197
+      },
+      {
+        "qid": "MSFT-NetIncomeLoss-2025",
+        "nDCG@10": 0.9362
+      },
+      {
+        "qid": "NVDA-StockholdersEquity-2023",
+        "nDCG@10": 0.6309
+      },
+      {
+        "qid": "AAPL-Liabilities-2024",
+        "nDCG@10": 0.3869
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2024",
+        "nDCG@10": 0.5428
+      },
+      {
+        "qid": "NVDA-GrossProfit-2023",
+        "nDCG@10": 0.5
+      },
+      {
+        "qid": "AAPL-GrossProfit-2022",
+        "nDCG@10": 0.8316
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2022",
+        "nDCG@10": 0.6309
+      },
+      {
+        "qid": "NVDA-EarningsPerShareDiluted-2026",
+        "nDCG@10": 0.9675
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2023",
+        "nDCG@10": 0.9675
+      },
+      {
+        "qid": "MSFT-RevenueFromContractWithCustomerExcludingAssessedTax-2022",
+        "nDCG@10": 0.8397
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2026",
+        "nDCG@10": 0.5833
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2023",
+        "nDCG@10": 0.3066
+      },
+      {
+        "qid": "MSFT-Liabilities-2024",
+        "nDCG@10": 0.6131
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2024",
+        "nDCG@10": 0.6427
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2025",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2025",
+        "nDCG@10": 0.9675
+      },
+      {
+        "qid": "NVDA-EarningsPerShareDiluted-2025",
+        "nDCG@10": 0.7751
+      },
+      {
+        "qid": "AAPL-RevenueFromContractWithCustomerExcludingAssessedTax-2025",
+        "nDCG@10": 0.9188
+      },
+      {
+        "qid": "MSFT-OperatingExpenses-2025",
+        "nDCG@10": 0.5706
+      },
+      {
+        "qid": "NVDA-StockholdersEquity-2026",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2022",
+        "nDCG@10": 0.3562
+      },
+      {
+        "qid": "MSFT-Assets-2025",
+        "nDCG@10": 0.7904
+      },
+      {
+        "qid": "NVDA-Liabilities-2026",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "AAPL-RevenueFromContractWithCustomerExcludingAssessedTax-2022",
+        "nDCG@10": 0.956
+      },
+      {
+        "qid": "MSFT-GrossProfit-2025",
+        "nDCG@10": 0.5706
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2026",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "AAPL-NetIncomeLoss-2022",
+        "nDCG@10": 0.9896
+      },
+      {
+        "qid": "MSFT-Liabilities-2025",
+        "nDCG@10": 0.6309
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2023",
+        "nDCG@10": 0.3869
+      },
+      {
+        "qid": "AAPL-ResearchAndDevelopmentExpense-2024",
+        "nDCG@10": 0.6458
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2024",
+        "nDCG@10": 0.4996
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2026",
+        "nDCG@10": 0.8772
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2023",
+        "nDCG@10": 0.6539
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2024",
+        "nDCG@10": 0.7227
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2023",
+        "nDCG@10": 0.6509
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2022",
+        "nDCG@10": 0.9197
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2024",
+        "nDCG@10": 0.1815
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2026",
+        "nDCG@10": 0.4911
+      },
+      {
+        "qid": "AAPL-CashAndCashEquivalentsAtCarryingValue-2023",
+        "nDCG@10": 0.8175
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2022",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "NVDA-SellingGeneralAndAdministrativeExpense-2025",
+        "nDCG@10": 0.4041
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2025",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-NetIncomeLoss-2022",
+        "nDCG@10": 0.9435
+      },
+      {
+        "qid": "NVDA-NetIncomeLoss-2023",
+        "nDCG@10": 0.8887
+      },
+      {
+        "qid": "AAPL-CashAndCashEquivalentsAtCarryingValue-2024",
+        "nDCG@10": 0.6054
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2025",
+        "nDCG@10": 0.5
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2025",
+        "nDCG@10": 0.616
+      },
+      {
+        "qid": "AAPL-NetIncomeLoss-2025",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-GrossProfit-2023",
+        "nDCG@10": 0.8048
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2024",
+        "nDCG@10": 0.8548
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2024",
+        "nDCG@10": 0.8319
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2023",
+        "nDCG@10": 0.5724
+      },
+      {
+        "qid": "NVDA-Revenues-2023",
+        "nDCG@10": 0.7328
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2025",
+        "nDCG@10": 0.6934
+      },
+      {
+        "qid": "MSFT-OperatingExpenses-2023",
+        "nDCG@10": 0.3155
+      },
+      {
+        "qid": "NVDA-SellingGeneralAndAdministrativeExpense-2026",
+        "nDCG@10": 0.5912
+      },
+      {
+        "qid": "AAPL-GrossProfit-2025",
+        "nDCG@10": 0.9197
+      },
+      {
+        "qid": "MSFT-Liabilities-2023",
+        "nDCG@10": 0.5
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2025",
+        "nDCG@10": 0.2641
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2025",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-OperatingExpenses-2024",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2024",
+        "nDCG@10": 0.3707
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2025",
+        "nDCG@10": 0.3869
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2023",
+        "nDCG@10": 0.5989
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2025",
+        "nDCG@10": 0.7409
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2022",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-Assets-2023",
+        "nDCG@10": 0.6131
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2024",
+        "nDCG@10": 0.8421
+      },
+      {
+        "qid": "AAPL-OperatingIncomeLoss-2024",
+        "nDCG@10": 0.7537
+      },
+      {
+        "qid": "MSFT-OperatingIncomeLoss-2025",
+        "nDCG@10": 0.7226
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2025",
+        "nDCG@10": 0.6717
+      },
+      {
+        "qid": "AAPL-ResearchAndDevelopmentExpense-2022",
+        "nDCG@10": 0.9469
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2024",
+        "nDCG@10": 0.4329
+      },
+      {
+        "qid": "NVDA-GrossProfit-2024",
+        "nDCG@10": 0.4228
+      }
+    ],
+    "Hybrid + rerank": [
+      {
+        "qid": "AAPL-Assets-2024",
+        "nDCG@10": 0.6131
+      },
+      {
+        "qid": "MSFT-RevenueFromContractWithCustomerExcludingAssessedTax-2025",
+        "nDCG@10": 0.4996
+      },
+      {
+        "qid": "NVDA-NetIncomeLoss-2026",
+        "nDCG@10": 0.6974
+      },
+      {
+        "qid": "AAPL-ResearchAndDevelopmentExpense-2025",
+        "nDCG@10": 0.6448
+      },
+      {
+        "qid": "MSFT-OperatingIncomeLoss-2022",
+        "nDCG@10": 0.8772
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2026",
+        "nDCG@10": 0.5
+      },
+      {
+        "qid": "AAPL-GrossProfit-2024",
+        "nDCG@10": 0.6367
+      },
+      {
+        "qid": "MSFT-GrossProfit-2024",
+        "nDCG@10": 0.3974
+      },
+      {
+        "qid": "NVDA-Revenues-2026",
+        "nDCG@10": 0.5896
+      },
+      {
+        "qid": "AAPL-Assets-2023",
+        "nDCG@10": 0.6309
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2025",
+        "nDCG@10": 0.6714
+      },
+      {
+        "qid": "NVDA-Liabilities-2024",
+        "nDCG@10": 0.6309
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2024",
+        "nDCG@10": 0.3633
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2023",
+        "nDCG@10": 0.5726
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2024",
+        "nDCG@10": 0.6714
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2024",
+        "nDCG@10": 0.9059
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2023",
+        "nDCG@10": 0.9047
+      },
+      {
+        "qid": "NVDA-Assets-2024",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "AAPL-GrossProfit-2023",
+        "nDCG@10": 0.6677
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2022",
+        "nDCG@10": 0.3562
+      },
+      {
+        "qid": "NVDA-SellingGeneralAndAdministrativeExpense-2023",
+        "nDCG@10": 0.3562
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2023",
+        "nDCG@10": 0.8486
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2022",
+        "nDCG@10": 0.6309
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2023",
+        "nDCG@10": 0.3869
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2024",
+        "nDCG@10": 0.8319
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2025",
+        "nDCG@10": 0.5438
+      },
+      {
+        "qid": "NVDA-Liabilities-2025",
+        "nDCG@10": 0.3869
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2022",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-OperatingIncomeLoss-2023",
+        "nDCG@10": 0.8046
+      },
+      {
+        "qid": "NVDA-StockholdersEquity-2024",
+        "nDCG@10": 0.9469
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2024",
+        "nDCG@10": 0.2372
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2022",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2023",
+        "nDCG@10": 0.6309
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2023",
+        "nDCG@10": 0.9558
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2025",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "NVDA-GrossProfit-2025",
+        "nDCG@10": 0.2184
+      },
+      {
+        "qid": "AAPL-Liabilities-2023",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2023",
+        "nDCG@10": 0.6727
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2025",
+        "nDCG@10": 0.3854
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2022",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-Assets-2024",
+        "nDCG@10": 0.5135
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2023",
+        "nDCG@10": 0.301
+      },
+      {
+        "qid": "AAPL-CashAndCashEquivalentsAtCarryingValue-2025",
+        "nDCG@10": 0.906
+      },
+      {
+        "qid": "MSFT-GrossProfit-2022",
+        "nDCG@10": 0.4307
+      },
+      {
+        "qid": "NVDA-Assets-2025",
+        "nDCG@10": 0.7977
+      },
+      {
+        "qid": "AAPL-OperatingIncomeLoss-2022",
+        "nDCG@10": 0.9197
+      },
+      {
+        "qid": "MSFT-NetIncomeLoss-2025",
+        "nDCG@10": 0.9292
+      },
+      {
+        "qid": "NVDA-StockholdersEquity-2023",
+        "nDCG@10": 0.6309
+      },
+      {
+        "qid": "AAPL-Liabilities-2024",
+        "nDCG@10": 0.3869
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2024",
+        "nDCG@10": 0.5428
+      },
+      {
+        "qid": "NVDA-GrossProfit-2023",
+        "nDCG@10": 0.5
+      },
+      {
+        "qid": "AAPL-GrossProfit-2022",
+        "nDCG@10": 0.8503
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2022",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "NVDA-EarningsPerShareDiluted-2026",
+        "nDCG@10": 0.9675
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2023",
+        "nDCG@10": 0.9675
+      },
+      {
+        "qid": "MSFT-RevenueFromContractWithCustomerExcludingAssessedTax-2022",
+        "nDCG@10": 0.8548
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2026",
+        "nDCG@10": 0.5726
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2023",
+        "nDCG@10": 0.5641
+      },
+      {
+        "qid": "MSFT-Liabilities-2024",
+        "nDCG@10": 0.6131
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2024",
+        "nDCG@10": 0.6366
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2025",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2025",
+        "nDCG@10": 0.906
+      },
+      {
+        "qid": "NVDA-EarningsPerShareDiluted-2025",
+        "nDCG@10": 0.853
+      },
+      {
+        "qid": "AAPL-RevenueFromContractWithCustomerExcludingAssessedTax-2025",
+        "nDCG@10": 0.9392
+      },
+      {
+        "qid": "MSFT-OperatingExpenses-2025",
+        "nDCG@10": 0.5706
+      },
+      {
+        "qid": "NVDA-StockholdersEquity-2026",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2022",
+        "nDCG@10": 0.3869
+      },
+      {
+        "qid": "MSFT-Assets-2025",
+        "nDCG@10": 0.3869
+      },
+      {
+        "qid": "NVDA-Liabilities-2026",
+        "nDCG@10": 0.5
+      },
+      {
+        "qid": "AAPL-RevenueFromContractWithCustomerExcludingAssessedTax-2022",
+        "nDCG@10": 0.9416
+      },
+      {
+        "qid": "MSFT-GrossProfit-2025",
+        "nDCG@10": 0.5706
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2026",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "AAPL-NetIncomeLoss-2022",
+        "nDCG@10": 0.9896
+      },
+      {
+        "qid": "MSFT-Liabilities-2025",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2023",
+        "nDCG@10": 0.3869
+      },
+      {
+        "qid": "AAPL-ResearchAndDevelopmentExpense-2024",
+        "nDCG@10": 0.6458
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2024",
+        "nDCG@10": 0.4644
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2026",
+        "nDCG@10": 0.8772
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2023",
+        "nDCG@10": 0.6663
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2024",
+        "nDCG@10": 0.8013
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2023",
+        "nDCG@10": 0.6509
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2022",
+        "nDCG@10": 0.6934
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2024",
+        "nDCG@10": 0.1672
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2026",
+        "nDCG@10": 0.5
+      },
+      {
+        "qid": "AAPL-CashAndCashEquivalentsAtCarryingValue-2023",
+        "nDCG@10": 0.8316
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2022",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "NVDA-SellingGeneralAndAdministrativeExpense-2025",
+        "nDCG@10": 0.4428
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2025",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-NetIncomeLoss-2022",
+        "nDCG@10": 0.967
+      },
+      {
+        "qid": "NVDA-NetIncomeLoss-2023",
+        "nDCG@10": 0.8777
+      },
+      {
+        "qid": "AAPL-CashAndCashEquivalentsAtCarryingValue-2024",
+        "nDCG@10": 0.6286
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2025",
+        "nDCG@10": 0.5
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2025",
+        "nDCG@10": 0.6318
+      },
+      {
+        "qid": "AAPL-NetIncomeLoss-2025",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-GrossProfit-2023",
+        "nDCG@10": 0.7495
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2024",
+        "nDCG@10": 0.8277
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2024",
+        "nDCG@10": 0.8319
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2023",
+        "nDCG@10": 0.6534
+      },
+      {
+        "qid": "NVDA-Revenues-2023",
+        "nDCG@10": 0.7271
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2025",
+        "nDCG@10": 0.6934
+      },
+      {
+        "qid": "MSFT-OperatingExpenses-2023",
+        "nDCG@10": 0.3333
+      },
+      {
+        "qid": "NVDA-SellingGeneralAndAdministrativeExpense-2026",
+        "nDCG@10": 0.5803
+      },
+      {
+        "qid": "AAPL-GrossProfit-2025",
+        "nDCG@10": 0.9197
+      },
+      {
+        "qid": "MSFT-Liabilities-2023",
+        "nDCG@10": 0.5
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2025",
+        "nDCG@10": 0.2641
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2025",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-OperatingExpenses-2024",
+        "nDCG@10": 0.0
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2024",
+        "nDCG@10": 0.3816
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2025",
+        "nDCG@10": 0.5
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2023",
+        "nDCG@10": 0.5989
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2025",
+        "nDCG@10": 0.7409
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2022",
+        "nDCG@10": 1.0
+      },
+      {
+        "qid": "MSFT-Assets-2023",
+        "nDCG@10": 0.6131
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2024",
+        "nDCG@10": 0.8262
+      },
+      {
+        "qid": "AAPL-OperatingIncomeLoss-2024",
+        "nDCG@10": 0.6096
+      },
+      {
+        "qid": "MSFT-OperatingIncomeLoss-2025",
+        "nDCG@10": 0.6445
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2025",
+        "nDCG@10": 0.5636
+      },
+      {
+        "qid": "AAPL-ResearchAndDevelopmentExpense-2022",
+        "nDCG@10": 0.9469
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2024",
+        "nDCG@10": 0.4329
+      },
+      {
+        "qid": "NVDA-GrossProfit-2024",
+        "nDCG@10": 0.4228
+      }
+    ]
+  }
+}

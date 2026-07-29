@@ -1,0 +1,8 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+# heavy caches -- rebuild with scripts/ingest + index (see README)
+data/raw/
+data/processed/
