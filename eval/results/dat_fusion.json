@@ -1,0 +1,1392 @@
+{
+  "numeric": {
+    "n": 120,
+    "nDCG@10": {
+      "dat": 0.6004,
+      "fixed": 0.6161,
+      "dense": 0.6073
+    },
+    "hybrid_sensitive": {
+      "n": 107,
+      "dat": 0.5889,
+      "fixed": 0.6027
+    },
+    "dat_vs_fixed_wins_losses": [
+      17,
+      22
+    ],
+    "mean_alpha": 0.797,
+    "per_question": [
+      {
+        "qid": "AAPL-Assets-2024",
+        "disagree": true,
+        "sv": 0,
+        "sb": 0,
+        "alpha": 0.5,
+        "dat": 0.42177340954886444,
+        "fixed": 0.40298313359773236,
+        "dense": 0.23719771276929622
+      },
+      {
+        "qid": "AAPL-ResearchAndDevelopmentExpense-2025",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.6257049680303419,
+        "fixed": 0.4441228664487979,
+        "dense": 0.6257049680303419
+      },
+      {
+        "qid": "AAPL-GrossProfit-2024",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.5135312443624667,
+        "fixed": 0.5135312443624667,
+        "dense": 0.5135312443624667
+      },
+      {
+        "qid": "AAPL-Assets-2023",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.5,
+        "fixed": 0.5,
+        "dense": 0.5
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2024",
+        "disagree": false,
+        "sv": 2,
+        "sb": 2,
+        "alpha": 0.5,
+        "dat": 0.5375811193822124,
+        "fixed": 0.5272750663607827,
+        "dense": 0.4144299250118475
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2024",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.7246262544989281,
+        "fixed": 0.7246262544989281,
+        "dense": 0.5413996682199069
+      },
+      {
+        "qid": "AAPL-GrossProfit-2023",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.867043684838194,
+        "fixed": 0.867043684838194,
+        "dense": 0.8773497378596238
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2023",
+        "disagree": false,
+        "sv": 5,
+        "sb": 5,
+        "alpha": 0.5,
+        "dat": 0.9267582364714125,
+        "fixed": 1.0,
+        "dense": 1.0
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2024",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 1.0,
+        "fixed": 1.0,
+        "dense": 1.0
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2022",
+        "disagree": false,
+        "sv": 0,
+        "sb": 0,
+        "alpha": 0.5,
+        "dat": 1.0,
+        "fixed": 1.0,
+        "dense": 1.0
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2024",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.17723928678404774,
+        "fixed": 0.17723928678404774,
+        "dense": 0.17723928678404774
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2023",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.8796542634124676,
+        "fixed": 0.8988898126139723,
+        "dense": 0.8796542634124676
+      },
+      {
+        "qid": "AAPL-Liabilities-2023",
+        "disagree": false,
+        "sv": 0,
+        "sb": 0,
+        "alpha": 0.5,
+        "dat": 0.43067655807339306,
+        "fixed": 0.5,
+        "dense": 0.6309297535714575
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2022",
+        "disagree": false,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 1.0,
+        "fixed": 1.0,
+        "dense": 1.0
+      },
+      {
+        "qid": "AAPL-CashAndCashEquivalentsAtCarryingValue-2025",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.812653045383133,
+        "fixed": 0.812653045383133,
+        "dense": 0.6462302129493455
+      },
+      {
+        "qid": "AAPL-OperatingIncomeLoss-2022",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.9197207891481876,
+        "fixed": 0.9197207891481876,
+        "dense": 0.9197207891481876
+      },
+      {
+        "qid": "AAPL-Liabilities-2024",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.40298313359773236,
+        "fixed": 0.40298313359773236,
+        "dense": 0.2640681225725909
+      },
+      {
+        "qid": "AAPL-GrossProfit-2022",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.7977228895450266,
+        "fixed": 0.7977228895450266,
+        "dense": 0.8175295903539445
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2023",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 1.0,
+        "fixed": 1.0,
+        "dense": 1.0
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2023",
+        "disagree": true,
+        "sv": 0,
+        "sb": 0,
+        "alpha": 0.5,
+        "dat": 0.37800210039683896,
+        "fixed": 0.4415801103577823,
+        "dense": 0.45560514958746035
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2025",
+        "disagree": false,
+        "sv": 5,
+        "sb": 5,
+        "alpha": 0.5,
+        "dat": 1.0,
+        "fixed": 1.0,
+        "dense": 1.0
+      },
+      {
+        "qid": "AAPL-RevenueFromContractWithCustomerExcludingAssessedTax-2025",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.7322962005285631,
+        "fixed": 0.644824486427155,
+        "dense": 0.7322962005285631
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2022",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.5,
+        "fixed": 0.5,
+        "dense": 0.6309297535714575
+      },
+      {
+        "qid": "AAPL-RevenueFromContractWithCustomerExcludingAssessedTax-2022",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.7227265726449519,
+        "fixed": 0.7227265726449519,
+        "dense": 0.7227265726449519
+      },
+      {
+        "qid": "AAPL-NetIncomeLoss-2022",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.8062079522181139,
+        "fixed": 0.7469385177900298,
+        "dense": 0.8062079522181139
+      },
+      {
+        "qid": "AAPL-ResearchAndDevelopmentExpense-2024",
+        "disagree": true,
+        "sv": 0,
+        "sb": 0,
+        "alpha": 0.5,
+        "dat": 0.41670506517877265,
+        "fixed": 0.4500112274528524,
+        "dense": 0.4725458388387121
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2023",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.7087212693585175,
+        "fixed": 0.5716190970674814,
+        "dense": 0.7087212693585175
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2022",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.8175295903539445,
+        "fixed": 0.8315546295836225,
+        "dense": 0.8175295903539445
+      },
+      {
+        "qid": "AAPL-CashAndCashEquivalentsAtCarryingValue-2023",
+        "disagree": true,
+        "sv": 0,
+        "sb": 0,
+        "alpha": 0.5,
+        "dat": 0.18457569677956817,
+        "fixed": 0.23719771276929622,
+        "dense": 0.8065735963827293
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2025",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 1.0,
+        "fixed": 1.0,
+        "dense": 1.0
+      },
+      {
+        "qid": "AAPL-CashAndCashEquivalentsAtCarryingValue-2024",
+        "disagree": true,
+        "sv": 0,
+        "sb": 5,
+        "alpha": 0.0,
+        "dat": 0.39325912586965384,
+        "fixed": 0.3727892582642587,
+        "dense": 0.2437748474873753
+      },
+      {
+        "qid": "AAPL-NetIncomeLoss-2025",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.8297197050122155,
+        "fixed": 0.8297197050122155,
+        "dense": 0.8297197050122155
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2024",
+        "disagree": false,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.961999147059583,
+        "fixed": 0.961999147059583,
+        "dense": 0.8665427526082052
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2025",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.5912352048230277,
+        "fixed": 0.5912352048230277,
+        "dense": 0.7977228895450266
+      },
+      {
+        "qid": "AAPL-GrossProfit-2025",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.6131471927654584,
+        "fixed": 0.6131471927654584,
+        "dense": 0.6131471927654584
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2025",
+        "disagree": false,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.8503449055347546,
+        "fixed": 0.8503449055347546,
+        "dense": 0.8065735963827293
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2025",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.0,
+        "fixed": 0.0,
+        "dense": 0.0
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2022",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.8175295903539445,
+        "fixed": 0.8503449055347546,
+        "dense": 0.8175295903539445
+      },
+      {
+        "qid": "AAPL-OperatingIncomeLoss-2024",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.7095272044910244,
+        "fixed": 0.7095272044910244,
+        "dense": 0.7095272044910244
+      },
+      {
+        "qid": "AAPL-ResearchAndDevelopmentExpense-2022",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.9217868789962071,
+        "fixed": 0.9134015924715543,
+        "dense": 0.9217868789962071
+      },
+      {
+        "qid": "MSFT-RevenueFromContractWithCustomerExcludingAssessedTax-2025",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.7891499901405781,
+        "fixed": 0.7773228980348948,
+        "dense": 0.7891499901405781
+      },
+      {
+        "qid": "MSFT-OperatingIncomeLoss-2022",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.6131471927654584,
+        "fixed": 0.7903864795495061,
+        "dense": 0.6131471927654584
+      },
+      {
+        "qid": "MSFT-GrossProfit-2024",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.5087403079104241,
+        "fixed": 0.5087403079104241,
+        "dense": 0.5531464700081437
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2025",
+        "disagree": true,
+        "sv": 0,
+        "sb": 0,
+        "alpha": 0.5,
+        "dat": 0.6105456988825855,
+        "fixed": 0.6257049680303419,
+        "dense": 0.36926780146674987
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2023",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.2769189462922768,
+        "fixed": 0.2769189462922768,
+        "dense": 0.34870224750355494
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2023",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.9047172294870751,
+        "fixed": 0.9047172294870751,
+        "dense": 0.9047172294870751
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2022",
+        "disagree": false,
+        "sv": 0,
+        "sb": 0,
+        "alpha": 0.5,
+        "dat": 0.0,
+        "fixed": 0.0,
+        "dense": 0.0
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2022",
+        "disagree": true,
+        "sv": 0,
+        "sb": 0,
+        "alpha": 0.5,
+        "dat": 0.0,
+        "fixed": 0.3010299956639812,
+        "dense": 0.5
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2025",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.6131471927654584,
+        "fixed": 0.6131471927654584,
+        "dense": 0.6131471927654584
+      },
+      {
+        "qid": "MSFT-OperatingIncomeLoss-2023",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.8104616303452686,
+        "fixed": 0.8104616303452686,
+        "dense": 0.8104616303452686
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2022",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.5,
+        "fixed": 0.5,
+        "dense": 0.5
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2025",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 1.0,
+        "fixed": 1.0,
+        "dense": 1.0
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2023",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.7028046245779903,
+        "fixed": 0.7028046245779903,
+        "dense": 0.6425958210520417
+      },
+      {
+        "qid": "MSFT-Assets-2024",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.3191471544989227,
+        "fixed": 0.3191471544989227,
+        "dense": 0.3071837157818931
+      },
+      {
+        "qid": "MSFT-GrossProfit-2022",
+        "disagree": true,
+        "sv": 0,
+        "sb": 0,
+        "alpha": 0.5,
+        "dat": 0.0,
+        "fixed": 0.3333333333333333,
+        "dense": 0.3562071871080222
+      },
+      {
+        "qid": "MSFT-NetIncomeLoss-2025",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.5846156829012062,
+        "fixed": 0.5846156829012062,
+        "dense": 0.6013124342022591
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2024",
+        "disagree": true,
+        "sv": 5,
+        "sb": 5,
+        "alpha": 0.5,
+        "dat": 0.6344420314027898,
+        "fixed": 0.6262414737195932,
+        "dense": 0.45378308474750184
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2022",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 1.0,
+        "fixed": 1.0,
+        "dense": 1.0
+      },
+      {
+        "qid": "MSFT-RevenueFromContractWithCustomerExcludingAssessedTax-2022",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.9108532513310018,
+        "fixed": 0.9108532513310018,
+        "dense": 0.9447176050778178
+      },
+      {
+        "qid": "MSFT-Liabilities-2024",
+        "disagree": true,
+        "sv": 0,
+        "sb": 0,
+        "alpha": 0.5,
+        "dat": 0.23719771276929622,
+        "fixed": 0.42177340954886444,
+        "dense": 0.42177340954886444
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2025",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.9469024295259745,
+        "fixed": 0.9469024295259745,
+        "dense": 0.8854598815714874
+      },
+      {
+        "qid": "MSFT-OperatingExpenses-2025",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 1.0,
+        "fixed": 1.0,
+        "dense": 1.0
+      },
+      {
+        "qid": "MSFT-Assets-2025",
+        "disagree": true,
+        "sv": 0,
+        "sb": 0,
+        "alpha": 0.5,
+        "dat": 0.3065735963827292,
+        "fixed": 0.5802792108518124,
+        "dense": 0.5109559939712153
+      },
+      {
+        "qid": "MSFT-GrossProfit-2025",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.6131471927654584,
+        "fixed": 0.6131471927654584,
+        "dense": 0.6131471927654584
+      },
+      {
+        "qid": "MSFT-Liabilities-2025",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.5,
+        "fixed": 0.5,
+        "dense": 0.5
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2024",
+        "disagree": false,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.4144299250118475,
+        "fixed": 0.4144299250118475,
+        "dense": 0.44149241373678083
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2024",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.7860137352654724,
+        "fixed": 0.7860137352654724,
+        "dense": 0.8687949224876582
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2024",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.0,
+        "fixed": 0.0,
+        "dense": 0.0
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2022",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.6509209298071326,
+        "fixed": 0.6509209298071326,
+        "dense": 0.6240505200038379
+      },
+      {
+        "qid": "MSFT-NetIncomeLoss-2022",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.44615333764087994,
+        "fixed": 0.44615333764087994,
+        "dense": 0.44615333764087994
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2025",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.0,
+        "fixed": 0.0,
+        "dense": 0.0
+      },
+      {
+        "qid": "MSFT-GrossProfit-2023",
+        "disagree": true,
+        "sv": 0,
+        "sb": 0,
+        "alpha": 0.5,
+        "dat": 0.33424620450682646,
+        "fixed": 0.5805485932475565,
+        "dense": 0.7053571733135213
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2023",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.7668091220635322,
+        "fixed": 0.7668091220635322,
+        "dense": 0.7757386182436072
+      },
+      {
+        "qid": "MSFT-OperatingExpenses-2023",
+        "disagree": true,
+        "sv": 2,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.6309297535714575,
+        "fixed": 1.0,
+        "dense": 0.6309297535714575
+      },
+      {
+        "qid": "MSFT-Liabilities-2023",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.43067655807339306,
+        "fixed": 0.43067655807339306,
+        "dense": 0.43067655807339306
+      },
+      {
+        "qid": "MSFT-OperatingExpenses-2024",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.430624116386567,
+        "fixed": 0.430624116386567,
+        "dense": 0.17723928678404774
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2023",
+        "disagree": false,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.2960819109658652,
+        "fixed": 0.2960819109658652,
+        "dense": 0.2960819109658652
+      },
+      {
+        "qid": "MSFT-Assets-2023",
+        "disagree": true,
+        "sv": 0,
+        "sb": 0,
+        "alpha": 0.5,
+        "dat": 0.2640681225725909,
+        "fixed": 0.5109559939712153,
+        "dense": 0.5109559939712153
+      },
+      {
+        "qid": "MSFT-OperatingIncomeLoss-2025",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.9550236580992475,
+        "fixed": 0.9550236580992475,
+        "dense": 0.9550236580992475
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2024",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.43292617940918415,
+        "fixed": 0.5499887725471477,
+        "dense": 0.43292617940918415
+      },
+      {
+        "qid": "NVDA-NetIncomeLoss-2026",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.6796878192480582,
+        "fixed": 0.6796878192480582,
+        "dense": 0.7193074786775863
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2026",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.31546487678572877,
+        "fixed": 0.31546487678572877,
+        "dense": 0.38685280723454163
+      },
+      {
+        "qid": "NVDA-Revenues-2026",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.6491644888741394,
+        "fixed": 0.6491644888741394,
+        "dense": 0.6924048374257172
+      },
+      {
+        "qid": "NVDA-Liabilities-2024",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 1.0,
+        "fixed": 1.0,
+        "dense": 0.6309297535714575
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2024",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.23463936301137822,
+        "fixed": 0.23463936301137822,
+        "dense": 0.23463936301137822
+      },
+      {
+        "qid": "NVDA-Assets-2024",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 1.0,
+        "fixed": 1.0,
+        "dense": 1.0
+      },
+      {
+        "qid": "NVDA-SellingGeneralAndAdministrativeExpense-2023",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.31546487678572877,
+        "fixed": 0.31546487678572877,
+        "dense": 0.31546487678572877
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2023",
+        "disagree": true,
+        "sv": 0,
+        "sb": 0,
+        "alpha": 0.5,
+        "dat": 0.3562071871080222,
+        "fixed": 0.3562071871080222,
+        "dense": 0.0
+      },
+      {
+        "qid": "NVDA-Liabilities-2025",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.8315546295836225,
+        "fixed": 0.8503449055347546,
+        "dense": 0.8315546295836225
+      },
+      {
+        "qid": "NVDA-StockholdersEquity-2024",
+        "disagree": false,
+        "sv": 0,
+        "sb": 0,
+        "alpha": 0.5,
+        "dat": 0.6105456988825855,
+        "fixed": 0.8854598815714874,
+        "dense": 0.9060254355346823
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2023",
+        "disagree": true,
+        "sv": 0,
+        "sb": 0,
+        "alpha": 0.5,
+        "dat": 0.3333333333333333,
+        "fixed": 0.0,
+        "dense": 0.0
+      },
+      {
+        "qid": "NVDA-GrossProfit-2025",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.21840743681816419,
+        "fixed": 0.21840743681816419,
+        "dense": 0.20438239758848611
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2025",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.34620964322385606,
+        "fixed": 0.34620964322385606,
+        "dense": 0.45905478457279136
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2023",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.3010299956639812,
+        "fixed": 0.3010299956639812,
+        "dense": 0.3333333333333333
+      },
+      {
+        "qid": "NVDA-Assets-2025",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.8065735963827293,
+        "fixed": 0.8065735963827293,
+        "dense": 0.7903864795495061
+      },
+      {
+        "qid": "NVDA-StockholdersEquity-2023",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.43067655807339306,
+        "fixed": 0.43067655807339306,
+        "dense": 0.43067655807339306
+      },
+      {
+        "qid": "NVDA-GrossProfit-2023",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.5,
+        "fixed": 0.5,
+        "dense": 0.6309297535714575
+      },
+      {
+        "qid": "NVDA-EarningsPerShareDiluted-2026",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 1.0,
+        "fixed": 1.0,
+        "dense": 0.9674679834891693
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2026",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.6364391809889587,
+        "fixed": 0.6257049680303419,
+        "dense": 0.6364391809889587
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2024",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.42913706161531123,
+        "fixed": 0.42913706161531123,
+        "dense": 0.42913706161531123
+      },
+      {
+        "qid": "NVDA-EarningsPerShareDiluted-2025",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.870608685426993,
+        "fixed": 0.870608685426993,
+        "dense": 0.7526136409516658
+      },
+      {
+        "qid": "NVDA-StockholdersEquity-2026",
+        "disagree": false,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 1.0,
+        "fixed": 1.0,
+        "dense": 1.0
+      },
+      {
+        "qid": "NVDA-Liabilities-2026",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 1.0,
+        "fixed": 1.0,
+        "dense": 1.0
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2026",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.7928654229965442,
+        "fixed": 0.7928654229965442,
+        "dense": 0.6508205185601091
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2023",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.31546487678572877,
+        "fixed": 0.31546487678572877,
+        "dense": 0.3562071871080222
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2026",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.6052602440527057,
+        "fixed": 0.6052602440527057,
+        "dense": 0.6052602440527057
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2023",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.8315546295836225,
+        "fixed": 0.8315546295836225,
+        "dense": 0.5802792108518124
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2026",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.5714285040141098,
+        "fixed": 0.4911492931622974,
+        "dense": 0.5714285040141098
+      },
+      {
+        "qid": "NVDA-SellingGeneralAndAdministrativeExpense-2025",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.5148381117249624,
+        "fixed": 0.5148381117249624,
+        "dense": 0.5148381117249624
+      },
+      {
+        "qid": "NVDA-NetIncomeLoss-2023",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.7227265726449519,
+        "fixed": 0.7227265726449519,
+        "dense": 0.6843515475204855
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2025",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.5709662133861838,
+        "fixed": 0.5547710914144913,
+        "dense": 0.5709662133861838
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2024",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.5413996682199069,
+        "fixed": 0.5205067333228022,
+        "dense": 0.5413996682199069
+      },
+      {
+        "qid": "NVDA-Revenues-2023",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.8843252268199594,
+        "fixed": 0.8796542634124676,
+        "dense": 0.8843252268199594
+      },
+      {
+        "qid": "NVDA-SellingGeneralAndAdministrativeExpense-2026",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.6052602440527057,
+        "fixed": 0.6052602440527057,
+        "dense": 0.5912352048230277
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2025",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.0,
+        "fixed": 0.0,
+        "dense": 0.0
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2024",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.38162168437253385,
+        "fixed": 0.18457569677956817,
+        "dense": 0.38162168437253385
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2025",
+        "disagree": true,
+        "sv": 5,
+        "sb": 1,
+        "alpha": 1.0,
+        "dat": 0.6105858728157117,
+        "fixed": 0.7021799053685304,
+        "dense": 0.6105858728157117
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2024",
+        "disagree": true,
+        "sv": 5,
+        "sb": 0,
+        "alpha": 1.0,
+        "dat": 0.5585075862632192,
+        "fixed": 0.6422813708518126,
+        "dense": 0.5585075862632192
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2025",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.5601521372325762,
+        "fixed": 0.5601521372325762,
+        "dense": 0.675319789382049
+      },
+      {
+        "qid": "NVDA-GrossProfit-2024",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.39780880120575696,
+        "fixed": 0.39780880120575696,
+        "dense": 0.41183384043543503
+      }
+    ]
+  },
+  "narrative": {
+    "n": 15,
+    "nDCG@10": {
+      "dat": 0.7289,
+      "fixed": 0.7522,
+      "dense": 0.7565
+    },
+    "hybrid_sensitive": {
+      "n": 10,
+      "dat": 0.6669,
+      "fixed": 0.702
+    },
+    "dat_vs_fixed_wins_losses": [
+      0,
+      2
+    ],
+    "mean_alpha": 0.76,
+    "per_question": [
+      {
+        "qid": "AAPL_10K_2024-09-28#0021-narr",
+        "disagree": false,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 1.0,
+        "fixed": 1.0,
+        "dense": 1.0
+      },
+      {
+        "qid": "AAPL_10K_2024-09-28#0057-narr",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 1.0,
+        "fixed": 1.0,
+        "dense": 1.0
+      },
+      {
+        "qid": "AAPL_10K_2025-09-27#0039-narr",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 1.0,
+        "fixed": 1.0,
+        "dense": 1.0
+      },
+      {
+        "qid": "AAPL_10K_2025-09-27#0060-narr",
+        "disagree": false,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 1.0,
+        "fixed": 1.0,
+        "dense": 1.0
+      },
+      {
+        "qid": "AAPL_10K_2025-09-27#0046-narr",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.3010299956639812,
+        "fixed": 0.3010299956639812,
+        "dense": 0.3010299956639812
+      },
+      {
+        "qid": "MSFT_10K_2024-06-30#0047-narr",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 1.0,
+        "fixed": 1.0,
+        "dense": 1.0
+      },
+      {
+        "qid": "MSFT_10K_2024-06-30#0162-narr",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 1.0,
+        "fixed": 1.0,
+        "dense": 1.0
+      },
+      {
+        "qid": "MSFT_10K_2025-06-30#0134-narr",
+        "disagree": false,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 1.0,
+        "fixed": 1.0,
+        "dense": 1.0
+      },
+      {
+        "qid": "MSFT_10K_2024-06-30#0069-narr",
+        "disagree": true,
+        "sv": 4,
+        "sb": 2,
+        "alpha": 0.7,
+        "dat": 0.6934264036172708,
+        "fixed": 1.0,
+        "dense": 1.0
+      },
+      {
+        "qid": "MSFT_10K_2024-06-30#0096-narr",
+        "disagree": false,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 1.0,
+        "fixed": 1.0,
+        "dense": 1.0
+      },
+      {
+        "qid": "NVDA_10K_2025-01-26#0022-narr",
+        "disagree": true,
+        "sv": 4,
+        "sb": 2,
+        "alpha": 0.7,
+        "dat": 0.38685280723454163,
+        "fixed": 0.43067655807339306,
+        "dense": 0.6309297535714575
+      },
+      {
+        "qid": "NVDA_10K_2026-01-25#0038-narr",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.9010126104210695,
+        "fixed": 0.9010126104210695,
+        "dense": 0.7653606369886217
+      },
+      {
+        "qid": "NVDA_10K_2026-01-25#0135-narr",
+        "disagree": false,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.2640681225725909,
+        "fixed": 0.2640681225725909,
+        "dense": 0.2640681225725909
+      },
+      {
+        "qid": "NVDA_10K_2025-01-26#0122-narr",
+        "disagree": true,
+        "sv": 3,
+        "sb": 4,
+        "alpha": 0.4,
+        "dat": 0.0,
+        "fixed": 0.0,
+        "dense": 0.0
+      },
+      {
+        "qid": "NVDA_10K_2025-01-26#0065-narr",
+        "disagree": true,
+        "sv": -1,
+        "sb": -1,
+        "alpha": 0.8,
+        "dat": 0.38685280723454163,
+        "fixed": 0.38685280723454163,
+        "dense": 0.38685280723454163
+      }
+    ]
+  }
+}

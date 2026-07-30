@@ -252,6 +252,13 @@ end-of-life mid-development.
   splits (best: numeric α=0.8 → 0.616, narrative α=0.9 → 0.766, vs RRF
   0.528/0.613). RRF's failure was equal weighting, not fusion as such.
   See REPORT §3.4.
+- **Optional, measured negative**: DAT per-query fusion weighting
+  (arXiv 2503.23013) is implemented in `eval/dat_fusion.py` and *loses* to
+  the fixed α on this corpus (0.600 vs 0.616 numeric) — the small hosted
+  scorer's per-query variance costs more than adaptivity gains. Off by
+  default; the replication details are in REPORT §3.5. Independent
+  corroboration of the RRF finding itself: T2-RAGBench (23k financial
+  queries) also measures convex > RRF (arXiv 2604.01733).
 
 ## License
 

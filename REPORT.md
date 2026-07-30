@@ -375,6 +375,36 @@ failure was never fusion-as-such, it was **equal weighting with no mechanism
 to learn it is wrong** — hand the fusion one tunable weight and the damage
 disappears.
 
+### 3.5 Optional: DAT per-query fusion — a measured negative
+
+Deep-research (2026-07-30) surfaced DAT — Dynamic Alpha Tuning
+(arXiv 2503.23013), verified 3-0 in adversarial review: instead of one global
+α, an LLM scores each retriever's top-1 passage per query (0–5) and sets
+α = Sv/(Sv+Sb). Published gains: +2.8–3.3pp P@1 over the *best* fixed α with
+GPT-4o as the scorer, concentrated on queries where the retrievers disagree.
+
+Implemented as `eval/dat_fusion.py` (optional; fixed-α remains the default)
+with `deepseek-v4-flash` as the hosted scorer, and measured against the same
+candidate pools:
+
+| | DAT | fixed α=0.8 | dense only |
+|---|---|---|---|
+| numeric (n=120) | 0.600 | **0.616** | 0.607 |
+| narrative (n=15) | 0.729 | 0.752 | **0.757** |
+
+**DAT lost to the fixed α on both splits** (numeric W/L 17/22), including on
+the hybrid-sensitive subset where the paper's gains concentrate. The
+diagnostic detail: DAT's *mean* α came out at 0.797 numeric / 0.76 narrative —
+almost exactly the swept optimum — so the per-query scorer finds the right
+global weight on average and then subtracts value through per-query variance.
+A 0–5 judgment of two top-1 passages by a small hosted model is noisier than
+the signal it is trying to add; the paper used GPT-4o.
+
+The mode ships as optional and off. A published, verified technique that
+fails to transfer under an honest replication is a result, not a bug — and it
+is precisely the kind of result the fixed-α sweep's in-sample caveat (§3.4)
+predicted this corpus might produce.
+
 ---
 
 ## 4. Engineering notes
