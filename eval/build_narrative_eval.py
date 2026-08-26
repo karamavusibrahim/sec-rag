@@ -56,7 +56,7 @@ from dotenv import load_dotenv  # noqa: E402
 from sec_rag.nvidia import chat_json_chain  # noqa: E402
 
 WRITER_MODELS = (
-    "deepseek-ai/deepseek-v4-flash",
+    "deepseek-ai/deepseek-v4-flash-0731",
     "nvidia/nemotron-3-super-120b-a12b",
     "openai/gpt-oss-120b",
 )
@@ -162,13 +162,32 @@ def near_duplicates(source: dict[str, Any], pool: Iterable[dict[str, Any]]) -> l
 
     Deliberately lexical. Using embeddings here would put the dense retriever's
     own notion of similarity into the labels it is then scored against.
+
+    **Lexical similarity is not enough on its own, and this is where the first
+    version was wrong.** Two 10-Ks from consecutive years share boilerplate,
+    risk-factor phrasing and segment descriptions, so an earlier filing clears
+    any Jaccard threshold a later one does. But a question about an event is
+    only answerable by a filing published *after* the event. The question
+    "how much did Nvidia lose in early 2026 because of new H20 export rules"
+    was labelled with a chunk from the 2025-01-26 filing -- which predates the
+    rules and cannot answer it. A retriever that correctly ranks that chunk low
+    was being penalised for being right.
+
+    So a near-duplicate must also be temporally capable of answering: it may be
+    the same filing or a *later* one, never an earlier one. This is a
+    necessary condition, not a sufficient one -- a later filing may still not
+    discuss the material -- so these remain candidate labels that deserve
+    review, not automatic gold.
     """
     src = set(tokens(source["text"]))
     if not src:
         return []
+    src_date = str(source.get("report_date") or "")
     out = []
     for c in pool:
         if c["chunk_id"] == source["chunk_id"] or c["ticker"] != source["ticker"]:
+            continue
+        if src_date and str(c.get("report_date") or "") < src_date:
             continue
         other = set(tokens(c["text"]))
         if not other:

@@ -41,7 +41,7 @@ from sec_rag.index.build import load as load_index  # noqa: E402
 from sec_rag.nvidia import chat_json, embed  # noqa: E402
 
 CANDIDATES = 50
-SCORER_MODEL = "deepseek-ai/deepseek-v4-flash"
+SCORER_MODEL = "deepseek-ai/deepseek-v4-flash-0731"
 
 SCORE_PROMPT = """Rate how effectively each passage answers the question, on a
 0-5 scale (0 = irrelevant, 5 = directly and completely answers it).
@@ -151,13 +151,26 @@ def main() -> int:
             return (sum(r[key] for r in subset) / len(subset)) if subset else 0.0
 
         sensitive = [r for r in rows if r["disagree"]]
+        successful = [r for r in rows if r["sv"] >= 0]
         wins = sum(1 for r in rows if r["dat"] > r["fixed"])
         losses = sum(1 for r in rows if r["dat"] < r["fixed"])
         results[split] = {
             "n": len(rows),
+            "fixed_alpha": args.fixed_alpha,
+            "configured_scorer_model": SCORER_MODEL,
+            "n_scorer_failed": len(rows) - len(successful),
             "nDCG@10": {"dat": round(mean("dat", rows), 4),
                         "fixed": round(mean("fixed", rows), 4),
                         "dense": round(mean("dense", rows), 4)},
+            "successful_only": {
+                "n": len(successful),
+                "dat": round(mean("dat", successful), 4),
+                "fixed": round(mean("fixed", successful), 4),
+                "mean_alpha": round(mean("alpha", successful), 3),
+                "wins": sum(1 for r in successful if r["dat"] > r["fixed"]),
+                "losses": sum(1 for r in successful if r["dat"] < r["fixed"]),
+                "ties": sum(1 for r in successful if r["dat"] == r["fixed"]),
+            },
             "hybrid_sensitive": {
                 "n": len(sensitive),
                 "dat": round(mean("dat", sensitive), 4),
@@ -170,6 +183,9 @@ def main() -> int:
         print(f"\n[{split}] n={r['n']}  DAT {r['nDCG@10']['dat']}  "
               f"fixed(a={args.fixed_alpha}) {r['nDCG@10']['fixed']}  "
               f"dense {r['nDCG@10']['dense']}  mean-alpha {r['mean_alpha']}")
+        print(f"  scorer failures: {r['n_scorer_failed']}/{r['n']}  "
+              f"successful-only DAT {r['successful_only']['dat']} vs fixed "
+              f"{r['successful_only']['fixed']}")
         print(f"  hybrid-sensitive n={r['hybrid_sensitive']['n']}: "
               f"DAT {r['hybrid_sensitive']['dat']} vs fixed "
               f"{r['hybrid_sensitive']['fixed']}  |  W/L {wins}/{losses}")

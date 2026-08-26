@@ -41,7 +41,7 @@ import re
 import sys
 from collections import defaultdict
 from pathlib import Path
-from typing import Any
+from typing import Any, Sequence
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
@@ -68,6 +68,74 @@ INTERESTING = {
     "EarningsPerShareDiluted": "diluted earnings per share",
     "PaymentsToAcquirePropertyPlantAndEquipment": "capital expenditures",
 }
+
+
+# Anchor terms per concept: a chunk only counts as gold if the number is
+# accompanied by wording that identifies *which* figure it is. Kept
+# deliberately loose -- filings phrase these many ways, and the goal is to
+# reject a chunk that shares a digit string by coincidence, not to demand an
+# exact row label.
+_ANCHORS: dict[str, tuple[str, ...]] = {
+    "Revenues": ("revenue", "net sales", "total sales"),
+    "RevenueFromContractWithCustomerExcludingAssessedTax":
+        ("revenue", "net sales", "total sales"),
+    "NetIncomeLoss": ("net income", "net loss", "net earnings"),
+    "OperatingIncomeLoss": ("operating income", "income from operations",
+                            "operating loss"),
+    "GrossProfit": ("gross profit", "gross margin"),
+    "ResearchAndDevelopmentExpense": ("research and development",),
+    "CostOfRevenue": ("cost of revenue", "cost of sales", "cost of goods"),
+    "Assets": ("total assets", "assets"),
+    "Liabilities": ("total liabilities", "liabilities"),
+    "StockholdersEquity": ("shareholders' equity", "stockholders' equity",
+                           "shareholders equity", "stockholders equity"),
+    "CashAndCashEquivalentsAtCarryingValue": ("cash and cash equivalents",
+                                              "cash equivalents"),
+    "OperatingExpenses": ("operating expenses",),
+    "SellingGeneralAndAdministrativeExpense":
+        ("selling, general and administrative", "selling, general",
+         "general and administrative"),
+    "EarningsPerShareDiluted": ("diluted", "per share"),
+    "PaymentsToAcquirePropertyPlantAndEquipment":
+        ("property, plant and equipment", "capital expenditure",
+         "purchases of property"),
+}
+
+# How far from the matched number the anchor may appear. A financial statement
+# row is a label followed by two or three period columns, so the label sits
+# within a few hundred characters of its value; a whole-chunk search would
+# re-admit the coincidences this is meant to exclude, because a 10-K page
+# mentioning revenue somewhere also contains many unrelated numbers.
+ANCHOR_WINDOW = 400
+
+
+def concept_supported(text: str, concept: str, variants: Sequence[str],
+                      *, window: int = ANCHOR_WINDOW) -> bool:
+    """Does this chunk say what the matched number *is*?
+
+    Without this the qrels are built on digit strings alone, and `_formats`
+    emits scaled variants -- so a total revenue of $1,234,000 generates the
+    string "1,234", and a sentence reading "the company employed 1,234 people"
+    becomes the gold passage for a revenue question. The retrieval metrics
+    computed against such a label are measuring the wrong thing and there is no
+    way to tell from the aggregate that they are.
+
+    A chunk qualifies when at least one anchor phrase for the concept occurs
+    within `window` characters of an occurrence of the value.
+    """
+    anchors = _ANCHORS.get(concept)
+    if not anchors:
+        return True
+    low = text.lower()
+    for variant in variants:
+        start = 0
+        while (i := text.find(variant, start)) != -1:
+            lo, hi = max(0, i - window), min(len(text), i + len(variant) + window)
+            near = low[lo:hi]
+            if any(a in near for a in anchors):
+                return True
+            start = i + 1
+    return False
 
 
 def _formats(value: float) -> list[str]:
@@ -131,10 +199,16 @@ def build(chunks: list[dict[str, Any]], tickers: list[str], *, max_per_ticker: i
             # share digits with something in a 2025 filing becomes a false gold
             # label -- silently corrupting every metric computed against it.
             variants = _formats(float(val))
+            # Three conditions, and the third is the one that was missing:
+            # the report year has to be one the filing could contain, the
+            # number has to appear, and the chunk has to say what the number
+            # *is*. Digit-only matching made "employed 1,234 people" a valid
+            # gold passage for a $1,234,000 revenue question.
             matches = [
                 c["chunk_id"] for c in pool
                 if fy and 0 <= int(c["report_date"][:4]) - fy <= 2
                 and any(v in c["text"] for v in variants)
+                and concept_supported(c["text"], concept, variants)
             ]
             # Too many matches = the number is not discriminative; zero = the
             # value never appears in the text we indexed (different period).
@@ -166,7 +240,7 @@ def main() -> int:
     load_dotenv(Path(__file__).resolve().parents[1] / ".env")
     ap = argparse.ArgumentParser()
     ap.add_argument("--index", type=Path, default=Path("data/processed"))
-    ap.add_argument("--out", type=Path, default=Path("data/eval/eval_set_v1.jsonl"))
+    ap.add_argument("--out", type=Path, default=Path("data/eval/eval_set_v2.jsonl"))
     ap.add_argument("--max-per-ticker", type=int, default=40)
     args = ap.parse_args()
 

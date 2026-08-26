@@ -112,8 +112,16 @@ def evaluate(retriever: Retriever, questions: list[dict[str, Any]],
         agg["nDCG@10"] += nd
         agg["MRR@10"] += mrr_at_k(ids, gold, 10)
         per_q.append({"qid": q.get("qid"), "nDCG@10": round(nd, 4)})
-    n = max(len(questions), 1)
-    return {m: v / n for m, v in agg.items()}, per_q
+    # `max(len(questions), 1)` turned an empty eval set into a full set of
+    # all-zero metrics and a successful exit -- a mis-specified --split or a
+    # renamed file produced a plausible-looking artifact recording a total
+    # failure that never happened. An evaluation with nothing to evaluate is a
+    # configuration error, not a score of zero.
+    if not questions:
+        raise ValueError(
+            "no questions to evaluate -- check --eval-set and --split; "
+            "an empty eval set is a configuration error, not a zero score")
+    return {m: v / len(questions) for m, v in agg.items()}, per_q
 
 
 def main() -> int:
@@ -121,7 +129,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--index", type=Path, default=Path("data/processed"))
     ap.add_argument("--eval-set", type=Path, nargs="+",
-                    default=[Path("data/eval/eval_set_v1.jsonl")],
+                    default=[Path("data/eval/eval_set_v2.jsonl")],
                     help="one or more jsonl files; each question's 'split' field groups it")
     ap.add_argument("--by-split", action="store_true",
                     help="report every configuration separately per split")
@@ -162,10 +170,19 @@ def main() -> int:
         json.loads(l) for l in
         (args.index / "chunks.jsonl").read_text(encoding="utf-8").splitlines() if l
     )}
+    overlap_summary: dict[str, dict[str, Any]] = {}
     for name, qs in sorted(splits.items()):
         ov = [lexical_overlap(q["question"],
                               [text_by_id.get(g, "") for g in q["gold_chunk_ids"]])
               for q in qs]
+        overlap_summary[name] = {
+            "n": len(ov),
+            "mean": sum(ov) / max(len(ov), 1),
+            "per_question": [
+                {"qid": q.get("qid"), "overlap": value}
+                for q, value in zip(qs, ov)
+            ],
+        }
         print(f"split {name:<10} n={len(qs):<4} "
               f"mean query/gold word overlap {sum(ov) / max(len(ov), 1):.3f}")
     print()
@@ -205,6 +222,7 @@ def main() -> int:
          "tickers": {t: sum(1 for q in questions if q.get("ticker") == t)
                      for t in sorted({q.get("ticker", "?") for q in questions})},
          "splits": {k: len(v) for k, v in splits.items()},
+         "lexical_overlap": overlap_summary,
          "results": rows,
          "per_question_ndcg": per_question}, indent=2))
 
@@ -212,10 +230,11 @@ def main() -> int:
     for split_name, _ in groups:
         sub = [r for r in rows if r["split"] == split_name]
         print(f"\n**{split_name}** (n={sub[0]['n']})\n")
-        print("| Configuration | R@1 | R@5 | R@10 | nDCG@10 | MRR@10 |")
-        print("|---|---|---|---|---|---|")
+        print("| Configuration | R@1 | S@1 | R@5 | R@10 | nDCG@10 | MRR@10 |")
+        print("|---|---|---|---|---|---|---|")
         for r in sub:
-            print(f"| {r['config']} | {r['R@1']:.3f} | {r['R@5']:.3f} | "
+            print(f"| {r['config']} | {r['R@1']:.3f} | {r['S@1']:.3f} | "
+                  f"{r['R@5']:.3f} | "
                   f"{r['R@10']:.3f} | {r['nDCG@10']:.3f} | {r['MRR@10']:.3f} |")
     print(f"\nwrote {args.out}")
     return 0

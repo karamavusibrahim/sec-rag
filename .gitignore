@@ -3,6 +3,6 @@
 __pycache__/
 *.pyc
 .pytest_cache/
-# heavy caches -- rebuild with scripts/ingest + index (see README)
+# heavy caches -- rebuild with scripts/build_index.py (see README)
 data/raw/
 data/processed/

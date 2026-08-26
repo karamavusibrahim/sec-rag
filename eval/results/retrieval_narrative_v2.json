@@ -14,6 +14,13 @@
   "splits": {
     "narrative": 15
   },
+  "lexical_overlap": {
+    "narrative": {
+      "n": 15,
+      "mean": 0.39292385174738115,
+      "metric": "share of unique query tokens longer than 3 characters present in any gold chunk"
+    }
+  },
   "results": [
     {
       "split": "all",

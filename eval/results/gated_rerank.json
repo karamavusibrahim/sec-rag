@@ -1,0 +1,1909 @@
+{
+  "numeric": {
+    "n": 120,
+    "nDCG@10": {
+      "dense": 0.6073,
+      "rerank_always": 0.6809
+    },
+    "gates": {
+      "top1": {
+        "curve": [
+          {
+            "pct": 10,
+            "threshold": 4.5508,
+            "nDCG@10": 0.6725,
+            "frac_reranked": 0.908
+          },
+          {
+            "pct": 20,
+            "threshold": 5.6875,
+            "nDCG@10": 0.6633,
+            "frac_reranked": 0.817
+          },
+          {
+            "pct": 30,
+            "threshold": 7.3945,
+            "nDCG@10": 0.6588,
+            "frac_reranked": 0.717
+          },
+          {
+            "pct": 40,
+            "threshold": 8.3046,
+            "nDCG@10": 0.6424,
+            "frac_reranked": 0.6
+          },
+          {
+            "pct": 50,
+            "threshold": 9.1016,
+            "nDCG@10": 0.6363,
+            "frac_reranked": 0.55
+          },
+          {
+            "pct": 60,
+            "threshold": 11.375,
+            "nDCG@10": 0.6326,
+            "frac_reranked": 0.417
+          },
+          {
+            "pct": 70,
+            "threshold": 12.5156,
+            "nDCG@10": 0.6283,
+            "frac_reranked": 0.333
+          },
+          {
+            "pct": 80,
+            "threshold": 13.6562,
+            "nDCG@10": 0.6199,
+            "frac_reranked": 0.242
+          },
+          {
+            "pct": 90,
+            "threshold": 15.9297,
+            "nDCG@10": 0.6156,
+            "frac_reranked": 0.117
+          }
+        ],
+        "best": {
+          "pct": 10,
+          "threshold": 4.5508,
+          "nDCG@10": 0.6725,
+          "frac_reranked": 0.908
+        }
+      },
+      "margin": {
+        "curve": [
+          {
+            "pct": 10,
+            "threshold": 0.0,
+            "nDCG@10": 0.6809,
+            "frac_reranked": 1.0
+          },
+          {
+            "pct": 20,
+            "threshold": 0.5102,
+            "nDCG@10": 0.6629,
+            "frac_reranked": 0.8
+          },
+          {
+            "pct": 30,
+            "threshold": 0.8107,
+            "nDCG@10": 0.6604,
+            "frac_reranked": 0.7
+          },
+          {
+            "pct": 40,
+            "threshold": 1.1367,
+            "nDCG@10": 0.6544,
+            "frac_reranked": 0.617
+          },
+          {
+            "pct": 50,
+            "threshold": 1.5648,
+            "nDCG@10": 0.6404,
+            "frac_reranked": 0.5
+          },
+          {
+            "pct": 60,
+            "threshold": 2.2734,
+            "nDCG@10": 0.6391,
+            "frac_reranked": 0.45
+          },
+          {
+            "pct": 70,
+            "threshold": 2.2812,
+            "nDCG@10": 0.633,
+            "frac_reranked": 0.308
+          },
+          {
+            "pct": 80,
+            "threshold": 3.4141,
+            "nDCG@10": 0.6193,
+            "frac_reranked": 0.225
+          },
+          {
+            "pct": 90,
+            "threshold": 5.1813,
+            "nDCG@10": 0.6096,
+            "frac_reranked": 0.1
+          }
+        ],
+        "best": {
+          "pct": 10,
+          "threshold": 0.0,
+          "nDCG@10": 0.6809,
+          "frac_reranked": 1.0
+        }
+      },
+      "entropy": {
+        "curve": [
+          {
+            "pct": 10,
+            "threshold": 0.0754,
+            "nDCG@10": 0.6118,
+            "frac_reranked": 0.1
+          },
+          {
+            "pct": 20,
+            "threshold": 0.3098,
+            "nDCG@10": 0.6175,
+            "frac_reranked": 0.2
+          },
+          {
+            "pct": 30,
+            "threshold": 0.6029,
+            "nDCG@10": 0.6273,
+            "frac_reranked": 0.3
+          },
+          {
+            "pct": 40,
+            "threshold": 0.7538,
+            "nDCG@10": 0.6368,
+            "frac_reranked": 0.4
+          },
+          {
+            "pct": 50,
+            "threshold": 0.947,
+            "nDCG@10": 0.6463,
+            "frac_reranked": 0.5
+          },
+          {
+            "pct": 60,
+            "threshold": 1.0447,
+            "nDCG@10": 0.6541,
+            "frac_reranked": 0.6
+          },
+          {
+            "pct": 70,
+            "threshold": 1.2184,
+            "nDCG@10": 0.6612,
+            "frac_reranked": 0.7
+          },
+          {
+            "pct": 80,
+            "threshold": 1.3847,
+            "nDCG@10": 0.6715,
+            "frac_reranked": 0.8
+          },
+          {
+            "pct": 90,
+            "threshold": 1.7206,
+            "nDCG@10": 0.6762,
+            "frac_reranked": 0.9
+          }
+        ],
+        "best": {
+          "pct": 90,
+          "threshold": 1.7206,
+          "nDCG@10": 0.6762,
+          "frac_reranked": 0.9
+        }
+      },
+      "oracle": 0.7246
+    },
+    "strata": {
+      "table": {
+        "n": 120,
+        "dense": 0.6073,
+        "rerank": 0.6809
+      }
+    },
+    "per_question": [
+      {
+        "qid": "AAPL-Assets-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 10.2422,
+          "margin": 1.1406,
+          "entropy": 0.9908
+        },
+        "ndcg_dense": 0.23719771276929622,
+        "ndcg_rerank": 0.6131471927654584
+      },
+      {
+        "qid": "AAPL-ResearchAndDevelopmentExpense-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 14.7891,
+          "margin": 1.1328,
+          "entropy": 0.594
+        },
+        "ndcg_dense": 0.6257049680303419,
+        "ndcg_rerank": 0.6447841584694202
+      },
+      {
+        "qid": "AAPL-GrossProfit-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 7.3945,
+          "margin": 0.5664,
+          "entropy": 1.1367
+        },
+        "ndcg_dense": 0.5135312443624667,
+        "ndcg_rerank": 0.6366824387328317
+      },
+      {
+        "qid": "AAPL-Assets-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 6.8281,
+          "margin": 0.0,
+          "entropy": 1.0974
+        },
+        "ndcg_dense": 0.5,
+        "ndcg_rerank": 0.6309297535714575
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 22.75,
+          "margin": 9.0938,
+          "entropy": 0.0027
+        },
+        "ndcg_dense": 0.4144299250118475,
+        "ndcg_rerank": 0.4144299250118475
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 13.6562,
+          "margin": 2.2812,
+          "entropy": 0.354
+        },
+        "ndcg_dense": 0.5413996682199069,
+        "ndcg_rerank": 0.7757386182436072
+      },
+      {
+        "qid": "AAPL-GrossProfit-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 5.1211,
+          "margin": 1.1387,
+          "entropy": 1.1306
+        },
+        "ndcg_dense": 0.8773497378596238,
+        "ndcg_rerank": 0.6836127878533236
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 11.375,
+          "margin": 2.2734,
+          "entropy": 0.6646
+        },
+        "ndcg_dense": 1.0,
+        "ndcg_rerank": 0.8276904491046954
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 14.7891,
+          "margin": 6.2578,
+          "entropy": 0.0166
+        },
+        "ndcg_dense": 1.0,
+        "ndcg_rerank": 0.8318724637288826
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2022",
+        "stratum": "table",
+        "stats": {
+          "top1": 8.5312,
+          "margin": 5.9707,
+          "entropy": 0.0807
+        },
+        "ndcg_dense": 1.0,
+        "ndcg_rerank": 1.0
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 5.6875,
+          "margin": 0.5664,
+          "entropy": 1.2586
+        },
+        "ndcg_dense": 0.17723928678404774,
+        "ndcg_rerank": 0.23719771276929622
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 10.2422,
+          "margin": 2.8477,
+          "entropy": 0.3169
+        },
+        "ndcg_dense": 0.8796542634124676,
+        "ndcg_rerank": 0.9558295932317544
+      },
+      {
+        "qid": "AAPL-Liabilities-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 5.1211,
+          "margin": 0.8555,
+          "entropy": 1.1937
+        },
+        "ndcg_dense": 0.6309297535714575,
+        "ndcg_rerank": 1.0
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2022",
+        "stratum": "table",
+        "stats": {
+          "top1": 10.2422,
+          "margin": 5.1211,
+          "entropy": 0.0772
+        },
+        "ndcg_dense": 1.0,
+        "ndcg_rerank": 1.0
+      },
+      {
+        "qid": "AAPL-CashAndCashEquivalentsAtCarryingValue-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 12.5156,
+          "margin": 0.0,
+          "entropy": 1.3747
+        },
+        "ndcg_dense": 0.6462302129493455,
+        "ndcg_rerank": 0.7328286204777911
+      },
+      {
+        "qid": "AAPL-OperatingIncomeLoss-2022",
+        "stratum": "table",
+        "stats": {
+          "top1": 9.1016,
+          "margin": 1.1367,
+          "entropy": 0.6258
+        },
+        "ndcg_dense": 0.9197207891481876,
+        "ndcg_rerank": 0.9197207891481876
+      },
+      {
+        "qid": "AAPL-Liabilities-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 8.5312,
+          "margin": 0.0,
+          "entropy": 1.7197
+        },
+        "ndcg_dense": 0.2640681225725909,
+        "ndcg_rerank": 0.38685280723454163
+      },
+      {
+        "qid": "AAPL-GrossProfit-2022",
+        "stratum": "table",
+        "stats": {
+          "top1": 2.1328,
+          "margin": 0.7109,
+          "entropy": 2.0722
+        },
+        "ndcg_dense": 0.8175295903539445,
+        "ndcg_rerank": 0.8315546295836225
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 6.2578,
+          "margin": 0.5703,
+          "entropy": 0.9588
+        },
+        "ndcg_dense": 1.0,
+        "ndcg_rerank": 0.9674679834891693
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 1.5645,
+          "margin": 1.7067,
+          "entropy": 1.3968
+        },
+        "ndcg_dense": 0.45560514958746035,
+        "ndcg_rerank": 0.3065735963827292
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 11.375,
+          "margin": 2.2734,
+          "entropy": 0.5594
+        },
+        "ndcg_dense": 1.0,
+        "ndcg_rerank": 1.0
+      },
+      {
+        "qid": "AAPL-RevenueFromContractWithCustomerExcludingAssessedTax-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 10.2422,
+          "margin": 1.7109,
+          "entropy": 1.1079
+        },
+        "ndcg_dense": 0.7322962005285631,
+        "ndcg_rerank": 0.9188490368414886
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2022",
+        "stratum": "table",
+        "stats": {
+          "top1": -0.7822,
+          "margin": 1.0664,
+          "entropy": 2.2975
+        },
+        "ndcg_dense": 0.6309297535714575,
+        "ndcg_rerank": 0.3562071871080222
+      },
+      {
+        "qid": "AAPL-RevenueFromContractWithCustomerExcludingAssessedTax-2022",
+        "stratum": "table",
+        "stats": {
+          "top1": 7.3945,
+          "margin": 1.1367,
+          "entropy": 1.2876
+        },
+        "ndcg_dense": 0.7227265726449519,
+        "ndcg_rerank": 0.9560290452802052
+      },
+      {
+        "qid": "AAPL-NetIncomeLoss-2022",
+        "stratum": "table",
+        "stats": {
+          "top1": 7.3945,
+          "margin": 0.5664,
+          "entropy": 1.1813
+        },
+        "ndcg_dense": 0.8062079522181139,
+        "ndcg_rerank": 0.9896062251871524
+      },
+      {
+        "qid": "AAPL-ResearchAndDevelopmentExpense-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 17.0625,
+          "margin": 2.2734,
+          "entropy": 0.4381
+        },
+        "ndcg_dense": 0.4725458388387121,
+        "ndcg_rerank": 0.6458375023792304
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 14.7891,
+          "margin": 4.5469,
+          "entropy": 0.0831
+        },
+        "ndcg_dense": 0.7087212693585175,
+        "ndcg_rerank": 0.653894291235738
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2022",
+        "stratum": "table",
+        "stats": {
+          "top1": 10.2422,
+          "margin": 0.0,
+          "entropy": 0.7535
+        },
+        "ndcg_dense": 0.8175295903539445,
+        "ndcg_rerank": 0.9197207891481876
+      },
+      {
+        "qid": "AAPL-CashAndCashEquivalentsAtCarryingValue-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 12.5156,
+          "margin": 3.4141,
+          "entropy": 0.1754
+        },
+        "ndcg_dense": 0.8065735963827293,
+        "ndcg_rerank": 0.8175295903539445
+      },
+      {
+        "qid": "AAPL-StockholdersEquity-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 13.6562,
+          "margin": 5.125,
+          "entropy": 0.0471
+        },
+        "ndcg_dense": 1.0,
+        "ndcg_rerank": 1.0
+      },
+      {
+        "qid": "AAPL-CashAndCashEquivalentsAtCarryingValue-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 12.5156,
+          "margin": 1.1406,
+          "entropy": 1.3826
+        },
+        "ndcg_dense": 0.2437748474873753,
+        "ndcg_rerank": 0.6053650088957859
+      },
+      {
+        "qid": "AAPL-NetIncomeLoss-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 13.6562,
+          "margin": 2.2812,
+          "entropy": 0.4696
+        },
+        "ndcg_dense": 0.8297197050122155,
+        "ndcg_rerank": 1.0
+      },
+      {
+        "qid": "AAPL-EarningsPerShareDiluted-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 13.6562,
+          "margin": 5.125,
+          "entropy": 0.0768
+        },
+        "ndcg_dense": 0.8665427526082052,
+        "ndcg_rerank": 0.8318724637288826
+      },
+      {
+        "qid": "AAPL-SellingGeneralAndAdministrativeExpense-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 18.2031,
+          "margin": 3.4141,
+          "entropy": 0.1436
+        },
+        "ndcg_dense": 0.7977228895450266,
+        "ndcg_rerank": 0.6934264036172708
+      },
+      {
+        "qid": "AAPL-GrossProfit-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 7.9648,
+          "margin": 1.707,
+          "entropy": 0.9468
+        },
+        "ndcg_dense": 0.6131471927654584,
+        "ndcg_rerank": 0.9197207891481876
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 14.7891,
+          "margin": 3.4141,
+          "entropy": 0.1985
+        },
+        "ndcg_dense": 0.8065735963827293,
+        "ndcg_rerank": 1.0
+      },
+      {
+        "qid": "AAPL-PaymentsToAcquirePropertyPlantAndEquipment-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 4.5508,
+          "margin": 0.5684,
+          "entropy": 1.5368
+        },
+        "ndcg_dense": 0.0,
+        "ndcg_rerank": 0.38685280723454163
+      },
+      {
+        "qid": "AAPL-OperatingExpenses-2022",
+        "stratum": "table",
+        "stats": {
+          "top1": 6.2578,
+          "margin": 1.1367,
+          "entropy": 1.0441
+        },
+        "ndcg_dense": 0.8175295903539445,
+        "ndcg_rerank": 1.0
+      },
+      {
+        "qid": "AAPL-OperatingIncomeLoss-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 13.6562,
+          "margin": 0.0,
+          "entropy": 0.8673
+        },
+        "ndcg_dense": 0.7095272044910244,
+        "ndcg_rerank": 0.75369761125927
+      },
+      {
+        "qid": "AAPL-ResearchAndDevelopmentExpense-2022",
+        "stratum": "table",
+        "stats": {
+          "top1": 10.2422,
+          "margin": 3.9844,
+          "entropy": 0.156
+        },
+        "ndcg_dense": 0.9217868789962071,
+        "ndcg_rerank": 0.9469024295259745
+      },
+      {
+        "qid": "MSFT-RevenueFromContractWithCustomerExcludingAssessedTax-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 12.5156,
+          "margin": 0.0,
+          "entropy": 1.5414
+        },
+        "ndcg_dense": 0.7891499901405781,
+        "ndcg_rerank": 0.5857420314400269
+      },
+      {
+        "qid": "MSFT-OperatingIncomeLoss-2022",
+        "stratum": "table",
+        "stats": {
+          "top1": 7.9648,
+          "margin": 2.2773,
+          "entropy": 1.2899
+        },
+        "ndcg_dense": 0.6131471927654584,
+        "ndcg_rerank": 0.9197207891481876
+      },
+      {
+        "qid": "MSFT-GrossProfit-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 6.8281,
+          "margin": 0.5703,
+          "entropy": 1.935
+        },
+        "ndcg_dense": 0.5531464700081437,
+        "ndcg_rerank": 0.3896266367619439
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 13.6562,
+          "margin": 3.4141,
+          "entropy": 0.2813
+        },
+        "ndcg_dense": 0.36926780146674987,
+        "ndcg_rerank": 0.7039180890341347
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 0.7822,
+          "margin": 1.0311,
+          "entropy": 2.0769
+        },
+        "ndcg_dense": 0.34870224750355494,
+        "ndcg_rerank": 0.5430667908374095
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 5.1211,
+          "margin": 2.2773,
+          "entropy": 1.2172
+        },
+        "ndcg_dense": 0.9047172294870751,
+        "ndcg_rerank": 0.9047172294870751
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2022",
+        "stratum": "table",
+        "stats": {
+          "top1": 11.375,
+          "margin": 4.5469,
+          "entropy": 0.1717
+        },
+        "ndcg_dense": 0.0,
+        "ndcg_rerank": 0.3562071871080222
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2022",
+        "stratum": "table",
+        "stats": {
+          "top1": 2.5605,
+          "margin": 2.5939,
+          "entropy": 0.8396
+        },
+        "ndcg_dense": 0.5,
+        "ndcg_rerank": 0.6309297535714575
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 22.75,
+          "margin": 9.0938,
+          "entropy": 0.0016
+        },
+        "ndcg_dense": 0.6131471927654584,
+        "ndcg_rerank": 0.5437713091520254
+      },
+      {
+        "qid": "MSFT-OperatingIncomeLoss-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 11.375,
+          "margin": 2.2734,
+          "entropy": 0.6643
+        },
+        "ndcg_dense": 0.8104616303452686,
+        "ndcg_rerank": 0.7933816496626285
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2022",
+        "stratum": "table",
+        "stats": {
+          "top1": 6.2578,
+          "margin": 3.4141,
+          "entropy": 0.5345
+        },
+        "ndcg_dense": 0.5,
+        "ndcg_rerank": 1.0
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 11.375,
+          "margin": 2.2734,
+          "entropy": 0.3724
+        },
+        "ndcg_dense": 1.0,
+        "ndcg_rerank": 1.0
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 12.5156,
+          "margin": 3.4141,
+          "entropy": 0.3885
+        },
+        "ndcg_dense": 0.6425958210520417,
+        "ndcg_rerank": 0.6727121162120745
+      },
+      {
+        "qid": "MSFT-Assets-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 10.2422,
+          "margin": 2.8477,
+          "entropy": 0.754
+        },
+        "ndcg_dense": 0.3071837157818931,
+        "ndcg_rerank": 0.5032251913410369
+      },
+      {
+        "qid": "MSFT-GrossProfit-2022",
+        "stratum": "table",
+        "stats": {
+          "top1": 2.5605,
+          "margin": 1.4229,
+          "entropy": 2.1372
+        },
+        "ndcg_dense": 0.3562071871080222,
+        "ndcg_rerank": 0.43067655807339306
+      },
+      {
+        "qid": "MSFT-NetIncomeLoss-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 12.5156,
+          "margin": 1.1406,
+          "entropy": 1.0371
+        },
+        "ndcg_dense": 0.6013124342022591,
+        "ndcg_rerank": 0.9361705073520016
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 12.5156,
+          "margin": 0.0,
+          "entropy": 0.9473
+        },
+        "ndcg_dense": 0.45378308474750184,
+        "ndcg_rerank": 0.542816587098026
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2022",
+        "stratum": "table",
+        "stats": {
+          "top1": 5.6875,
+          "margin": 0.5664,
+          "entropy": 1.7061
+        },
+        "ndcg_dense": 1.0,
+        "ndcg_rerank": 0.6309297535714575
+      },
+      {
+        "qid": "MSFT-RevenueFromContractWithCustomerExcludingAssessedTax-2022",
+        "stratum": "table",
+        "stats": {
+          "top1": 7.9648,
+          "margin": 0.5703,
+          "entropy": 2.0611
+        },
+        "ndcg_dense": 0.9447176050778178,
+        "ndcg_rerank": 0.8396538878217249
+      },
+      {
+        "qid": "MSFT-Liabilities-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 7.3945,
+          "margin": 2.2734,
+          "entropy": 1.0846
+        },
+        "ndcg_dense": 0.42177340954886444,
+        "ndcg_rerank": 0.6131471927654584
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 13.6562,
+          "margin": 1.1406,
+          "entropy": 0.7907
+        },
+        "ndcg_dense": 0.8854598815714874,
+        "ndcg_rerank": 0.9674679834891693
+      },
+      {
+        "qid": "MSFT-OperatingExpenses-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 11.375,
+          "margin": 1.1328,
+          "entropy": 1.0235
+        },
+        "ndcg_dense": 1.0,
+        "ndcg_rerank": 0.5706417189553201
+      },
+      {
+        "qid": "MSFT-Assets-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 11.375,
+          "margin": 1.1328,
+          "entropy": 0.8801
+        },
+        "ndcg_dense": 0.5109559939712153,
+        "ndcg_rerank": 0.7903864795495061
+      },
+      {
+        "qid": "MSFT-GrossProfit-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 9.1016,
+          "margin": 2.8438,
+          "entropy": 0.6764
+        },
+        "ndcg_dense": 0.6131471927654584,
+        "ndcg_rerank": 0.5706417189553201
+      },
+      {
+        "qid": "MSFT-Liabilities-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 7.3945,
+          "margin": 0.0,
+          "entropy": 2.1655
+        },
+        "ndcg_dense": 0.5,
+        "ndcg_rerank": 0.6309297535714575
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 25.0312,
+          "margin": 12.5156,
+          "entropy": 0.0001
+        },
+        "ndcg_dense": 0.44149241373678083,
+        "ndcg_rerank": 0.49958026644179554
+      },
+      {
+        "qid": "MSFT-StockholdersEquity-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 9.1016,
+          "margin": 0.0,
+          "entropy": 0.8894
+        },
+        "ndcg_dense": 0.8687949224876582,
+        "ndcg_rerank": 0.7227265726449519
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 3.4141,
+          "margin": 0.8535,
+          "entropy": 2.0257
+        },
+        "ndcg_dense": 0.0,
+        "ndcg_rerank": 0.18154179253735267
+      },
+      {
+        "qid": "MSFT-EarningsPerShareDiluted-2022",
+        "stratum": "table",
+        "stats": {
+          "top1": 7.9648,
+          "margin": 2.8438,
+          "entropy": 0.5426
+        },
+        "ndcg_dense": 0.6240505200038379,
+        "ndcg_rerank": 1.0
+      },
+      {
+        "qid": "MSFT-NetIncomeLoss-2022",
+        "stratum": "table",
+        "stats": {
+          "top1": 9.1016,
+          "margin": 2.8438,
+          "entropy": 0.707
+        },
+        "ndcg_dense": 0.44615333764087994,
+        "ndcg_rerank": 0.9434732991210639
+      },
+      {
+        "qid": "MSFT-PaymentsToAcquirePropertyPlantAndEquipment-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 6.8281,
+          "margin": 0.0,
+          "entropy": 1.3426
+        },
+        "ndcg_dense": 0.0,
+        "ndcg_rerank": 0.5
+      },
+      {
+        "qid": "MSFT-GrossProfit-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 3.9824,
+          "margin": 0.8535,
+          "entropy": 1.3988
+        },
+        "ndcg_dense": 0.7053571733135213,
+        "ndcg_rerank": 0.8048099750039491
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 6.8281,
+          "margin": 2.2773,
+          "entropy": 1.2754
+        },
+        "ndcg_dense": 0.7757386182436072,
+        "ndcg_rerank": 0.5724250321999883
+      },
+      {
+        "qid": "MSFT-OperatingExpenses-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 6.2578,
+          "margin": 3.4141,
+          "entropy": 0.458
+        },
+        "ndcg_dense": 0.6309297535714575,
+        "ndcg_rerank": 0.31546487678572877
+      },
+      {
+        "qid": "MSFT-Liabilities-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 3.6973,
+          "margin": 0.2832,
+          "entropy": 1.6182
+        },
+        "ndcg_dense": 0.43067655807339306,
+        "ndcg_rerank": 0.5
+      },
+      {
+        "qid": "MSFT-OperatingExpenses-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 9.1016,
+          "margin": 0.0,
+          "entropy": 1.0455
+        },
+        "ndcg_dense": 0.17723928678404774,
+        "ndcg_rerank": 0.0
+      },
+      {
+        "qid": "MSFT-ResearchAndDevelopmentExpense-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 15.9297,
+          "margin": 4.5547,
+          "entropy": 0.0629
+        },
+        "ndcg_dense": 0.2960819109658652,
+        "ndcg_rerank": 0.5988943393645153
+      },
+      {
+        "qid": "MSFT-Assets-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 5.1211,
+          "margin": 0.5703,
+          "entropy": 2.0638
+        },
+        "ndcg_dense": 0.5109559939712153,
+        "ndcg_rerank": 0.6131471927654584
+      },
+      {
+        "qid": "MSFT-OperatingIncomeLoss-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 14.7891,
+          "margin": 2.2734,
+          "entropy": 0.9239
+        },
+        "ndcg_dense": 0.9550236580992475,
+        "ndcg_rerank": 0.7226387152952866
+      },
+      {
+        "qid": "MSFT-CashAndCashEquivalentsAtCarryingValue-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 11.375,
+          "margin": 2.2734,
+          "entropy": 0.7145
+        },
+        "ndcg_dense": 0.43292617940918415,
+        "ndcg_rerank": 0.43292617940918415
+      },
+      {
+        "qid": "NVDA-NetIncomeLoss-2026",
+        "stratum": "table",
+        "stats": {
+          "top1": 11.375,
+          "margin": 2.2734,
+          "entropy": 0.9861
+        },
+        "ndcg_dense": 0.7193074786775863,
+        "ndcg_rerank": 0.9495662644168644
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2026",
+        "stratum": "table",
+        "stats": {
+          "top1": 15.9297,
+          "margin": 6.8281,
+          "entropy": 0.012
+        },
+        "ndcg_dense": 0.38685280723454163,
+        "ndcg_rerank": 0.5
+      },
+      {
+        "qid": "NVDA-Revenues-2026",
+        "stratum": "table",
+        "stats": {
+          "top1": 12.5156,
+          "margin": 1.1406,
+          "entropy": 1.3933
+        },
+        "ndcg_dense": 0.6924048374257172,
+        "ndcg_rerank": 0.4725458388387121
+      },
+      {
+        "qid": "NVDA-Liabilities-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 4.5508,
+          "margin": 2.7021,
+          "entropy": 0.9085
+        },
+        "ndcg_dense": 0.6309297535714575,
+        "ndcg_rerank": 0.43067655807339306
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 8.5312,
+          "margin": 2.2734,
+          "entropy": 0.8736
+        },
+        "ndcg_dense": 0.23463936301137822,
+        "ndcg_rerank": 0.6364391809889587
+      },
+      {
+        "qid": "NVDA-Assets-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 5.1211,
+          "margin": 2.2773,
+          "entropy": 0.9862
+        },
+        "ndcg_dense": 1.0,
+        "ndcg_rerank": 1.0
+      },
+      {
+        "qid": "NVDA-SellingGeneralAndAdministrativeExpense-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 4.2656,
+          "margin": 0.5684,
+          "entropy": 2.1012
+        },
+        "ndcg_dense": 0.31546487678572877,
+        "ndcg_rerank": 0.3562071871080222
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 5.1211,
+          "margin": 0.0,
+          "entropy": 1.729
+        },
+        "ndcg_dense": 0.0,
+        "ndcg_rerank": 0.38685280723454163
+      },
+      {
+        "qid": "NVDA-Liabilities-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 10.2422,
+          "margin": 1.7109,
+          "entropy": 1.2212
+        },
+        "ndcg_dense": 0.8315546295836225,
+        "ndcg_rerank": 0.3065735963827292
+      },
+      {
+        "qid": "NVDA-StockholdersEquity-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 5.6875,
+          "margin": 0.0,
+          "entropy": 1.0058
+        },
+        "ndcg_dense": 0.9060254355346823,
+        "ndcg_rerank": 0.9469024295259745
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 3.6973,
+          "margin": 0.0,
+          "entropy": 1.5964
+        },
+        "ndcg_dense": 0.0,
+        "ndcg_rerank": 0.6309297535714575
+      },
+      {
+        "qid": "NVDA-GrossProfit-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 12.5156,
+          "margin": 0.0,
+          "entropy": 1.0566
+        },
+        "ndcg_dense": 0.20438239758848611,
+        "ndcg_rerank": 0.39564672360221187
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 17.0625,
+          "margin": 2.2734,
+          "entropy": 0.3343
+        },
+        "ndcg_dense": 0.45905478457279136,
+        "ndcg_rerank": 0.3764290720714305
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 4.5508,
+          "margin": 0.2852,
+          "entropy": 1.9196
+        },
+        "ndcg_dense": 0.3333333333333333,
+        "ndcg_rerank": 0.31546487678572877
+      },
+      {
+        "qid": "NVDA-Assets-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 12.5156,
+          "margin": 5.6875,
+          "entropy": 0.1058
+        },
+        "ndcg_dense": 0.7903864795495061,
+        "ndcg_rerank": 0.8315546295836225
+      },
+      {
+        "qid": "NVDA-StockholdersEquity-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 4.5508,
+          "margin": 0.0,
+          "entropy": 0.9587
+        },
+        "ndcg_dense": 0.43067655807339306,
+        "ndcg_rerank": 0.6309297535714575
+      },
+      {
+        "qid": "NVDA-GrossProfit-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 9.1016,
+          "margin": 6.9688,
+          "entropy": 0.0245
+        },
+        "ndcg_dense": 0.6309297535714575,
+        "ndcg_rerank": 0.5
+      },
+      {
+        "qid": "NVDA-EarningsPerShareDiluted-2026",
+        "stratum": "table",
+        "stats": {
+          "top1": 8.5312,
+          "margin": 0.0,
+          "entropy": 1.1519
+        },
+        "ndcg_dense": 0.9674679834891693,
+        "ndcg_rerank": 0.9674679834891693
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2026",
+        "stratum": "table",
+        "stats": {
+          "top1": 13.6562,
+          "margin": 0.0,
+          "entropy": 1.0429
+        },
+        "ndcg_dense": 0.6364391809889587,
+        "ndcg_rerank": 0.5833416105149332
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 8.5312,
+          "margin": 2.8438,
+          "entropy": 0.6905
+        },
+        "ndcg_dense": 0.42913706161531123,
+        "ndcg_rerank": 0.6426881189719141
+      },
+      {
+        "qid": "NVDA-EarningsPerShareDiluted-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 7.3945,
+          "margin": 0.0,
+          "entropy": 1.2435
+        },
+        "ndcg_dense": 0.7526136409516658,
+        "ndcg_rerank": 0.7751482523375256
+      },
+      {
+        "qid": "NVDA-StockholdersEquity-2026",
+        "stratum": "table",
+        "stats": {
+          "top1": 8.5312,
+          "margin": 2.2734,
+          "entropy": 0.9536
+        },
+        "ndcg_dense": 1.0,
+        "ndcg_rerank": 1.0
+      },
+      {
+        "qid": "NVDA-Liabilities-2026",
+        "stratum": "table",
+        "stats": {
+          "top1": 9.1016,
+          "margin": 0.0,
+          "entropy": 1.707
+        },
+        "ndcg_dense": 1.0,
+        "ndcg_rerank": 1.0
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2026",
+        "stratum": "table",
+        "stats": {
+          "top1": 15.9297,
+          "margin": 1.1406,
+          "entropy": 0.7173
+        },
+        "ndcg_dense": 0.6508205185601091,
+        "ndcg_rerank": 1.0
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 7.3945,
+          "margin": 1.707,
+          "entropy": 0.7138
+        },
+        "ndcg_dense": 0.3562071871080222,
+        "ndcg_rerank": 0.38685280723454163
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2026",
+        "stratum": "table",
+        "stats": {
+          "top1": 11.375,
+          "margin": 1.1328,
+          "entropy": 0.8648
+        },
+        "ndcg_dense": 0.6052602440527057,
+        "ndcg_rerank": 0.8772153153380493
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 5.1211,
+          "margin": 0.5703,
+          "entropy": 1.3814
+        },
+        "ndcg_dense": 0.5802792108518124,
+        "ndcg_rerank": 0.6509209298071326
+      },
+      {
+        "qid": "NVDA-ResearchAndDevelopmentExpense-2026",
+        "stratum": "table",
+        "stats": {
+          "top1": 15.9297,
+          "margin": 4.5547,
+          "entropy": 0.1458
+        },
+        "ndcg_dense": 0.5714285040141098,
+        "ndcg_rerank": 0.4911492931622974
+      },
+      {
+        "qid": "NVDA-SellingGeneralAndAdministrativeExpense-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 18.2031,
+          "margin": 6.8281,
+          "entropy": 0.0338
+        },
+        "ndcg_dense": 0.5148381117249624,
+        "ndcg_rerank": 0.4041238719904177
+      },
+      {
+        "qid": "NVDA-NetIncomeLoss-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 5.6875,
+          "margin": 1.4219,
+          "entropy": 1.4382
+        },
+        "ndcg_dense": 0.6843515475204855,
+        "ndcg_rerank": 0.8886733622104969
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 15.9297,
+          "margin": 1.1406,
+          "entropy": 0.6837
+        },
+        "ndcg_dense": 0.5709662133861838,
+        "ndcg_rerank": 0.6159929108925155
+      },
+      {
+        "qid": "NVDA-OperatingExpenses-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 7.3945,
+          "margin": 1.707,
+          "entropy": 1.3212
+        },
+        "ndcg_dense": 0.5413996682199069,
+        "ndcg_rerank": 0.8547529378296287
+      },
+      {
+        "qid": "NVDA-Revenues-2023",
+        "stratum": "table",
+        "stats": {
+          "top1": 7.3945,
+          "margin": 1.1367,
+          "entropy": 1.1708
+        },
+        "ndcg_dense": 0.8843252268199594,
+        "ndcg_rerank": 0.7327711443782633
+      },
+      {
+        "qid": "NVDA-SellingGeneralAndAdministrativeExpense-2026",
+        "stratum": "table",
+        "stats": {
+          "top1": 14.7891,
+          "margin": 1.1328,
+          "entropy": 0.913
+        },
+        "ndcg_dense": 0.5912352048230277,
+        "ndcg_rerank": 0.5912352048230277
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 20.4844,
+          "margin": 7.9688,
+          "entropy": 0.0036
+        },
+        "ndcg_dense": 0.0,
+        "ndcg_rerank": 0.2640681225725909
+      },
+      {
+        "qid": "NVDA-CostOfRevenue-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 14.7891,
+          "margin": 9.1016,
+          "entropy": 0.0025
+        },
+        "ndcg_dense": 0.38162168437253385,
+        "ndcg_rerank": 0.3706656904013186
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 15.9297,
+          "margin": 2.2734,
+          "entropy": 0.6067
+        },
+        "ndcg_dense": 0.6105858728157117,
+        "ndcg_rerank": 0.7409096387260824
+      },
+      {
+        "qid": "NVDA-CashAndCashEquivalentsAtCarryingValue-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 12.5156,
+          "margin": 5.6875,
+          "entropy": 0.0403
+        },
+        "ndcg_dense": 0.5585075862632192,
+        "ndcg_rerank": 0.8421423592553552
+      },
+      {
+        "qid": "NVDA-OperatingIncomeLoss-2025",
+        "stratum": "table",
+        "stats": {
+          "top1": 10.2422,
+          "margin": 0.0,
+          "entropy": 1.5001
+        },
+        "ndcg_dense": 0.675319789382049,
+        "ndcg_rerank": 0.6716991002599991
+      },
+      {
+        "qid": "NVDA-GrossProfit-2024",
+        "stratum": "table",
+        "stats": {
+          "top1": 7.3945,
+          "margin": 0.0,
+          "entropy": 1.3151
+        },
+        "ndcg_dense": 0.41183384043543503,
+        "ndcg_rerank": 0.4227898344066503
+      }
+    ]
+  },
+  "narrative": {
+    "n": 15,
+    "nDCG@10": {
+      "dense": 0.7565,
+      "rerank_always": 0.7632
+    },
+    "gates": {
+      "top1": {
+        "curve": [
+          {
+            "pct": 10,
+            "threshold": -1.7636,
+            "nDCG@10": 0.7166,
+            "frac_reranked": 0.867
+          },
+          {
+            "pct": 20,
+            "threshold": 2.5879,
+            "nDCG@10": 0.7452,
+            "frac_reranked": 0.8
+          },
+          {
+            "pct": 30,
+            "threshold": 6.143,
+            "nDCG@10": 0.7452,
+            "frac_reranked": 0.667
+          },
+          {
+            "pct": 40,
+            "threshold": 8.6469,
+            "nDCG@10": 0.747,
+            "frac_reranked": 0.6
+          },
+          {
+            "pct": 50,
+            "threshold": 10.2422,
+            "nDCG@10": 0.7716,
+            "frac_reranked": 0.533
+          },
+          {
+            "pct": 60,
+            "threshold": 12.9718,
+            "nDCG@10": 0.7716,
+            "frac_reranked": 0.4
+          },
+          {
+            "pct": 70,
+            "threshold": 13.6562,
+            "nDCG@10": 0.7716,
+            "frac_reranked": 0.4
+          },
+          {
+            "pct": 80,
+            "threshold": 15.0172,
+            "nDCG@10": 0.7565,
+            "frac_reranked": 0.2
+          },
+          {
+            "pct": 90,
+            "threshold": 15.9297,
+            "nDCG@10": 0.7565,
+            "frac_reranked": 0.2
+          }
+        ],
+        "best": {
+          "pct": 50,
+          "threshold": 10.2422,
+          "nDCG@10": 0.7716,
+          "frac_reranked": 0.533
+        }
+      },
+      "margin": {
+        "curve": [
+          {
+            "pct": 10,
+            "threshold": 0.3992,
+            "nDCG@10": 0.7386,
+            "frac_reranked": 0.867
+          },
+          {
+            "pct": 20,
+            "threshold": 0.6828,
+            "nDCG@10": 0.7404,
+            "frac_reranked": 0.8
+          },
+          {
+            "pct": 30,
+            "threshold": 1.2539,
+            "nDCG@10": 0.769,
+            "frac_reranked": 0.667
+          },
+          {
+            "pct": 40,
+            "threshold": 2.0468,
+            "nDCG@10": 0.7936,
+            "frac_reranked": 0.6
+          },
+          {
+            "pct": 50,
+            "threshold": 2.2812,
+            "nDCG@10": 0.7936,
+            "frac_reranked": 0.533
+          },
+          {
+            "pct": 60,
+            "threshold": 3.6414,
+            "nDCG@10": 0.7785,
+            "frac_reranked": 0.4
+          },
+          {
+            "pct": 70,
+            "threshold": 5.9722,
+            "nDCG@10": 0.7565,
+            "frac_reranked": 0.333
+          },
+          {
+            "pct": 80,
+            "threshold": 6.8281,
+            "nDCG@10": 0.7565,
+            "frac_reranked": 0.267
+          },
+          {
+            "pct": 90,
+            "threshold": 8.1922,
+            "nDCG@10": 0.7565,
+            "frac_reranked": 0.133
+          }
+        ],
+        "best": {
+          "pct": 40,
+          "threshold": 2.0468,
+          "nDCG@10": 0.7936,
+          "frac_reranked": 0.6
+        }
+      },
+      "entropy": {
+        "curve": [
+          {
+            "pct": 10,
+            "threshold": 0.0044,
+            "nDCG@10": 0.7565,
+            "frac_reranked": 0.133
+          },
+          {
+            "pct": 20,
+            "threshold": 0.0133,
+            "nDCG@10": 0.7565,
+            "frac_reranked": 0.2
+          },
+          {
+            "pct": 30,
+            "threshold": 0.0778,
+            "nDCG@10": 0.7565,
+            "frac_reranked": 0.333
+          },
+          {
+            "pct": 40,
+            "threshold": 0.3771,
+            "nDCG@10": 0.7565,
+            "frac_reranked": 0.4
+          },
+          {
+            "pct": 50,
+            "threshold": 0.6932,
+            "nDCG@10": 0.7785,
+            "frac_reranked": 0.533
+          },
+          {
+            "pct": 60,
+            "threshold": 0.8142,
+            "nDCG@10": 0.7539,
+            "frac_reranked": 0.6
+          },
+          {
+            "pct": 70,
+            "threshold": 0.9319,
+            "nDCG@10": 0.7539,
+            "frac_reranked": 0.667
+          },
+          {
+            "pct": 80,
+            "threshold": 0.9604,
+            "nDCG@10": 0.7521,
+            "frac_reranked": 0.8
+          },
+          {
+            "pct": 90,
+            "threshold": 1.0883,
+            "nDCG@10": 0.7672,
+            "frac_reranked": 0.867
+          }
+        ],
+        "best": {
+          "pct": 50,
+          "threshold": 0.6932,
+          "nDCG@10": 0.7785,
+          "frac_reranked": 0.533
+        }
+      },
+      "oracle": 0.8182
+    },
+    "strata": {
+      "text": {
+        "n": 15,
+        "dense": 0.7565,
+        "rerank": 0.7632
+      }
+    },
+    "per_question": [
+      {
+        "qid": "AAPL_10K_2024-09-28#0021-narr",
+        "stratum": "text",
+        "stats": {
+          "top1": 5.6875,
+          "margin": 6.4697,
+          "entropy": 0.039
+        },
+        "ndcg_dense": 1.0,
+        "ndcg_rerank": 1.0
+      },
+      {
+        "qid": "AAPL_10K_2024-09-28#0057-narr",
+        "stratum": "text",
+        "stats": {
+          "top1": 9.1016,
+          "margin": 1.707,
+          "entropy": 0.764
+        },
+        "ndcg_dense": 1.0,
+        "ndcg_rerank": 0.6309297535714575
+      },
+      {
+        "qid": "AAPL_10K_2025-09-27#0039-narr",
+        "stratum": "text",
+        "stats": {
+          "top1": 14.7891,
+          "margin": 0.0,
+          "entropy": 0.6932
+        },
+        "ndcg_dense": 1.0,
+        "ndcg_rerank": 1.0
+      },
+      {
+        "qid": "AAPL_10K_2025-09-27#0060-narr",
+        "stratum": "text",
+        "stats": {
+          "top1": 15.9297,
+          "margin": 6.8281,
+          "entropy": 0.0087
+        },
+        "ndcg_dense": 1.0,
+        "ndcg_rerank": 1.0
+      },
+      {
+        "qid": "AAPL_10K_2025-09-27#0046-narr",
+        "stratum": "text",
+        "stats": {
+          "top1": -3.9824,
+          "margin": 3.9824,
+          "entropy": 0.4733
+        },
+        "ndcg_dense": 0.3010299956639812,
+        "ndcg_rerank": 0.6309297535714575
+      },
+      {
+        "qid": "MSFT_10K_2024-06-30#0047-narr",
+        "stratum": "text",
+        "stats": {
+          "top1": 13.6562,
+          "margin": 3.4141,
+          "entropy": 0.2328
+        },
+        "ndcg_dense": 1.0,
+        "ndcg_rerank": 1.0
+      },
+      {
+        "qid": "MSFT_10K_2024-06-30#0162-narr",
+        "stratum": "text",
+        "stats": {
+          "top1": 15.9297,
+          "margin": 6.8281,
+          "entropy": 0.0144
+        },
+        "ndcg_dense": 1.0,
+        "ndcg_rerank": 1.0
+      },
+      {
+        "qid": "MSFT_10K_2025-06-30#0134-narr",
+        "stratum": "text",
+        "stats": {
+          "top1": 12.5156,
+          "margin": 9.1016,
+          "entropy": 0.0016
+        },
+        "ndcg_dense": 1.0,
+        "ndcg_rerank": 1.0
+      },
+      {
+        "qid": "MSFT_10K_2024-06-30#0069-narr",
+        "stratum": "text",
+        "stats": {
+          "top1": 1.5645,
+          "margin": 0.7109,
+          "entropy": 1.159
+        },
+        "ndcg_dense": 1.0,
+        "ndcg_rerank": 0.5706417189553201
+      },
+      {
+        "qid": "MSFT_10K_2024-06-30#0096-narr",
+        "stratum": "text",
+        "stats": {
+          "top1": 2.8438,
+          "margin": 13.0859,
+          "entropy": 0.0001
+        },
+        "ndcg_dense": 1.0,
+        "ndcg_rerank": 1.0
+      },
+      {
+        "qid": "NVDA_10K_2025-01-26#0022-narr",
+        "stratum": "text",
+        "stats": {
+          "top1": -4.2656,
+          "margin": 0.2852,
+          "entropy": 2.2019
+        },
+        "ndcg_dense": 0.6309297535714575,
+        "ndcg_rerank": 1.0
+      },
+      {
+        "qid": "NVDA_10K_2026-01-25#0038-narr",
+        "stratum": "text",
+        "stats": {
+          "top1": 10.2422,
+          "margin": 1.1406,
+          "entropy": 0.8895
+        },
+        "ndcg_dense": 0.7653606369886217,
+        "ndcg_rerank": 0.7653606369886217
+      },
+      {
+        "qid": "NVDA_10K_2026-01-25#0135-narr",
+        "stratum": "text",
+        "stats": {
+          "top1": 7.9648,
+          "margin": 0.5703,
+          "entropy": 0.9425
+        },
+        "ndcg_dense": 0.2640681225725909,
+        "ndcg_rerank": 0.23719771276929622
+      },
+      {
+        "qid": "NVDA_10K_2025-01-26#0122-narr",
+        "stratum": "text",
+        "stats": {
+          "top1": 15.9297,
+          "margin": 2.2734,
+          "entropy": 0.955
+        },
+        "ndcg_dense": 0.0,
+        "ndcg_rerank": 0.0
+      },
+      {
+        "qid": "NVDA_10K_2025-01-26#0065-narr",
+        "stratum": "text",
+        "stats": {
+          "top1": 13.6562,
+          "margin": 2.2812,
+          "entropy": 0.9822
+        },
+        "ndcg_dense": 0.38685280723454163,
+        "ndcg_rerank": 0.6131471927654584
+      }
+    ]
+  }
+}
