@@ -192,3 +192,97 @@ chunker version — is the highest-value change left in this repository.** Until
 it exists, aggregate metrics can be recomputed from the saved JSON but the
 retrieval itself cannot be rerun, and corrections like the two above can be
 applied but never verified.
+
+
+---
+
+## Third pass
+
+The second pass converted the concept anchor from a filter to a diagnostic.
+That was right about the leakage and wrong to stop there: the original false
+positive came straight back, and nothing else had been put in its place.
+
+### Numbers are now matched at boundaries, which does not leak vocabulary
+
+Plain substring matching accepted a value *inside* a longer number: `"123"`
+matched `"1234"`, `"6.16"` matched `"16.16"`, `"12,914"` matched `"112,914"`.
+Every one of those produced a gold label for a figure the passage never states,
+and unlike the concept anchor, fixing it costs no independence — a digit
+boundary says nothing about the question's wording.
+
+A bug inside that fix is worth recording, because it is the failure direction
+that matters. The first version tested `before in ",."`, and `"" in ",."` is
+`True` in Python: the empty string is a substring of everything. So a value at
+the very start or end of a chunk read as *embedded in a longer number* and was
+silently dropped. Real gold disappearing is worse than false gold appearing,
+and only an explicit emptiness check prevents it.
+
+### Losses in parentheses were finding no gold at all
+
+Filings print a loss as `(1,234)`, never `-1,234`. `_formats` emitted only the
+signed form, so every negative figure matched zero chunks and dropped out of
+the eval set — skewing the question mix toward profitable years with nothing
+recording that it had. Both forms are generated now.
+
+### What boundary matching still does not fix
+
+A revenue of $1,234,000 searches for `"1,234"` because filings report in
+thousands, and *"the company employed 1,234 people"* contains exactly that
+number standing alone. No string-matching rule separates those two facts. Only
+a label that carries the concept can, which is what inline-XBRL element-to-DOM
+mapping provides and why it remains the right fix. A test now pins this case
+explicitly as known-unfixed rather than leaving it implied.
+
+### Tests now drive `build()`
+
+Every earlier test in `test_qrel_grounding.py` called `concept_supported`
+directly, so deleting the diagnostic or restoring the withdrawn filter would
+have left them green. `TestBuildEndToEnd` runs the builder with stubbed XBRL
+facts and asserts on the labels it produces.
+
+### Two crashes in the reporting path
+
+`gated_rerank` raised `IndexError` on `logits[0]` when a rerank call returned
+an empty-but-successful response — killing the whole evaluation rather than
+counting the one failed query it was. And when *every* call failed, `gates` was
+`{}` and printing the summary raised `KeyError`, hiding the actual failure
+behind a crash. Both handled.
+
+`r_at_1_ceiling` divided by every question while summing only those with gold
+chunks, so an empty `gold_chunk_ids` quietly depressed the ceiling instead of
+being reported. It raises now.
+
+### Also corrected
+
+- REPORT still published `0.075 → 0.226` after AUDIT.md had already retracted
+  the `0.075`. Only the endpoint is quoted now.
+- "Direction is unanimous" survived in README and REPORT next to the `11/4`
+  concept split that contradicts it. Both now say consistent, unanimous across
+  companies.
+- REPORT's closing section called having a p-value the finding's "strongest
+  state" while concept and company p-values are 0.12 and 0.25.
+
+## Still open after three passes
+
+- **No corpus manifest.** `retrieval_v3.json` still records no accessions,
+  checksum, BM25 configuration, reranker model or git revision, and the corpus
+  is gitignored. Nothing here is rerunnable; this remains the highest-value
+  change in the repo.
+- **Committed artifacts predate their producers.** `gated_rerank.json` has none
+  of the failure fields the code now writes, and `dat_fusion.json` has no
+  `configured_scorer_model` while the code names `deepseek-v4-flash-0731` and
+  REPORT says `deepseek-v4-flash`.
+- **`report_tables --check` only guards the numeric table.** Narrative, DAT and
+  gate tables are unanchored and unchecked; wrong numbers there still pass.
+- **Failure policy is inconsistent across harnesses**: `run_retrieval` raises,
+  `fusion_sweep` raises `ZeroDivisionError`, DAT writes zero-like summaries,
+  gated rerank reports complete-case metrics and exits 0.
+- **Gated rerank is still complete-case.** Failures are recorded and warned
+  about; they are not fatal, and the denominator still shrinks.
+- **The narrative date rule ignores question type**, so standing-risk prose
+  from an earlier filing is rejected along with genuinely impossible labels.
+- `paired()` silently collapses duplicate qids; empty qrels still score as zero
+  in `recall_at_k` / `ndcg_at_k`.
+- The `concept_supported` diagnostic is itself imprecise: it calls
+  `"Turnover | 1,234"` unsupported and the employee sentence supported when a
+  concept word happens to be nearby. It is a rough signal, labelled as one.

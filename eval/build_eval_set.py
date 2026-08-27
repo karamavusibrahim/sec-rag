@@ -138,6 +138,37 @@ def concept_supported(text: str, concept: str, variants: Sequence[str],
     return False
 
 
+def value_occurs(text: str, variants: Sequence[str]) -> bool:
+    """Does one of the formatted variants occur as a standalone number?
+
+    Plain substring matching accepts a value inside a larger number: `"123"`
+    matches `"1234"`, and `"6.16"` matches `"16.16"`. Both create gold labels
+    for a figure the passage never states.
+
+    The boundary has to be numeric rather than `\b`, because `\b` treats the
+    comma and period inside `12,914.50` as word boundaries and would keep
+    matching fragments. A digit, comma or decimal point on either side means we
+    are inside a longer number.
+    """
+    def inside_a_number(ch: str) -> bool:
+        # `ch` is "" at the start or end of the text, and `"" in ",."` is True
+        # in Python -- the empty string is a substring of everything. Without
+        # the emptiness check, a value at either end of a chunk was treated as
+        # embedded in a longer number and rejected, which is the false-negative
+        # direction: real gold silently disappears.
+        return bool(ch) and (ch.isdigit() or ch in ",.")
+
+    for v in variants:
+        start = 0
+        while (i := text.find(v, start)) != -1:
+            before = text[i - 1] if i else ""
+            after = text[i + len(v)] if i + len(v) < len(text) else ""
+            if not inside_a_number(before) and not inside_a_number(after):
+                return True
+            start = i + 1
+    return False
+
+
 def _formats(value: float) -> list[str]:
     """Ways a value plausibly appears in filing text.
 
@@ -156,7 +187,14 @@ def _formats(value: float) -> list[str]:
                 out.add(str(n))
     if abs(value) < 1000:
         out.add(f"{value:,.2f}")
-    return [s for s in out if len(s.replace(",", "")) >= 3]
+    # Filings print losses in parentheses, not with a minus sign: a net loss of
+    # -1,234 appears as "(1,234)". Emitting only the signed form meant every
+    # negative figure silently found zero gold chunks and dropped out of the
+    # eval set, so the question mix skewed toward profitable years without
+    # anything recording that it had.
+    if value < 0:
+        out |= {f"({v.lstrip('-')})" for v in list(out) if v.startswith("-")}
+    return [s for s in out if len(s.replace(",", "").strip("()-")) >= 3]
 
 
 def build(chunks: list[dict[str, Any]], tickers: list[str], *, max_per_ticker: int = 40,
@@ -207,7 +245,7 @@ def build(chunks: list[dict[str, Any]], tickers: list[str], *, max_per_ticker: i
             matches = [
                 c["chunk_id"] for c in pool
                 if fy and 0 <= int(c["report_date"][:4]) - fy <= 2
-                and any(v in c["text"] for v in variants)
+                and value_occurs(c["text"], variants)
             ]
             # Deliberately NOT filtered on `concept_supported`.
             #

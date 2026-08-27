@@ -145,6 +145,16 @@ def main() -> int:
                       file=sys.stderr)
                 failures.append({"qid": q.get("qid"), "error": str(exc)})
                 continue
+            # An empty-but-successful response is a failure of the call, not
+            # a zero-confidence result. Letting it through raised IndexError on
+            # `logits[0]` outside the try block, killing the whole evaluation
+            # instead of being counted as the one failed query it is.
+            if not ranked:
+                print(f"  rerank returned nothing for {q.get('qid')}",
+                      file=sys.stderr)
+                failures.append({"qid": q.get("qid"),
+                                 "error": "empty rerank response"})
+                continue
             logits = [lg for _, lg in ranked]
             rerank_order = [cand_ids[idx] for idx, _ in ranked[:K]]
 
@@ -198,8 +208,17 @@ def main() -> int:
               f"dense {r['nDCG@10']['dense']}  "
               f"rerank-always {r['nDCG@10']['rerank_always']}  "
               f"oracle {r['gates'].get('oracle')}")
+        if not r["gates"]:
+            print("  no queries succeeded; no gate curves to report",
+                  file=sys.stderr)
         for stat in STATS:
-            b = r["gates"][stat]["best"]
+            # `gates` is {} when every rerank call failed, and indexing it threw
+            # KeyError while printing -- a crash in the reporting path that hid
+            # the actual failure from whoever ran it.
+            gate = r["gates"].get(stat)
+            if not gate:
+                continue
+            b = gate["best"]
             print(f"  gate[{stat}]  best {b['nDCG@10']} at p{b['pct']} "
                   f"(reranks {b['frac_reranked']:.0%} of queries)")
 

@@ -54,7 +54,16 @@ def r_at_1_ceiling(eval_set: Path) -> tuple[float, int]:
     """
     sizes = [len(json.loads(l)["gold_chunk_ids"])
              for l in eval_set.read_text().splitlines() if l.strip()]
-    return sum(1.0 / n for n in sizes if n) / len(sizes), len(sizes)
+    # A question with no gold chunks is invalid input, not a question whose
+    # ceiling is zero. Dividing by every row while summing only the non-empty
+    # ones quietly depressed the ceiling instead of reporting the problem.
+    empty = [i for i, n in enumerate(sizes, 1) if not n]
+    if empty:
+        raise ValueError(
+            f"{len(empty)} question(s) have empty gold_chunk_ids "
+            f"(lines {empty[:5]}{'...' if len(empty) > 5 else ''}); "
+            "an unanswerable question cannot contribute a ceiling")
+    return sum(1.0 / n for n in sizes) / len(sizes), len(sizes)
 
 
 # --------------------------------------------------------------------------

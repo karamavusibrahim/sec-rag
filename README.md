@@ -43,8 +43,9 @@ Aggregating first, so each cluster contributes one observation
 | concept | 15 | 11/4/0 | 0.1185 |
 | ticker | 3 | 3/0/0 | 0.2500 |
 
-The **direction is unanimous** — dense wins on all three companies and 11 of 15
-concepts — but the p-value is a within-corpus diagnostic, not population-level
+The **direction is consistent, and unanimous across companies** — dense wins on
+all three companies and 11 of 15 concepts, so four concepts go the other way —
+but the p-value is a within-corpus diagnostic, not population-level
 validation, and three companies cannot deliver one. "Hybrid beats either
 component alone" did not hold on this workload; establishing that it generally
 fails to hold needs a wider corpus, not a different test.

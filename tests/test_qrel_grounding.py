@@ -92,3 +92,96 @@ def test_empty_eval_set_is_an_error_not_a_zero_score():
 
     with pytest.raises(ValueError, match="no questions"):
         evaluate(None, [], {})
+
+
+# ---------------------------------------------------------------------------
+# Driven through `build()`, not its helpers. The earlier tests in this file all
+# called `concept_supported` directly, so deleting the diagnostic or restoring
+# the rejected vocabulary filter would have left them green.
+# ---------------------------------------------------------------------------
+
+from unittest.mock import patch  # noqa: E402
+
+from build_eval_set import build, value_occurs  # noqa: E402
+
+
+def chunk(cid, text, ticker="AAPL", date="2024-09-28"):
+    return {"chunk_id": cid, "text": text, "ticker": ticker,
+            "report_date": date}
+
+
+def fake_facts(concept, value, fy=2024):
+    return [{"concept": concept, "value": value, "unit": "USD",
+             "form": "10-K", "annual": True, "fiscal_year": fy}]
+
+
+def run_build(chunks, concept="Revenues", value=1_234_000.0):
+    with patch("build_eval_set.company_facts", return_value={}), \
+         patch("build_eval_set.iter_us_gaap_facts",
+               return_value=fake_facts(concept, value)):
+        return build(chunks, ["AAPL"], max_per_ticker=10)
+
+
+class TestValueBoundaries:
+    """A value must occur as a standalone number, not inside a longer one."""
+
+    def test_a_value_embedded_in_a_longer_number_is_not_a_match(self):
+        assert not value_occurs("Total 1234", ["123"])
+        assert not value_occurs("was 112,914", ["12,914"])
+        assert not value_occurs("rate 16.16", ["6.16"])
+
+    def test_a_standalone_value_matches(self):
+        assert value_occurs("Total 123 units", ["123"])
+        assert value_occurs("was 12,914 total", ["12,914"])
+
+    def test_a_value_at_either_end_of_the_chunk_matches(self):
+        # "" in ",." is True in Python, so an emptiness check is required or
+        # every value touching a chunk boundary is silently dropped.
+        assert value_occurs("12,914", ["12,914"])
+        assert value_occurs("12,914 and more", ["12,914"])
+        assert value_occurs("ending in 12,914", ["12,914"])
+
+    def test_a_parenthesised_loss_is_found(self):
+        from build_eval_set import _formats
+        assert value_occurs("Net loss (1,234)", _formats(-1_234_000.0))
+
+
+class TestBuildEndToEnd:
+    def test_an_embedded_digit_string_does_not_become_gold(self):
+        # 1,234,000 searches for "1,234" and "1234" among others. Inside
+        # "12345" neither occurs as a standalone number, so no label is made.
+        qs = run_build([chunk("X", "Headcount rose to 12345 people.")])
+        assert qs == [], "a value inside a longer number became gold"
+
+    def test_an_exact_standalone_collision_still_becomes_gold(self):
+        """Documents what boundary matching does NOT fix.
+
+        A revenue of $1,234,000 searches for "1,234" because filings report in
+        thousands, and "the company employed 1,234 people" contains exactly
+        that number standing alone. No amount of string matching separates
+        those two facts -- only a label carrying the concept can, which is what
+        inline-XBRL element-to-DOM mapping would provide. The diagnostic below
+        is the interim measure, not a fix.
+        """
+        qs = run_build([chunk("X", "The company employed 1,234 people.")])
+        assert len(qs) == 1 and qs[0]["gold_chunk_ids"] == ["X"]
+        assert qs[0]["n_gold_unsupported"] == 1
+
+    def test_a_real_revenue_row_becomes_gold(self):
+        qs = run_build([chunk("X", "Total net sales 1,234 (in thousands)")])
+        assert len(qs) == 1 and qs[0]["gold_chunk_ids"] == ["X"]
+
+    def test_the_support_diagnostic_is_recorded_and_not_enforced(self):
+        """Both fields must exist, and an unsupported label must survive.
+
+        Filtering on concept vocabulary was tried and withdrawn: questions are
+        written from the concept label, so requiring that vocabulary in the
+        gold chunk hands BM25 a lexical path from passage to query. The signal
+        is recorded so the contamination stays measurable.
+        """
+        qs = run_build([chunk("X", "The company employed 1,234 people.")])
+        assert len(qs) == 1, "the label was filtered out rather than flagged"
+        q = qs[0]
+        assert q["gold_chunk_ids"] == ["X"]
+        assert q["gold_concept_supported"] == []
+        assert q["n_gold_unsupported"] == 1

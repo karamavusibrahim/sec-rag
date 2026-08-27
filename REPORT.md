@@ -262,8 +262,9 @@ trials. Recomputed at every defensible unit of aggregation
 | ticker | 3 | 3 | 0 | 0 | 0.2500 |
 
 What survives is worth more than the p-value did: **the direction is
-unanimous.** Dense beats hybrid on all 3 companies, on 11 of 15 concepts, and
-on 25 of 38 ticker×concept cells. What does not survive is the claim of
+consistent, and unanimous across companies.** Dense beats hybrid on all 3
+companies, on 11 of 15 concepts, and on 25 of 38 ticker×concept cells — so
+four concepts and eleven ticker×concept cells go the other way. What does not survive is the claim of
 significance — with three companies, the honest statement is a consistent
 effect that this eval set is too narrow to establish at population level, and
 the fix is more companies, not a better test. (Sign and Wilcoxon tests are also
@@ -320,8 +321,13 @@ counts into the results file.
 the gold chunks contain the company name in their raw text, while every
 question opens with it. The two retrievers were not searching the same
 documents. Isolating the effect offline (BM25 is local, so this costs
-nothing): fair indexing alone moves BM25 from 0.075 to 0.226 on the full set —
-a **3× effect that had been attributed to "BM25 is bad at this corpus."**
+nothing): fair indexing alone lifts BM25 to 0.226 on the full set, a large
+effect that had been attributed to "BM25 is bad at this corpus."
+
+The *before* figure this sentence used to quote, 0.075, appears in no committed
+artifact, so the size of the jump cannot be checked from this repository. Only
+the corrected endpoint reproduces. Treat the direction as established and the
+multiple as unsupported.
 
 (An earlier revision also cited 0.112 → 0.353 on the exact old slice. That
 rerun was never committed, so the effect size cannot be reproduced from this
@@ -681,8 +687,10 @@ the first conclusion. It falsified half of the stated *mechanism* while
 confirming the *finding*. The audit (§2.3) then split the mechanism again:
 roughly 3× of BM25's numeric collapse was an indexing asymmetry this project
 introduced, and only the residual ~2× is about tables. The finding survived
-both corrections with a p-value attached — which is the strongest state it has
-been in — but the path there is the real lesson: **every large effect in this
+both corrections, and its direction held at every level of aggregation — which
+is the strongest state it has been in, stronger than the p-value alone, since
+that p-value falls to 0.12 by concept and 0.25 by company. But the path there
+is the real lesson: **every large effect in this
 report eventually decomposed into a smaller true effect plus a measurement
 artifact**, and the artifact was only ever found by someone assuming it was
 there.
