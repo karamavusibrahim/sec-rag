@@ -1,4 +1,13 @@
-"""Regression tests for numeric ground-truth construction.
+"""Regression tests for the numeric ground-truth support diagnostic.
+
+`concept_supported` is a DIAGNOSTIC, not a filter. It is recorded per question
+as `gold_concept_supported` / `n_gold_unsupported` and never removes a label.
+Filtering on it would require every gold chunk to contain the vocabulary the
+question was written from, handing BM25 a lexical path from passage to query in
+an ablation whose whole subject is sparse versus dense retrieval. These tests
+pin the signal's behaviour; they do not assert that labels are filtered.
+
+Original context:
 
 The numeric eval set is built by finding chunks that contain the XBRL value.
 `_formats` deliberately emits scaled variants, because filings report in
@@ -35,6 +44,17 @@ def test_employee_count_is_not_gold_for_a_revenue_question():
 def test_a_real_revenue_row_is_gold():
     text = "Total net sales 1,234 1,100 987 (in thousands)"
     assert concept_supported(text, REVENUE, _formats(1_234_000.0))
+
+
+def test_a_nearby_mention_is_not_proof_the_number_is_the_figure():
+    """The diagnostic is a weak signal and is documented as one.
+
+    Proximity does not establish that the number *is* the concept. This case
+    is why the signal is recorded rather than acted on: it reports support,
+    and support is not correctness.
+    """
+    assert concept_supported("Revenue declined. The company employed 1,234 people.",
+                             REVENUE, _formats(1_234_000.0))
 
 
 def test_the_anchor_must_be_near_the_number_not_merely_present():

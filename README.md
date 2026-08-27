@@ -176,9 +176,12 @@ comparatives, so the fix is a window guard — `0 <= report_year - fiscal_year <
 checked *what the number is*. Values are searched at several scales, because
 filings report in thousands and millions — so a total revenue of $1,234,000
 also searches for `1,234`, and "the company employed 1,234 people" satisfied
-every condition and became the gold passage for a revenue question. The builder
-now requires wording that identifies the figure ("net sales", "research and
-development", "total assets") within a few hundred characters of the match.
+every condition and became the gold passage for a revenue question. The builder now
+**records** whether such wording ("net sales", "research and development",
+"total assets") appears near the match, per question, and does not filter on
+it — requiring it would force gold chunks to contain the vocabulary the
+question was written from, handing BM25 a lexical shortcut in the one
+comparison this repo exists to make.
 
 **The table above was computed against the un-anchored labels.** The corpus is
 fetched at run time and not committed, so how many of the 120 questions were
@@ -281,8 +284,11 @@ end-of-life mid-development.
 
 - 6 filings, 3 tickers. Scaling is a config change, not a code change.
 - 120 numeric + 15 narrative questions, heavily correlated (~15 concepts ×
-  years × tickers). Paired sign tests are reported for the central claims;
-  only the numeric-split comparisons are individually significant.
+  years × tickers) over just three companies. Paired sign tests are reported
+  for the central claims and are within-corpus diagnostics, not population-level
+  significance: the question-level p-value drops from 0.0007 to 0.029 when
+  ticker×concept clusters each contribute one observation, and to 0.25 over the
+  three companies. The direction is what carries.
 - No answer-generation stage — this project is scoped to retrieval, the part
   that's cleanly measurable. Generation lives in `agentic-rag`.
 - The fix indicated by the data has been measured (`eval/fusion_sweep.py`):
@@ -294,11 +300,11 @@ end-of-life mid-development.
   (arXiv 2503.23013) is implemented in `eval/dat_fusion.py` and *loses* to
   the fixed α on this corpus (0.600 vs 0.616 numeric) — the small hosted
   scorer's per-query variance costs more than adaptivity gains. Off by
-  default. **Caveat that belongs next to the number**: the scorer failed on
-  64/120 numeric and 12/15 narrative queries, and every failure falls back to
-  the fixed α, so the numeric result rests on 56 scored queries and the
-  narrative one on 3 — the latter is not a replication. Details in
-  REPORT §3.5. Independent
+  default. **Caveat that belongs next to the number**: those two figures are
+  120-row means in which 64 rows are fixed-α fallbacks after the scorer
+  failed, so they are pulled toward each other. Over the 56 rows actually
+  scored the gap is wider, 0.602 vs 0.636. The narrative split failed on 12 of
+  15 and is a 3-query result, not a replication. Details in REPORT §3.5. Independent
   corroboration of the RRF finding itself: T2-RAGBench (23k financial
   queries) also measures convex > RRF (arXiv 2604.01733).
 - **Optional: confidence-gated reranking** (arXiv 2606.03535) in

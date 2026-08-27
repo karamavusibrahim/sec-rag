@@ -15,10 +15,14 @@ happen to hand-copied numbers.
 ### Three S@1 cells were higher than the artifact they came from
 
 `REPORT.md` published dense / hybrid / BM25+rerank S@1 as **0.575 / 0.442 /
-0.550**. `eval/results/retrieval_v3.json` says **0.542 / 0.425 / 0.500**. Every
-other cell in that six-row table matched exactly, and README had already been
-corrected — so this was transcription drift in one file, and all three errors
-ran in the flattering direction. The R@1 ceiling was quoted as "~0.43"; the
+0.550**. `eval/results/retrieval_v3.json` says **0.542 / 0.425 / 0.500**. Every other
+cell in that six-row table matched exactly, so this was transcription drift in
+three cells, and all three ran in the flattering direction.
+
+An earlier draft of this file said README "had already been corrected". That was
+wrong. `git show main:README.md` carries the same 0.575 / 0.442 / 0.550. The
+error came from reading the working tree and describing it as the committed
+state; both files are corrected by this branch, not one. The R@1 ceiling was quoted as "~0.43"; the
 mean of `1/|gold|` over the eval set's own gold sizes is **0.477**.
 
 Both tables now carry a generation anchor and are verified by
@@ -38,10 +42,12 @@ one observation:
 | concept | 15 | 11/4/0 | 0.1185 |
 | ticker | 3 | 3/0/0 | 0.2500 |
 
-What survives is arguably better than the p-value: **the direction is
-unanimous** — dense wins on all 3 companies and 11 of 15 concepts. What does
-not survive is the word "significantly", and the fix is more companies, not a
-different test. (Sign and Wilcoxon tests are also known to run high Type-I
+What survives is arguably better than the p-value: the direction is
+**consistent**, and unanimous at company level — dense wins on all 3 companies,
+and on 11 of 15 concepts. (An earlier draft called it "unanimous" flatly. Four
+concepts favour hybrid; only the company-level aggregation is unanimous.) What
+does not survive is the word "significantly", and the fix is more companies,
+not a different test. (Sign and Wilcoxon tests are also known to run high Type-I
 error rates relative to bootstrap and randomization tests at large n — another
 reason not to lean on the question-level figure.)
 
@@ -74,9 +80,15 @@ numbers.
 ### A retracted effect size was still in the report
 
 REPORT still cited fair indexing moving BM25 `0.112 → 0.353` on the old slice.
-README had already retracted that exact figure as never committed. Removed from
-REPORT, with the retraction stated rather than the number silently deleted. The
-full-set figures (`0.075 → 0.226`) do reproduce and stay.
+Removed from REPORT, with the retraction stated rather than the number silently
+deleted.
+
+Two corrections to an earlier draft of this entry. README on `main` cited
+`0.353` too and had *not* retracted it; the retraction is made by this branch,
+not inherited from it. And the full-set pair `0.075 → 0.226` does **not**
+reproduce either: `0.226` is in `retrieval_v3.json`, but `0.075` appears in no
+committed artifact, so the before-and-after cannot be checked offline. Only the
+corrected endpoint is supported.
 
 ## Fixed in code
 
@@ -90,13 +102,26 @@ thousands and millions — so a total revenue of $1,234,000 also searches for
 1,234 people"* satisfied every condition the builder checked and became the
 gold passage for a revenue question. Reproduced directly against the builder.
 
-The builder now requires a concept anchor — "net sales", "research and
-development", "total assets" — within ~400 characters of the matched value.
-Near, not merely present: a 10-K page mentioning revenue somewhere also
-contains dozens of unrelated numbers, and a whole-chunk search would re-admit
-exactly the coincidences this rejects. Concepts with no anchor list fall
-through rather than being rejected, so adding one to `INTERESTING` can never
-silently empty its qrels.
+**The obvious fix was the wrong one, and this branch does not ship it.** The
+first attempt required a concept anchor — "net sales", "research and
+development" — within ~400 characters of the matched value, and dropped labels
+that lacked one. Two problems killed it:
+
+- **It biases the eval it is grading.** Questions are written *from the concept
+  label*, so requiring gold chunks to contain that same vocabulary guarantees a
+  lexical path from passage to question. That is precisely the circularity the
+  XBRL design exists to avoid, and it would have handed free keyword matches to
+  BM25 in an ablation whose entire subject is sparse versus dense retrieval.
+- **It did not work.** `"Revenue declined. The company employed 1,234 people."`
+  satisfies a proximity check for a revenue question. The original false
+  positive survives it.
+
+So the support signal is now **recorded, not enforced**: each question carries
+`gold_concept_supported` and `n_gold_unsupported`, which makes the
+contamination measurable and lets metrics be recomputed on the supported subset
+without letting labels inherit the question's words. Fixing it properly needs
+qrels built from inline-XBRL element-to-DOM mappings, which carry the concept
+with the value instead of inferring it from nearby prose.
 
 **Prevalence is unknown, not estimated.** The corpus is fetched at run time and
 not committed, so the affected fraction of the 120 questions cannot be
@@ -117,9 +142,17 @@ was labelled with a chunk from the **2025-01-26** filing, which predates the
 rules. A retriever ranking that chunk low was penalised for being right.
 
 Expansion is now restricted to the same filing or later. Unlike the numeric
-case this one **is** measurable from committed data: **3 of 15** narrative
-questions carry an earlier-filing label. A test pins the count so the caveat
-cannot go stale in either direction.
+case the *count* is measurable from committed data: **3 of 15** narrative
+questions carry an earlier-filing label, pinned by a test.
+
+That count is not the same as 3 wrong labels, and an earlier draft blurred the
+two by calling it "20% known-contaminated". At least one of the three is a
+standing Apple developer-ecosystem question of exactly the kind REPORT §1.2
+argues an earlier filing *can* answer. Without committed chunk text the honest
+statement is "3 labels point backwards in time"; how many are wrong is unknown.
+The date rule now applied is correspondingly blunt — it rejects backward
+propagation for standing risks too, which is stricter than the reasoning
+warrants.
 
 ### Two evaluations that changed their own denominators
 
@@ -127,11 +160,15 @@ cannot go stale in either direction.
   query from every metric *and* from threshold selection. A run that lost half
   its queries reported clean numbers over the survivors, indistinguishable from
   a complete run. Now records `n_attempted`, `n_failed`, the failing qids, and
-  warns loudly.
+  warns loudly. **This makes the loss visible; it does not stop it.** Metrics
+  are still computed over survivors and the run still exits 0, so these remain
+  complete-case results. Failing closed is the better behaviour and is not done
+  here.
 - `eval/run_retrieval.py` — `max(len(questions), 1)` turned an empty eval set
-  into a full set of all-zero metrics and a **successful exit**. A mis-typed
-  `--split` wrote a plausible artifact recording a collapse that never
-  happened. Now raises.
+  into a full set of all-zero metrics and a **successful exit**, writing a
+  plausible artifact recording a collapse that never happened. Now raises.
+  (An earlier draft illustrated this with a mis-typed `--split`; there is no
+  such option. The reachable route is an eval file that exists and is empty.)
 
 ## Examined and rejected
 

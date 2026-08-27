@@ -208,7 +208,33 @@ def build(chunks: list[dict[str, Any]], tickers: list[str], *, max_per_ticker: i
                 c["chunk_id"] for c in pool
                 if fy and 0 <= int(c["report_date"][:4]) - fy <= 2
                 and any(v in c["text"] for v in variants)
-                and concept_supported(c["text"], concept, variants)
+            ]
+            # Deliberately NOT filtered on `concept_supported`.
+            #
+            # Anchoring gold on concept vocabulary looked like the obvious fix
+            # for digit-only matching, and it is the wrong one. The question is
+            # written from the concept label, so requiring the gold chunk to
+            # contain that same vocabulary guarantees a lexical path from
+            # passage to question -- the exact circularity this eval set exists
+            # to avoid, handed straight to BM25. It would have quietly inflated
+            # the sparse retriever in an ablation whose entire subject is sparse
+            # versus dense.
+            #
+            # It also did not work: "Revenue declined. The company employed
+            # 1,234 people." still satisfies a proximity check for a revenue
+            # question.
+            #
+            # So the support signal is recorded per question instead of acting
+            # on it. That makes the contamination measurable -- metrics can be
+            # recomputed on the supported subset -- without letting the labels
+            # inherit the question's words. Fixing it properly needs qrels built
+            # from inline-XBRL element-to-DOM mappings, which carry the concept
+            # with the value instead of inferring it from nearby prose.
+            supported = [
+                cid for cid in matches
+                if concept_supported(
+                    next(c["text"] for c in pool if c["chunk_id"] == cid),
+                    concept, variants)
             ]
             # Too many matches = the number is not discriminative; zero = the
             # value never appears in the text we indexed (different period).
@@ -226,6 +252,8 @@ def build(chunks: list[dict[str, Any]], tickers: list[str], *, max_per_ticker: i
                 "expected_value": val,
                 "unit": fact["unit"],
                 "gold_chunk_ids": matches,
+                "gold_concept_supported": supported,
+                "n_gold_unsupported": len(matches) - len(supported),
                 "split": "numeric",
                 "source": "xbrl",
             })
