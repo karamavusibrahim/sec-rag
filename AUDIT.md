@@ -313,7 +313,9 @@ inline-XBRL element-to-DOM qrels — needs the corpus.
 REPORT §1.2 still called the three backward-pointing narrative labels a "20%
 known-contaminated fraction" after this file had already corrected that to a
 count. Aligned: three labels an earlier filing cannot necessarily support, at
-least one of which (a standing risk) it can.
+least one of which (a standing risk) an earlier filing *may* answer — "may",
+not "can": no chunk text is committed, so answerability is established by
+nothing in this repository.
 
 ## Still open after four passes
 
@@ -323,3 +325,19 @@ highest-value change), committed artifacts predating their producers
 only the anchored numeric table, inconsistent failure policy across harnesses,
 complete-case gated rerank, the blunt narrative date rule, duplicate-qid
 collapsing in `paired()`, and empty qrels scoring zero.
+
+
+---
+
+## Fifth pass
+
+One wording overclaim of the fourth pass, corrected: the standing-risk
+narrative question was described as one an earlier filing "can" answer. No
+chunk text is committed, so nothing here can establish that — "may" is the
+supportable word, and the point it serves is unchanged (the blanket date rule
+cannot tell events from standing risks). The punctuation boundary matcher
+survived independent review with no defect found; a leading attached dot
+(".123") was additionally excluded as decimal continuation, with tests. Known
+remaining imprecision, noted so it is not rediscovered: `concept_supported`'s
+backward window is ~400 chars minus the anchor's own length — tolerable for a
+diagnostic that is recorded rather than enforced.

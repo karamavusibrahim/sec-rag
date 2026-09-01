@@ -150,17 +150,22 @@ def value_occurs(text: str, variants: Sequence[str]) -> bool:
     matching fragments. A digit, comma or decimal point on either side means we
     are inside a longer number.
     """
-    def continues_number(near: str, beyond: str) -> bool:
-        # A digit is unambiguous. A comma or period is only numeric
-        # continuation when a digit sits on its far side: "123,456" embeds
-        # "123", but "were 123." is a sentence ending and "123, compared" is a
-        # clause break -- rejecting those dropped every figure that closed a
-        # sentence, which is most figures in prose. And `near` is "" at either
-        # end of the text ("" in ",." is True in Python), so the emptiness
-        # check is what keeps chunk-boundary values alive.
+    def continues_number(near: str, beyond: str, *, leading: bool) -> bool:
+        # A digit is unambiguous. Separators need direction. On the trailing
+        # side, "," or "." continue a number only when a digit sits beyond
+        # them: "123,456" embeds "123", but "were 123." is a sentence ending
+        # and "123, compared" is a clause break -- rejecting those dropped
+        # every figure that closed a sentence, which is most figures in prose.
+        # On the leading side an attached "." is always continuation: ".123"
+        # is a decimal with its zero omitted, and nothing ends a sentence
+        # flush against the next number. And `near` is "" at either end of the
+        # text ("" in ",." is True in Python), so the emptiness check is what
+        # keeps chunk-boundary values alive.
         if not near:
             return False
         if near.isdigit():
+            return True
+        if leading and near == ".":
             return True
         return near in ",." and beyond.isdigit()
 
@@ -169,9 +174,11 @@ def value_occurs(text: str, variants: Sequence[str]) -> bool:
         while (i := text.find(v, start)) != -1:
             j = i + len(v)
             before = continues_number(text[i - 1] if i else "",
-                                      text[i - 2] if i > 1 else "")
+                                      text[i - 2] if i > 1 else "",
+                                      leading=True)
             after = continues_number(text[j] if j < len(text) else "",
-                                     text[j + 1] if j + 1 < len(text) else "")
+                                     text[j + 1] if j + 1 < len(text) else "",
+                                     leading=False)
             if not before and not after:
                 return True
             start = i + 1

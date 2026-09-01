@@ -146,6 +146,14 @@ class TestValueBoundaries:
         assert not value_occurs("grew 123,456 units", ["123"])
         assert not value_occurs("x 0.123 y", ["123"])
 
+    def test_a_leading_attached_dot_is_a_decimal_not_punctuation(self):
+        # ".123" is a decimal with its zero omitted; nothing ends a sentence
+        # flush against the next number. The trailing side stays punctuation-
+        # tolerant ("were 123.") -- direction matters.
+        assert not value_occurs(".123", ["123"])
+        assert not value_occurs("x .123 y", ["123"])
+        assert value_occurs("vs. 123 units", ["123"])
+
     def test_a_value_at_either_end_of_the_chunk_matches(self):
         # "" in ",." is True in Python, so an emptiness check is required or
         # every value touching a chunk boundary is silently dropped.
