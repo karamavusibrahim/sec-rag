@@ -173,8 +173,10 @@ copying, generation is filtered mechanically:
    questions carry an earlier-filing label** (`AAPL...#0039`, `NVDA...#0038`,
    `NVDA...#0135`); the count is pinned by a test so this caveat cannot go
    stale. Rebuilding the set needs the corpus, which is not committed, so the
-   narrative numbers in §3 stand as measured with that 20% known-contaminated
-   fraction attached. n=15 was already too small to carry weight; this is a
+   narrative numbers in §3 stand as measured with those three backward-pointing
+   labels attached — a count, not three proven errors: an earlier filing cannot
+   answer an event question, but at least one of the three is a standing-risk
+   question it can. n=15 was already too small to carry weight; this is a
    second reason the split is read as directional.
 
 ### 1.3 A calibration error worth recording

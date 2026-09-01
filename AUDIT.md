@@ -286,3 +286,40 @@ being reported. It raises now.
 - The `concept_supported` diagnostic is itself imprecise: it calls
   `"Turnover | 1,234"` unsupported and the employee sentence supported when a
   concept word happens to be nearby. It is a rough signal, labelled as one.
+
+
+---
+
+## Fourth pass
+
+### The boundary guard was rejecting sentence-final figures
+
+The third-pass matcher treated *every* adjacent period or comma as numeric
+continuation, so `"Total assets were 123."` and `"123, compared with last
+year"` found no gold — and in filing prose, most figures close a sentence or a
+clause. The dangerous direction again: real gold silently disappearing. A comma
+or period now only counts as continuation when a digit sits on its far side
+(`123,456` embeds `123`; `123.` does not), with tests for both directions.
+
+The reviewer also re-flagged that the exact-collision case ("employed 1,234
+people" as a standalone number) is back to being gold. That is the documented
+position, not an oversight: the vocabulary filter that caught it was withdrawn
+for injecting a lexical path into the one ablation this repo is about, the case
+is pinned by a test as known-unfixed, and the fix that does not bias the eval —
+inline-XBRL element-to-DOM qrels — needs the corpus.
+
+### Wording drift
+
+REPORT §1.2 still called the three backward-pointing narrative labels a "20%
+known-contaminated fraction" after this file had already corrected that to a
+count. Aligned: three labels an earlier filing cannot necessarily support, at
+least one of which (a standing risk) it can.
+
+## Still open after four passes
+
+Unchanged from the third-pass list: no corpus manifest (still the
+highest-value change), committed artifacts predating their producers
+(`gated_rerank.json`, `dat_fusion.json` scorer-model field), `--check` covering
+only the anchored numeric table, inconsistent failure policy across harnesses,
+complete-case gated rerank, the blunt narrative date rule, duplicate-qid
+collapsing in `paired()`, and empty qrels scoring zero.

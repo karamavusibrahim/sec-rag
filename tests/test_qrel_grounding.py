@@ -134,6 +134,18 @@ class TestValueBoundaries:
         assert value_occurs("Total 123 units", ["123"])
         assert value_occurs("was 12,914 total", ["12,914"])
 
+    def test_sentence_punctuation_is_not_numeric_continuation(self):
+        # "were 123." and "123, compared" are prose, not longer numbers. The
+        # first boundary guard treated every adjacent period/comma as numeric
+        # continuation and silently dropped every figure that closed a
+        # sentence -- which in filing prose is most of them.
+        assert value_occurs("Total assets were 123.", ["123"])
+        assert value_occurs("Total assets were 123, compared with prior", ["123"])
+        assert value_occurs("was 12,914.", ["12,914"])
+        # ...while a digit beyond the separator still means embedded:
+        assert not value_occurs("grew 123,456 units", ["123"])
+        assert not value_occurs("x 0.123 y", ["123"])
+
     def test_a_value_at_either_end_of_the_chunk_matches(self):
         # "" in ",." is True in Python, so an emptiness check is required or
         # every value touching a chunk boundary is silently dropped.

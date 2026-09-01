@@ -150,20 +150,29 @@ def value_occurs(text: str, variants: Sequence[str]) -> bool:
     matching fragments. A digit, comma or decimal point on either side means we
     are inside a longer number.
     """
-    def inside_a_number(ch: str) -> bool:
-        # `ch` is "" at the start or end of the text, and `"" in ",."` is True
-        # in Python -- the empty string is a substring of everything. Without
-        # the emptiness check, a value at either end of a chunk was treated as
-        # embedded in a longer number and rejected, which is the false-negative
-        # direction: real gold silently disappears.
-        return bool(ch) and (ch.isdigit() or ch in ",.")
+    def continues_number(near: str, beyond: str) -> bool:
+        # A digit is unambiguous. A comma or period is only numeric
+        # continuation when a digit sits on its far side: "123,456" embeds
+        # "123", but "were 123." is a sentence ending and "123, compared" is a
+        # clause break -- rejecting those dropped every figure that closed a
+        # sentence, which is most figures in prose. And `near` is "" at either
+        # end of the text ("" in ",." is True in Python), so the emptiness
+        # check is what keeps chunk-boundary values alive.
+        if not near:
+            return False
+        if near.isdigit():
+            return True
+        return near in ",." and beyond.isdigit()
 
     for v in variants:
         start = 0
         while (i := text.find(v, start)) != -1:
-            before = text[i - 1] if i else ""
-            after = text[i + len(v)] if i + len(v) < len(text) else ""
-            if not inside_a_number(before) and not inside_a_number(after):
+            j = i + len(v)
+            before = continues_number(text[i - 1] if i else "",
+                                      text[i - 2] if i > 1 else "")
+            after = continues_number(text[j] if j < len(text) else "",
+                                     text[j + 1] if j + 1 < len(text) else "")
+            if not before and not after:
                 return True
             start = i + 1
     return False
