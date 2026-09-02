@@ -154,6 +154,21 @@ class TestValueBoundaries:
         assert not value_occurs("x .123 y", ["123"])
         assert value_occurs("vs. 123 units", ["123"])
 
+    def test_a_dot_leader_is_not_a_decimal(self):
+        # "Total assets .....123" is a formatted table row; only a SINGLE
+        # leading dot reads as a decimal point.
+        assert value_occurs("Total assets .....123", ["123"])
+
+    def test_a_negated_printing_is_not_gold_for_a_positive_fact(self):
+        # Filings write losses as -123 or (123). Same digits, different number.
+        from build_eval_set import _formats
+        assert not value_occurs("Net loss was -123.", _formats(123.0))
+        assert not value_occurs("Net loss was (123).", _formats(123.0))
+        # ...while parens with intervening text are not a sign:
+        assert value_occurs("(see note 123)", ["123"])
+        # ...and negative facts still match their own parenthesised printing:
+        assert value_occurs("Net loss (1,234)", _formats(-1_234_000.0))
+
     def test_a_value_at_either_end_of_the_chunk_matches(self):
         # "" in ",." is True in Python, so an emptiness check is required or
         # every value touching a chunk boundary is silently dropped.

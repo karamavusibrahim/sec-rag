@@ -341,3 +341,25 @@ survived independent review with no defect found; a leading attached dot
 remaining imprecision, noted so it is not rediscovered: `concept_supported`'s
 backward window is ~400 chars minus the anchor's own length — tolerable for a
 diagnostic that is recorded rather than enforced.
+
+
+---
+
+## Sixth pass
+
+Two boundary-matcher defects the fifth-pass review found, both real, both the
+false-negative-vs-wrong-gold trade at its narrowest:
+
+- **Sign polarity.** A positive fact's variants matched "-123." and "(123)" —
+  the same digits printing a *negative* number. A bare variant immediately
+  preceded by a minus, or immediately flanked by parentheses, is now rejected;
+  negative facts still match through their own signed and parenthesised
+  variants, and "(see note 123)" — parens with intervening text — still
+  matches.
+- **Dot leaders.** "Total assets .....123" is a formatted table row, and the
+  leading-dot rule read the last leader dot as a decimal point, dropping the
+  value. Only a *single* leading dot is decimal continuation now.
+
+Both pinned. The gated-rerank complete-case behaviour, the blunt narrative
+date rule, the concept-blind digit matching, and the missing corpus manifest
+remain open and remain the honest ceiling of what an offline audit can do here.

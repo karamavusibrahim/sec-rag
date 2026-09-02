@@ -165,9 +165,24 @@ def value_occurs(text: str, variants: Sequence[str]) -> bool:
             return False
         if near.isdigit():
             return True
-        if leading and near == ".":
+        if leading and near == "." and beyond != ".":
+            # ".123" is a decimal with its zero omitted -- but ONLY a single
+            # dot. "…..123" is a dot leader, the fill between a row label and
+            # its value in formatted tables, and rejecting values behind
+            # leaders threw away exactly the rows tables are made of.
             return True
         return near in ",." and beyond.isdigit()
+
+    def sign_flipped(i: int, j: int) -> bool:
+        # "123" inside "-123" or "(123)" is a different number: filings write
+        # losses with a minus sign or parentheses, and a positive XBRL fact
+        # must not take a negated printing of the same digits as its gold.
+        # (Negative facts match those forms via their own signed/parenthesised
+        # variants, so nothing legitimate is lost here.)
+        if i and text[i - 1] == "-":
+            return True
+        return bool(i and j < len(text)
+                    and text[i - 1] == "(" and text[j] == ")")
 
     for v in variants:
         start = 0
@@ -179,7 +194,8 @@ def value_occurs(text: str, variants: Sequence[str]) -> bool:
             after = continues_number(text[j] if j < len(text) else "",
                                      text[j + 1] if j + 1 < len(text) else "",
                                      leading=False)
-            if not before and not after:
+            if not before and not after and not (
+                    not v.startswith(("-", "(")) and sign_flipped(i, j)):
                 return True
             start = i + 1
     return False
