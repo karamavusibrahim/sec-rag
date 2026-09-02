@@ -138,7 +138,17 @@ def concept_supported(text: str, concept: str, variants: Sequence[str],
     return False
 
 
-def value_occurs(text: str, variants: Sequence[str]) -> bool:
+# Concepts whose values are cash OUTFLOWS: positive XBRL facts that the cash
+# flow statement prints in parentheses as a matter of style, not sign. For
+# these, "(9,447)" IS the positive fact 9,447,000,000 and rejecting the
+# parenthesised printing deleted every capital-expenditure question from the
+# eval set -- four candidates per company, silently.
+def _paren_is_style(concept: str) -> bool:
+    return concept.startswith("Payments")
+
+
+def value_occurs(text: str, variants: Sequence[str],
+                 *, paren_is_sign: bool = True) -> bool:
     """Does one of the formatted variants occur as a standalone number?
 
     Plain substring matching accepts a value inside a larger number: `"123"`
@@ -174,14 +184,15 @@ def value_occurs(text: str, variants: Sequence[str]) -> bool:
         return near in ",." and beyond.isdigit()
 
     def sign_flipped(i: int, j: int) -> bool:
-        # "123" inside "-123" or "(123)" is a different number: filings write
-        # losses with a minus sign or parentheses, and a positive XBRL fact
-        # must not take a negated printing of the same digits as its gold.
-        # (Negative facts match those forms via their own signed/parenthesised
-        # variants, so nothing legitimate is lost here.)
+        # "123" inside "-123" is a different number, always: a minus sign is
+        # unambiguous. "(123)" is a different number for income-statement
+        # concepts and mere presentation for cash outflows, so the paren check
+        # obeys `paren_is_sign` while the minus check does not. (Negative
+        # facts match negated printings via their own signed/parenthesised
+        # variants, so nothing legitimate is lost either way.)
         if i and text[i - 1] == "-":
             return True
-        return bool(i and j < len(text)
+        return bool(paren_is_sign and i and j < len(text)
                     and text[i - 1] == "(" and text[j] == ")")
 
     for v in variants:
@@ -194,8 +205,8 @@ def value_occurs(text: str, variants: Sequence[str]) -> bool:
             after = continues_number(text[j] if j < len(text) else "",
                                      text[j + 1] if j + 1 < len(text) else "",
                                      leading=False)
-            if not before and not after and not (
-                    not v.startswith(("-", "(")) and sign_flipped(i, j)):
+            flip = not v.startswith(("-", "(")) and sign_flipped(i, j)
+            if not before and not after and not flip:
                 return True
             start = i + 1
     return False
@@ -277,7 +288,8 @@ def build(chunks: list[dict[str, Any]], tickers: list[str], *, max_per_ticker: i
             matches = [
                 c["chunk_id"] for c in pool
                 if fy and 0 <= int(c["report_date"][:4]) - fy <= 2
-                and value_occurs(c["text"], variants)
+                and value_occurs(c["text"], variants,
+                                 paren_is_sign=not _paren_is_style(concept))
             ]
             # Deliberately NOT filtered on `concept_supported`.
             #

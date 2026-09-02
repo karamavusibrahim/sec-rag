@@ -363,3 +363,23 @@ false-negative-vs-wrong-gold trade at its narrowest:
 Both pinned. The gated-rerank complete-case behaviour, the blunt narrative
 date rule, the concept-blind digit matching, and the missing corpus manifest
 remain open and remain the honest ceiling of what an offline audit can do here.
+
+
+---
+
+## Seventh pass
+
+The sixth-pass sign rule assumed parentheses always negate. For cash-outflow
+concepts they are presentation: capital expenditure is a *positive* XBRL fact
+that the cash flow statement prints as `(9,447)`, and the universal rule found
+no gold for any capex question — deleting four AAPL candidates from the
+buildable set, verified against the cached corpus. Parentheses now count as a
+sign only for concepts where they mean one (`paren_is_sign`, off for
+`Payments*` outflows); a minus sign stays a sign for everyone. The test that
+had encoded the universal assumption now encodes the distinction, including
+the real FY2024 printing.
+
+The committed eval set predates every matcher change in passes 4–7, so its
+120 questions were built under none of these rules. That was already true and
+stays the headline caveat: these fixes govern the next build, and the next
+build needs the corpus.

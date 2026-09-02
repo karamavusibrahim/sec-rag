@@ -164,6 +164,22 @@ class TestValueBoundaries:
         from build_eval_set import _formats
         assert not value_occurs("Net loss was -123.", _formats(123.0))
         assert not value_occurs("Net loss was (123).", _formats(123.0))
+
+    def test_parentheses_are_style_not_sign_for_cash_outflows(self):
+        """Capex is a POSITIVE fact the cash flow statement prints as (9,447).
+
+        The first version of the sign rule assumed parentheses always negate.
+        For Payments* concepts they are presentation, and the universal rule
+        deleted every capital-expenditure question from the eval set. The real
+        AAPL FY2024 printing:
+        """
+        from build_eval_set import _formats
+        v = _formats(9_447_000_000.0)
+        assert not value_occurs("Payments for acquisition of PP&E (9,447)", v)
+        assert value_occurs("Payments for acquisition of PP&E (9,447)", v,
+                            paren_is_sign=False)
+        # ...while the minus sign stays a sign for everyone:
+        assert not value_occurs("adjustment of -9,447", v, paren_is_sign=False)
         # ...while parens with intervening text are not a sign:
         assert value_occurs("(see note 123)", ["123"])
         # ...and negative facts still match their own parenthesised printing:
