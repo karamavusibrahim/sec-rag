@@ -29,6 +29,10 @@ def main() -> int:
     ap.add_argument("--forms", nargs="+", default=["10-K"])
     ap.add_argument("--per-ticker", type=int, default=2)
     ap.add_argument("--out", type=Path, default=Path("data/processed"))
+    ap.add_argument("--contextual", action="store_true",
+                    help="optional: prepend a model-written situating sentence "
+                         "to every chunk before indexing (one LLM call per "
+                         "chunk; see sec_rag/ingest/contextual.py)")
     args = ap.parse_args()
 
     all_chunks = []
@@ -48,6 +52,10 @@ def main() -> int:
         return 1
 
     print(f"\ntotal: {len(all_chunks)} chunks from {len(args.tickers)} tickers")
+    if args.contextual:
+        from sec_rag.ingest.contextual import contextualize
+        print("writing contextual headers (optional; one LLM call per chunk) ...")
+        all_chunks = contextualize(all_chunks)
     build(all_chunks, out_dir=args.out)
     return 0
 

@@ -245,20 +245,38 @@ uv run python eval/build_eval_set.py
 
 # Run the ablation
 uv run python eval/run_retrieval.py --limit 40
+
+# Check that the docs still match the artifacts (no network)
+uv run python eval/report_tables.py --check REPORT.md README.md
+
+# Optional, unmeasured: contextual chunk headers at index time (one LLM call
+# per chunk) and multi-query fusion at query time
+uv run python scripts/build_index.py --contextual --out data/processed_ctx
+uv run python eval/multiquery_eval.py --limit 20
 ```
+
+Every artifact written by the eval scripts now carries a `provenance` block
+(git revision and dirty flag, SHA-256 of the corpus files and eval sets, the
+models used, the time). The committed artifacts predate it and carry none;
+that gap is recorded in AUDIT.md rather than back-filled.
 
 ## Layout
 
 ```
 src/sec_rag/
-  nvidia.py           NIM client: chat (streaming), embeddings, reranking
-  ingest/edgar.py     EDGAR API, rate limiting, XBRL facts
-  ingest/chunk.py     structure-aware chunking, table serialization
-  index/build.py      dense vectors + BM25
-  retrieve/hybrid.py  RRF fusion + cross-encoder rerank, all stages switchable
+  nvidia.py               NIM client: chat (streaming), embeddings, reranking
+  ingest/edgar.py         EDGAR API, rate limiting, XBRL facts
+  ingest/chunk.py         structure-aware chunking, table serialization
+  ingest/contextual.py    optional: model-written situating header per chunk
+  index/build.py          dense vectors + BM25
+  retrieve/hybrid.py      RRF fusion + cross-encoder rerank, all stages switchable
+  retrieve/multiquery.py  optional: query rewrites + weighted rank fusion
 eval/
-  build_eval_set.py   XBRL-grounded question generation
-  run_retrieval.py    the ablation sweep
+  build_eval_set.py       XBRL-grounded question generation
+  run_retrieval.py        the ablation sweep
+  report_tables.py        regenerates every published table; --check fails on drift
+  provenance.py           code/corpus/eval-set/model stamp written into artifacts
+  multiquery_eval.py      optional: measures multi-query fusion (not yet run)
 ```
 
 ## Notes on the NVIDIA endpoints
@@ -318,6 +336,22 @@ end-of-life mid-development.
   per query; matching chunks get a convex boost over dense scores. Numeric
   **0.607 → 0.669** (63 W / 9 L), within reach of full reranking for one
   small LLM call; narrative exactly flat. β in-sample. REPORT §3.7.
+- **Optional and unmeasured** — implemented, tested offline, off by default,
+  and quoting no number because neither has been run against the hosted API:
+  - *Multi-query rank fusion* (RAG-Fusion, [arXiv 2402.03367](https://arxiv.org/abs/2402.03367))
+    in `retrieve/multiquery.py`: LLM rewrites of the question in filing
+    vocabulary, retrieved separately and fused with RRF weighted toward the
+    original. The weighting is deliberate: §2.1 measured that *equal*-weight
+    RRF hurts, and rewrites are not peers of the question.
+    `eval/multiquery_eval.py` is the measurement.
+  - *Contextual chunk headers* ([Anthropic, Sept 2024](https://www.anthropic.com/engineering/contextual-retrieval))
+    in `ingest/contextual.py`, enabled by `build_index.py --contextual`: a
+    model-written sentence situating each chunk (statement, periods, units)
+    is indexed into both dense and BM25 representations. Read any BM25 gain
+    under it with suspicion — the header can carry concept vocabulary into a
+    gold chunk, which is the lexical path the eval set exists to close, and
+    the lexical-overlap control in `run_retrieval.py` is how to tell.
+  Both are integration points with a paper behind them, not results. REPORT §3.8.
 
 ## License
 

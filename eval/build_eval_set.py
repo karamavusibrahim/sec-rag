@@ -138,13 +138,26 @@ def concept_supported(text: str, concept: str, variants: Sequence[str],
     return False
 
 
-# Concepts whose values are cash OUTFLOWS: positive XBRL facts that the cash
-# flow statement prints in parentheses as a matter of style, not sign. For
-# these, "(9,447)" IS the positive fact 9,447,000,000 and rejecting the
-# parenthesised printing deleted every capital-expenditure question from the
-# eval set -- four candidates per company, silently.
+# Concepts whose values are debits -- expenses, costs, cash outflows. Their XBRL
+# facts are POSITIVE, and filings routinely print them in parentheses as a
+# matter of presentation, not sign: capital expenditure appears as "(9,447)"
+# on the cash flow statement, and AAPL's segment reconciliation prints R&D as
+# "(34,550)" against a fact of +34,550,000,000. Treating those parentheses as
+# a negation deleted every capex question (four AAPL candidates, verified
+# against the cached corpus) and rejected three real R&D rows. The set is
+# explicit rather than pattern-matched so the decision is reviewable per
+# concept; a concept not listed here keeps parentheses as a sign.
+_PRESENTATION_PARENS = frozenset({
+    "ResearchAndDevelopmentExpense",
+    "CostOfRevenue",
+    "OperatingExpenses",
+    "SellingGeneralAndAdministrativeExpense",
+    "PaymentsToAcquirePropertyPlantAndEquipment",
+})
+
+
 def _paren_is_style(concept: str) -> bool:
-    return concept.startswith("Payments")
+    return concept in _PRESENTATION_PARENS or concept.startswith("Payments")
 
 
 def value_occurs(text: str, variants: Sequence[str],
@@ -183,30 +196,55 @@ def value_occurs(text: str, variants: Sequence[str],
             return True
         return near in ",." and beyond.isdigit()
 
-    def sign_flipped(i: int, j: int) -> bool:
-        # "123" inside "-123" is a different number, always: a minus sign is
-        # unambiguous. "(123)" is a different number for income-statement
-        # concepts and mere presentation for cash outflows, so the paren check
-        # obeys `paren_is_sign` while the minus check does not. (Negative
-        # facts match negated printings via their own signed/parenthesised
-        # variants, so nothing legitimate is lost either way.)
-        if i and text[i - 1] == "-":
-            return True
-        return bool(paren_is_sign and i and j < len(text)
-                    and text[i - 1] == "(" and text[j] == ")")
+    def negation(i: int, j: int) -> tuple[bool, bool]:
+        """(minus, parens) printed around the digits at text[i:j].
+
+        Filings put a currency symbol and whitespace between the sign and
+        the digits -- "($123)", "- 123", "$ (1,234)" -- and the first version
+        looked only at the adjacent character, so "($123)" read as a positive
+        123. The Unicode minus (U+2212) that PDFs and some renderers emit is a
+        minus as well. Skip past "$" and spaces on both sides, then look.
+        """
+        a = i
+        while a and text[a - 1] in "$ \u00a0":
+            a -= 1
+        b = j
+        while b < len(text) and text[b] in " \u00a0":
+            b += 1
+        minus = a > 0 and text[a - 1] in "-−"
+        parens = a > 0 and b < len(text) and text[a - 1] == "(" and text[b] == ")"
+        return minus, parens
 
     for v in variants:
+        # A variant carries its own sign: "-1,234" and "(1,234)" are the
+        # negative fact's printings, and both reduce to the digits "1,234"
+        # plus a requirement that the passage negate them. Searching the
+        # digits and reading the sign off the passage means "($1,234)" and
+        # "− 1,234" match a negative fact, which literal search never did.
+        core = v.strip("()-")
+        want_negative = core != v
         start = 0
-        while (i := text.find(v, start)) != -1:
-            j = i + len(v)
+        while (i := text.find(core, start)) != -1:
+            j = i + len(core)
             before = continues_number(text[i - 1] if i else "",
                                       text[i - 2] if i > 1 else "",
                                       leading=True)
             after = continues_number(text[j] if j < len(text) else "",
                                      text[j + 1] if j + 1 < len(text) else "",
                                      leading=False)
-            flip = not v.startswith(("-", "(")) and sign_flipped(i, j)
-            if not before and not after and not flip:
+            minus, parens = negation(i, j)
+            if want_negative:
+                # A minus sign always negates; parentheses do too when the
+                # fact is genuinely negative -- a loss printed "(1,234)" is
+                # the same number whatever the concept's usual presentation.
+                ok = minus or parens
+            else:
+                # "123" inside "-123" is a different number, always. "(123)"
+                # is a different number for income-statement concepts and
+                # mere presentation for expenses and outflows, so only the
+                # paren check obeys `paren_is_sign`.
+                ok = not minus and not (paren_is_sign and parens)
+            if not before and not after and ok:
                 return True
             start = i + 1
     return False

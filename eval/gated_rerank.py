@@ -43,12 +43,17 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from dotenv import load_dotenv  # noqa: E402
 
+from provenance import provenance  # noqa: E402
 from run_retrieval import ndcg_at_k  # noqa: E402
 from sec_rag.index.build import load as load_index  # noqa: E402
-from sec_rag.nvidia import rerank, embed  # noqa: E402
+from sec_rag.nvidia import RERANK_NEMOTRON, rerank, embed  # noqa: E402
 
 CANDIDATES = 50
 K = 10
+EVAL_SETS = {
+    "numeric": Path("data/eval/eval_set_v2.jsonl"),
+    "narrative": Path("data/eval/eval_narrative.jsonl"),
+}
 PERCENTILES = [10, 20, 30, 40, 50, 60, 70, 80, 90]
 STATS = ("top1", "margin", "entropy")
 
@@ -99,6 +104,9 @@ def main() -> int:
                     help="cap questions per split (smoke runs)")
     ap.add_argument("--out", type=Path,
                     default=Path("eval/results/gated_rerank.json"))
+    ap.add_argument("--allow-partial", action="store_true",
+                    help="exit 0 even if some rerank calls failed; the "
+                         "artifact is still marked complete-case")
     args = ap.parse_args()
 
     index = load_index(args.index)
@@ -106,16 +114,18 @@ def main() -> int:
     by_id = {c["chunk_id"]: c for c in index.chunks}
 
     splits = {
-        "numeric": [json.loads(l) for l in
-                    Path("data/eval/eval_set_v2.jsonl").read_text().splitlines() if l],
-        "narrative": [json.loads(l) for l in
-                      Path("data/eval/eval_narrative.jsonl").read_text().splitlines() if l],
+        name: [json.loads(l) for l in path.read_text().splitlines() if l]
+        for name, path in EVAL_SETS.items()
     }
     if args.limit:
         splits = {s: qs[:args.limit] for s, qs in splits.items()}
 
-    results = {}
+    results: dict = {}
+    any_failures = False
     for split, questions in splits.items():
+        if not questions:
+            raise ValueError(f"no questions in the {split} split -- an empty "
+                             "eval set is a configuration error, not a score")
         texts = [q["question"] for q in questions]
         qvecs = np.asarray(embed(texts, model=index.embed_model,
                                  input_type="query"), dtype=np.float32)
@@ -186,12 +196,23 @@ def main() -> int:
                     "dense": round(mean("ndcg_dense", sub), 4),
                     "rerank": round(mean("ndcg_rerank", sub), 4),
                 }
+        # Fail closed. A run in which every rerank call failed used to write
+        # an artifact of survivor-only zeros and exit 0 -- a total outage
+        # recorded as a result. Nothing is written for that case; the error is
+        # the output.
+        if not rows:
+            raise SystemExit(
+                f"[{split}] every one of {len(questions)} rerank calls failed; "
+                "no artifact written. First error: "
+                f"{failures[0]['error'] if failures else '?'}")
+        any_failures = any_failures or bool(failures)
         results[split] = {
             # Both numbers, always. `n` alone cannot distinguish a complete run
             # from one that lost half its queries to rerank errors.
             "n_attempted": len(questions),
             "n": len(rows),
             "n_failed": len(failures),
+            "complete_case": bool(failures),
             "failures": failures,
             "nDCG@10": {"dense": round(mean("ndcg_dense", rows), 4),
                         "rerank_always": round(mean("ndcg_rerank", rows), 4)},
@@ -222,9 +243,20 @@ def main() -> int:
             print(f"  gate[{stat}]  best {b['nDCG@10']} at p{b['pct']} "
                   f"(reranks {b['frac_reranked']:.0%} of queries)")
 
+    results["provenance"] = provenance(
+        args.index, eval_sets=EVAL_SETS.values(),
+        models={"embed": index.embed_model, "rerank": RERANK_NEMOTRON},
+        extra={"candidates": CANDIDATES, "k": K, "limit": args.limit})
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(results, indent=2))
     print(f"\nwrote {args.out}")
+    if any_failures and not args.allow_partial:
+        # Partial failure is recorded in the artifact and still exits
+        # non-zero, so a pipeline cannot mistake a complete-case run for a
+        # complete one. `--allow-partial` is the explicit opt-in.
+        print("some rerank calls failed; artifact is complete-case "
+              "(pass --allow-partial to exit 0)", file=sys.stderr)
+        return 1
     return 0
 
 

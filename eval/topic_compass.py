@@ -39,7 +39,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from dotenv import load_dotenv  # noqa: E402
 
-from fusion_sweep import minmax  # noqa: E402
+from fusion_sweep import EVAL_SETS, minmax  # noqa: E402
+from provenance import provenance  # noqa: E402
 from run_retrieval import ndcg_at_k  # noqa: E402
 from sec_rag.index.build import load as load_index  # noqa: E402
 from sec_rag.nvidia import chat_json_chain, embed  # noqa: E402
@@ -101,15 +102,13 @@ def main() -> int:
                            sorted(item_titles.items(), key=lambda kv: kv[0]))
 
     splits = {
-        "numeric": [json.loads(l) for l in
-                    Path("data/eval/eval_set_v2.jsonl").read_text().splitlines() if l],
-        "narrative": [json.loads(l) for l in
-                      Path("data/eval/eval_narrative.jsonl").read_text().splitlines() if l],
+        name: [json.loads(l) for l in path.read_text().splitlines() if l]
+        for name, path in EVAL_SETS.items()
     }
     if args.limit:
         splits = {s: qs[:args.limit] for s, qs in splits.items()}
 
-    results = {}
+    results: dict = {}
     for split, questions in splits.items():
         texts = [q["question"] for q in questions]
         qvecs = np.asarray(embed(texts, model=index.embed_model,
@@ -193,6 +192,12 @@ def main() -> int:
               f"compass acc item={r['compass_accuracy']['item']} "
               f"kind={r['compass_accuracy']['kind']}")
 
+    results["provenance"] = provenance(
+        args.index, eval_sets=EVAL_SETS.values(),
+        models={"embed": index.embed_model,
+                "compass_chain": list(COMPASS_MODELS)},
+        extra={"candidates": CANDIDATES, "k": K, "betas": BETAS,
+               "limit": args.limit})
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(results, indent=2))
     print(f"\nwrote {args.out}")

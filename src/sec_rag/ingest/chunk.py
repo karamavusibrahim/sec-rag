@@ -67,18 +67,27 @@ class Chunk:
     breadcrumb: str           # human/embedder-facing path
     source_url: str
     n_chars: int = 0
+    # Optional situating sentence(s) written by `ingest.contextual`: what this
+    # chunk is within its filing, in words the chunk itself may not contain.
+    # Empty unless the index was built with --contextual. Persisted to
+    # chunks.jsonl so an index records whether it was built with context.
+    context: str = ""
 
     def __post_init__(self) -> None:
         self.n_chars = len(self.text)
 
     @property
     def embed_text(self) -> str:
-        """What actually gets embedded: breadcrumb + content.
+        """What actually gets embedded: breadcrumb (+ context) + content.
 
         The breadcrumb is included deliberately -- it supplies the topical anchor
-        that an anaphoric paragraph lacks on its own.
+        that an anaphoric paragraph lacks on its own. The optional context goes
+        in the same place for the same reason, and into BM25 too: both
+        retrievers index `embed_text`, so contextualising helps or hurts them
+        together rather than reintroducing the asymmetry fixed in index/build.
         """
-        return f"{self.breadcrumb}\n\n{self.text}"
+        head = f"{self.breadcrumb}\n{self.context}" if self.context else self.breadcrumb
+        return f"{head}\n\n{self.text}"
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

@@ -22,9 +22,11 @@ from pathlib import Path
 from typing import Any, Sequence
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from dotenv import load_dotenv  # noqa: E402
 
+from provenance import provenance  # noqa: E402
 from sec_rag.index.build import load as load_index  # noqa: E402
 from sec_rag.retrieve.hybrid import Retriever  # noqa: E402
 
@@ -58,15 +60,25 @@ def lexical_overlap(question: str, gold_texts: Sequence[str]) -> float:
     return len(q & g) / len(q)
 
 
-def recall_at_k(retrieved: Sequence[str], gold: set[str], k: int) -> float:
+def _require_gold(gold: set[str]) -> None:
+    # A question with no gold chunks has no defined score. Returning 0.0
+    # folded such rows into every mean as failures, so a malformed eval set
+    # lowered every configuration's number by the same amount and nothing
+    # reported it. `report_tables.r_at_1_ceiling` already refuses these rows;
+    # the metrics themselves now refuse them too, so the two cannot disagree.
     if not gold:
-        return 0.0
+        raise ValueError("a question with empty gold_chunk_ids has no defined "
+                         "retrieval score; fix the eval set rather than "
+                         "scoring it as zero")
+
+
+def recall_at_k(retrieved: Sequence[str], gold: set[str], k: int) -> float:
+    _require_gold(gold)
     return len(set(retrieved[:k]) & gold) / len(gold)
 
 
 def ndcg_at_k(retrieved: Sequence[str], gold: set[str], k: int = 10) -> float:
-    if not gold:
-        return 0.0
+    _require_gold(gold)
     dcg = sum(
         1.0 / math.log2(i + 2)
         for i, cid in enumerate(retrieved[:k])
@@ -77,6 +89,7 @@ def ndcg_at_k(retrieved: Sequence[str], gold: set[str], k: int = 10) -> float:
 
 
 def mrr_at_k(retrieved: Sequence[str], gold: set[str], k: int = 10) -> float:
+    _require_gold(gold)
     for i, cid in enumerate(retrieved[:k]):
         if cid in gold:
             return 1.0 / (i + 1)
@@ -217,6 +230,14 @@ def main() -> int:
          "embed_model": index.embed_model,
          # Provenance. The v1/v2 mixups documented in REPORT.md had to be
          # reverse-engineered from file mtimes because none of this was stamped.
+         # `provenance` adds the code revision, corpus and eval-set checksums,
+         # and the reranker identity -- the fields every review asked for.
+         "provenance": provenance(
+             args.index, eval_sets=args.eval_set,
+             models={"embed": index.embed_model,
+                     "rerank": retriever.rerank_model},
+             extra={"configs": {n: f for n, f in CONFIGS},
+                    "candidates": 50, "top_k": 10}),
          "eval_sets": [str(p) for p in args.eval_set],
          "limit": args.limit,
          "tickers": {t: sum(1 for q in questions if q.get("ticker") == t)

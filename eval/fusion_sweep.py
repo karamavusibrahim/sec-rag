@@ -35,6 +35,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import bm25s  # noqa: E402
 from dotenv import load_dotenv  # noqa: E402
 
+from provenance import provenance  # noqa: E402
 from run_retrieval import ndcg_at_k  # noqa: E402
 from sec_rag.index.build import load as load_index  # noqa: E402
 from sec_rag.nvidia import embed  # noqa: E402
@@ -42,6 +43,10 @@ from sec_rag.nvidia import embed  # noqa: E402
 CANDIDATES = 50
 ALPHAS = [round(a / 10, 1) for a in range(11)]
 RRF_K = 60
+EVAL_SETS = {
+    "numeric": Path("data/eval/eval_set_v2.jsonl"),
+    "narrative": Path("data/eval/eval_narrative.jsonl"),
+}
 
 
 def minmax(scores: dict[str, float]) -> dict[str, float]:
@@ -73,6 +78,12 @@ def sweep(questions, dense_ranked, sparse_ranked):
         top = sorted(rrf, key=rrf.get, reverse=True)[:10]
         rrf_total += ndcg_at_k(top, gold, 10)
     n = len(questions)
+    # Same rule as run_retrieval.evaluate: nothing to evaluate is a
+    # configuration error. This used to surface as a bare ZeroDivisionError,
+    # which is the right outcome by accident and the wrong message on purpose.
+    if not n:
+        raise ValueError("no questions to sweep -- an empty eval set is a "
+                         "configuration error, not a zero score")
     return {a: v / n for a, v in out.items()}, rrf_total / n
 
 
@@ -88,13 +99,11 @@ def main() -> int:
     bm25 = bm25s.BM25.load(str(args.index / "bm25"))
 
     splits = {
-        "numeric": [json.loads(l) for l in
-                    Path("data/eval/eval_set_v2.jsonl").read_text().splitlines() if l],
-        "narrative": [json.loads(l) for l in
-                      Path("data/eval/eval_narrative.jsonl").read_text().splitlines() if l],
+        name: [json.loads(l) for l in path.read_text().splitlines() if l]
+        for name, path in EVAL_SETS.items()
     }
 
-    results = {}
+    results: dict = {}
     for split, questions in splits.items():
         texts = [q["question"] for q in questions]
         qvecs = np.asarray(embed(texts, model=index.embed_model,
@@ -125,6 +134,11 @@ def main() -> int:
             print(f"  alpha={a:.1f}  nDCG@10={curve[a]:.4f}{marker}")
         print(f"  RRF k=60   nDCG@10={rrf:.4f}")
 
+    results["provenance"] = provenance(
+        args.index, eval_sets=EVAL_SETS.values(),
+        models={"embed": index.embed_model},
+        extra={"candidates": CANDIDATES, "alphas": ALPHAS, "rrf_k": RRF_K,
+               "bm25": {"library": "bm25s", "stopwords": "en"}})
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(results, indent=2))
     print(f"\nwrote {args.out}")

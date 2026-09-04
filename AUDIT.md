@@ -383,3 +383,69 @@ The committed eval set predates every matcher change in passes 4–7, so its
 120 questions were built under none of these rules. That was already true and
 stays the headline caveat: these fixes govern the next build, and the next
 build needs the corpus.
+
+
+---
+
+## Eighth pass
+
+Two independent reviews of the seventh pass (3 and 4 September) agreed on
+what was still wrong, and most of it is now fixed rather than described.
+
+- **Parentheses as presentation, for every expense concept.** The seventh
+  pass exempted only `Payments*`. AAPL's segment reconciliation prints R&D as
+  `(34,550)` against a positive fact, and the rule rejected three real R&D
+  rows. The exemption is now an explicit, reviewable set of debit-natured
+  concepts (R&D, cost of revenue, operating expenses, SG&A, capex); income
+  concepts keep parentheses as a sign. Consequence worth stating plainly:
+  **an offline rebuild of the eval set now reproduces the committed 120
+  questions and every gold list exactly** (R@1 ceiling 0.477 both ways), so
+  the committed qrels and the producer agree again. The committed file was
+  regenerated from that build so it also carries the support diagnostics
+  (53 unsupported labels across 29 rows, recorded, not filtered); no label
+  and no metric changed.
+- **Signs separated from their digits.** `($123)`, `$ (1,234)`, `- 123` and
+  the Unicode minus read as unsigned before; a positive fact matched a
+  negated printing and a negative fact could not match its own `($1,234)`
+  row. Sign is now read past currency symbols and spaces on both sides.
+- **The wiring test drives `build()`.** The seventh-pass test called
+  `value_occurs(..., paren_is_sign=False)` directly and stayed green with
+  the production hookup reverted. The new test fails on that revert
+  (verified by monkeypatching `_paren_is_style` to the old rule).
+- **Gated reranking fails closed.** Every rerank call failing used to write
+  survivor-only zeros and exit 0. It now raises before writing; partial
+  failure writes the artifact marked `complete_case` and exits 1 unless
+  `--allow-partial` is passed. A regression test drives `main()` with a
+  raising reranker and asserts no artifact.
+- **Empty gold is an error in every metric**, not 0.0 — recall, nDCG and MRR
+  now agree with `r_at_1_ceiling`. `fusion_sweep` rejects an empty split with
+  a message instead of a bare ZeroDivisionError. Duplicate qids are refused
+  by the paired comparison and the ceiling, since both key rows by qid.
+- **The DAT failure counts are checked.** `report_tables.py --check` verifies
+  the anchored DAT table cell for cell against `dat_fusion.json`; changing
+  "64" to "999" in the report now fails the check. The table header says
+  "mean alpha" so the generated and published forms are identical.
+- **Provenance is stamped.** Every artifact writer (`run_retrieval`,
+  `fusion_sweep`, `dat_fusion`, `gated_rerank`, `topic_compass`,
+  `multiquery_eval`) writes a `provenance` block: git revision and dirty
+  flag, SHA-256 of `chunks.jsonl`, `vectors.npy` and each eval set, the
+  models used, candidate/k settings, the time. The committed artifacts
+  predate this and carry none; that includes the DAT scorer identity
+  (`deepseek-v4-flash-0731` in code, unrecorded in the artifact) and the
+  gated-rerank attempt counts. Back-filling a stamp would be a guess dressed
+  as a record, so the gap stands until those runs are repeated.
+- **A stale comment** said the old sign rule deleted "four candidates per
+  company"; replaying it against the cache removed four AAPL candidates and
+  no MSFT ones. Corrected in place.
+
+Added, optional, unmeasured: multi-query rank fusion and contextual chunk
+headers (README, REPORT §3.8). Neither has a number and neither is claimed
+to.
+
+Still open, and honestly outside an offline audit: the corpus itself is not
+committed (the manifest is a checksum, not the data); the narrative
+near-duplicate rule still rejects identical standing-risk text dated a year
+earlier; digit-only matching still admits a same-number collision in an
+unrelated row (recorded per question, not fixed); and `concept_supported`'s
+400-character window is a window, so an anchor 411 characters away does not
+count — by design, and stated.

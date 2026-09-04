@@ -196,6 +196,24 @@ class TestValueBoundaries:
         from build_eval_set import _formats
         assert value_occurs("Net loss (1,234)", _formats(-1_234_000.0))
 
+    def test_a_sign_separated_by_currency_or_space_still_counts(self):
+        """Filings print "($123)", "$ (1,234)" and "- 123"; PDFs emit U+2212.
+
+        The adjacent-character sign check read all of those as unsigned, so a
+        positive fact matched a negated printing and a negative fact could
+        never match its own "($1,234)" row.
+        """
+        from build_eval_set import _formats
+        pos, neg = _formats(123.0), _formats(-1_234_000.0)
+        assert not value_occurs("Net loss was ($123).", pos)
+        assert not value_occurs("Net loss was −123.", pos)
+        assert not value_occurs("Net loss was - 123.", pos)
+        assert value_occurs("Net loss was ($1,234).", neg)
+        assert value_occurs("Net loss was $ (1,234).", neg)
+        assert value_occurs("Net loss was − 1,234.", neg)
+        # A closing paren far from the digits is prose, not a sign.
+        assert value_occurs("(revenue of 123 in the period)", pos)
+
 
 class TestBuildEndToEnd:
     def test_an_embedded_digit_string_does_not_become_gold(self):
@@ -236,3 +254,93 @@ class TestBuildEndToEnd:
         assert q["gold_chunk_ids"] == ["X"]
         assert q["gold_concept_supported"] == []
         assert q["n_gold_unsupported"] == 1
+
+    def test_presentation_parentheses_are_gold_for_expense_concepts(self):
+        """Driven through build(), so reverting the production wiring fails.
+
+        The seventh-pass test called `value_occurs(..., paren_is_sign=False)`
+        directly and stayed green with the `build()` hookup reverted. These
+        rows are the real printings: AAPL's cash flow statement for capex and
+        its segment reconciliation for R&D, both positive XBRL facts.
+        """
+        capex = run_build([chunk("X", "Payments for acquisition of PP&E (9,447)")],
+                          concept="PaymentsToAcquirePropertyPlantAndEquipment",
+                          value=9_447_000_000.0)
+        assert [q["gold_chunk_ids"] for q in capex] == [["X"]]
+        rnd = run_build([chunk("X", "Research and development | (34,550) |")],
+                        concept="ResearchAndDevelopmentExpense",
+                        value=34_550_000_000.0)
+        assert [q["gold_chunk_ids"] for q in rnd] == [["X"]]
+
+    def test_parentheses_stay_a_sign_for_income_concepts(self):
+        # The same printing under a concept that can be negative is a loss,
+        # and a positive net-income fact must not claim it.
+        qs = run_build([chunk("X", "Net income (loss) | (34,550) |")],
+                       concept="NetIncomeLoss", value=34_550_000_000.0)
+        assert qs == []
+
+
+def test_empty_gold_is_an_error_in_every_metric():
+    """recall/nDCG/MRR returned 0.0 for a question with no gold chunks, so a
+    malformed row lowered every configuration's mean by the same amount and
+    nothing reported it. `r_at_1_ceiling` already refuses such rows; the
+    metrics now agree with it."""
+    import pytest
+    from run_retrieval import mrr_at_k, ndcg_at_k, recall_at_k
+
+    for fn in (recall_at_k, ndcg_at_k, mrr_at_k):
+        with pytest.raises(ValueError, match="empty gold"):
+            fn(["a", "b"], set(), 10)
+
+
+def test_duplicate_qids_are_refused(tmp_path):
+    """Per-question rows are keyed by qid; a repeat silently overwrote the
+    earlier row and the sign test counted a trial that never happened."""
+    import json
+
+    import pytest
+    from report_tables import paired, r_at_1_ceiling
+
+    art = tmp_path / "a.json"
+    art.write_text(json.dumps({"per_question_ndcg": {
+        "A": [{"qid": "dup", "nDCG@10": 1.0}, {"qid": "dup", "nDCG@10": 0.0}],
+        "B": [{"qid": "dup", "nDCG@10": 0.5}]}}))
+    with pytest.raises(ValueError, match="duplicate qid"):
+        paired(art, "A", "B")
+    es = tmp_path / "e.jsonl"
+    es.write_text("\n".join(json.dumps({"qid": "q", "gold_chunk_ids": ["c"]})
+                            for _ in range(2)))
+    with pytest.raises(ValueError, match="duplicate qid"):
+        r_at_1_ceiling(es)
+
+
+def test_gated_rerank_fails_closed_on_total_failure(tmp_path, monkeypatch):
+    """Every rerank call failing used to write survivor-only zeros and exit 0."""
+    import json
+    import sys
+    import types
+
+    import numpy as np
+    import pytest
+
+    import gated_rerank as gr
+
+    chunks = [{"chunk_id": "c1", "breadcrumb": "b", "text": "t", "kind": "table"}]
+    index = types.SimpleNamespace(chunks=chunks, embed_model="m",
+                                  vectors=np.ones((1, 2), dtype=np.float32))
+    monkeypatch.setattr(gr, "load_index", lambda p: index)
+    monkeypatch.setattr(gr, "embed", lambda texts, **kw: [[1.0, 0.0]] * len(texts))
+
+    def boom(*a, **kw):
+        raise RuntimeError("boom")
+    monkeypatch.setattr(gr, "rerank", boom)
+    q = {"qid": "q1", "question": "?", "gold_chunk_ids": ["c1"]}
+    monkeypatch.setattr(gr, "EVAL_SETS", {"numeric": tmp_path / "n.jsonl",
+                                          "narrative": tmp_path / "r.jsonl"})
+    for p in gr.EVAL_SETS.values():
+        p.write_text(json.dumps(q))
+    out = tmp_path / "out.json"
+    monkeypatch.setattr(sys, "argv", ["gated_rerank", "--out", str(out)])
+    with pytest.raises(SystemExit, match="every one of 1 rerank calls failed"):
+        gr.main()
+    assert not out.exists(), "an artifact was written for a total failure"
